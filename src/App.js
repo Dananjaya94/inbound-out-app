@@ -1,25 +1,52 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter as Router,Route,Link} from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import inbound from "./components/inbound.component";
+import outbound from "./components/outbound.component";
+import viewrep from "./components/view.component";
+import reportCom from "./components/report.component";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="container">
+
+
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <a className="navbar-brand" href="ceyins.lk" target="_blank">
+            <img src={logo} width="50" height="50" alt="Ceyins"></img>
+          </a>
+
+          <div className="collapse navbar-collapse">
+            <ul className="navbar-nav mr-auto">
+              <li className="navbar-item">
+                <Link to="/" className="nav-link">Inbound Interfeace</Link>
+              </li>
+
+              <li className="navbar-item">
+                <Link to="/outbound" className="nav-link">OutBound Interfeace</Link>
+              </li>
+
+              <li className="navbar-item">
+                <Link to="/view" className="nav-link">View Interfeace</Link>
+              </li>
+
+              <li className="navbar-item">
+                <Link to="/reports" className="nav-link">Reports Interfeace</Link>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      <Route path = "/" exact component={inbound}/>
+      <Route path = "/outbound" exact component={outbound}/>
+      <Route path = "/view" exact component={viewrep}/>
+      <Route path = "/reports" exact component={reportCom}/>
+      </div>
+    </Router>
   );
 }
 
