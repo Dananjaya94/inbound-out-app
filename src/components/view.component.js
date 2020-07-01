@@ -60,6 +60,47 @@ export default class ViewComp extends Component{
                     </table>
                  </div>
 
+{/* --------------------------------------------------------------------------------------------------------------------------- 
+Change the table , add two drop downs , learn how to make it dynamic */}
+
+                 <div> 
+                    <table classname ="form-control" borderWidth="10" cellPadding="20">
+                        <tr>
+                            <th>
+                            <p>Asset ID: </p> <input type ="text"/> 
+                                <p>Username: </p> <input type ="text"/>
+                                <br></br>
+                            <label for="prov">Province :</label> <br></br>
+
+                                <select name="province" id="province">
+                                    <option value="cp">Central Province </option>
+                                    <option value="ep">Eastern Province</option>
+                                    <option value="np">Nothern Province</option>
+                                    <option value="sp">Southern Province</option>
+                                    <option value="wp">Western Province</option>
+
+                                </select>
+                            </th>
+
+                            <th>
+                                Branch Code
+                            </th>
+                            <th>
+                                Sender EPF
+                            </th>
+                            <th>
+                                Location
+                            </th>
+                        
+                        </tr>
+                        
+       
+                    </table>
+                 </div>
+
+
+
+
             </div>
             
 
