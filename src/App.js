@@ -24,24 +24,19 @@ function App() {
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav mr-auto">
               <li className="navbar-item">
-                <Link to="/" className="nav-link">Inbound Interfeace</Link>
+                <Link to="/" className="nav-link">Inbound</Link>
               </li>
 
               <li className="navbar-item">
-                <Link to="/outbound" className="nav-link">OutBound Interfeace</Link>
+                <Link to="/outbound" className="nav-link">Outbound</Link>
               </li>
 
               <li className="navbar-item">
-                <Link to="/repair&replace" className="nav-link">repair&replace Interfeace</Link>
-              </li>
-
-
-              <li className="navbar-item">
-                <Link to="/view" className="nav-link">View Interfeace</Link>
+                <Link to="/view" className="nav-link">View</Link>
               </li>
 
               <li className="navbar-item">
-                <Link to="/reports" className="nav-link">Reports Interfeace</Link>
+                <Link to="/reports" className="nav-link">Reports</Link>
               </li>
 
               <li className="navbar-item">
