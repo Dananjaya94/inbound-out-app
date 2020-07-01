@@ -1,7 +1,11 @@
 import React , {Component} from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { render } from '@testing-library/react';
+
+
 
 export default class reportscomp extends Component{
 
@@ -11,6 +15,7 @@ export default class reportscomp extends Component{
 
         this.onSubmitInbound = this.onSubmitInbound.bind(this);
         this.onSubmitOutbound = this.onSubmitOutbound.bind(this);
+        
 
         this.state = {
             start_date : new Date(),
@@ -20,15 +25,17 @@ export default class reportscomp extends Component{
         }
     }
 
+    
     onChangeStartDate = start_date => this.setState({ start_date })
     onChangeEndDate = end_date => this.setState({ end_date })
-
+    
     onSubmitInbound(e)
     {
         e.preventDefault();
 
         console.log(`Report Strat Date : ${this.state.start_date}`);
         console.log(`Report End Date : ${this.state.end_date}`);
+        toast("Successfully Generated");
     }
 
     onSubmitOutbound(e)
@@ -37,10 +44,14 @@ export default class reportscomp extends Component{
 
         console.log(`Report Strat Date : ${this.state.start_date}`);
         console.log(`Report End Date : ${this.state.end_date}`);
+        toast("Successfully Generated");
     }
 
     render()
     {
+        
+    const notifySuccess = () => toast("Successfully Added");
+    const notifyGenerated = () => toast("Successfully Generated");
         return(
             <div className="container">
                 <h2>Report Generator</h2>
@@ -89,13 +100,15 @@ export default class reportscomp extends Component{
                         <tr>
                             <td>
                                 <div className="form-group">
-                                <input type="submit" value="Create Inbound Report" className="btn btn-primary" onClick={this.onSubmitInbound}></input>
+                                <input type="submit" value="Create Inbound Report" className="btn btn-primary" onClick={this.onSubmitInbound} onClick={notifyGenerated}></input>
+                                <ToastContainer />
                                 </div>
                             </td>
 
                             <td>
                                 <div className="form-group">
-                                <input type="submit" value="Create Outbound Report" className="btn btn-primary" onClick={this.onSubmitOutbound}></input>
+                                <input type="submit" value="Create Outbound Report" className="btn btn-primary" onClick={this.onSubmitOutbound} onClick={notifyGenerated}></input>
+                                <ToastContainer />
                                 </div>
                             </td>
 
