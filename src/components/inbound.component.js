@@ -1,4 +1,8 @@
 import React , {Component} from 'react';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { render } from '@testing-library/react';
 
 export default class inbound extends Component{
@@ -17,6 +21,7 @@ export default class inbound extends Component{
         this.onchange_asset_recieved_location = this.onchange_asset_recieved_location.bind(this);
         this.onchange_asset_recieved_date = this.onchange_asset_recieved_date.bind(this);
         this.onchange_asset_expected_outbound_date = this.onchange_asset_expected_outbound_date.bind(this);
+        this.onChangeDate = this.onChangeDate.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         
 
@@ -32,10 +37,12 @@ export default class inbound extends Component{
             asset_recieved_location:'',
             asset_recieved_date:'',
             asset_expected_outbound_date:'',
+            date: new Date(),
             asset_inbound_completed: false
         }
     }
     
+    onChangeDate = date => this.setState({ date })
 
     onchange_asset_seq_no(e)
     {
@@ -129,6 +136,7 @@ export default class inbound extends Component{
         console.log(`Reciever EPF : ${this.state.asset_reciever_epf}`);
         console.log(`Recieved Location : ${this.state.asset_recieved_location}`);
         console.log(`Recieved date : ${this.state.asset_recieved_date}`);
+        console.log(`Date Recieved : ${this.state.date}`);
         console.log(`Expected Outbound Date : ${this.state.asset_expected_outbound_date}`);
 
         this.setState ({
@@ -143,12 +151,14 @@ export default class inbound extends Component{
             asset_recieved_location:'',
             asset_recieved_date:'',
             asset_expected_outbound_date:'',
+            date: new Date(),
             asset_inbound_completed: false
         })
     }
 
     render()
     {
+        const notifySuccess = () => toast("Successfully Added");
         return(
             <div style={{margin:20}}>
                 <br></br>
@@ -279,7 +289,8 @@ export default class inbound extends Component{
 
                             <td>
                             <div className="form-group">
-                                <input type="text" className="form-control" value={this.state.asset_recieved_date} onChange={this.onchange_asset_recieved_date}></input>
+                                {/* <input type="text" className="form-control" value={this.state.asset_recieved_date} onChange={this.onchange_asset_recieved_date}></input> */}
+                                <Calendar onChange={this.onChangeDate} value={this.state.date}></Calendar>
                             </div>
                             </td>
 
@@ -287,7 +298,8 @@ export default class inbound extends Component{
                                 
                             </td>
                             <td>
-                                <input type="submit" value="Create Inbound" className="btn btn-primary" onClick={this.onSubmit}></input>
+                                <input type="submit" value="Create Inbound" className="btn btn-primary" onClick={this.onSubmit} onClick={notifySuccess}></input>
+                                <ToastContainer />
                             </td>
                         </tr>
                         </tbody>
