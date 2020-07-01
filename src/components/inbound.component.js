@@ -1,6 +1,8 @@
 import React , {Component} from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { render } from '@testing-library/react';
 
 export default class inbound extends Component{
@@ -156,6 +158,7 @@ export default class inbound extends Component{
 
     render()
     {
+        const notifySuccess = () => toast("Successfully Added");
         return(
             <div style={{margin:20}}>
                 <br></br>
@@ -295,7 +298,8 @@ export default class inbound extends Component{
                                 
                             </td>
                             <td>
-                                <input type="submit" value="Create Inbound" className="btn btn-primary" onClick={this.onSubmit}></input>
+                                <input type="submit" value="Create Inbound" className="btn btn-primary" onClick={this.onSubmit} onClick={notifySuccess}></input>
+                                <ToastContainer />
                             </td>
                         </tr>
                         </tbody>
