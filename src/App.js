@@ -38,6 +38,11 @@ function App() {
               <li className="navbar-item">
                 <Link to="/reports" className="nav-link">Reports</Link>
               </li>
+
+              <li className="navbar-item">
+                <Link to="/exit" className="nav-link">Exits</Link>
+              </li>
+
             </ul>
           </div>
         </nav>
@@ -45,6 +50,8 @@ function App() {
       <Route path = "/outbound" exact component={outbound}/>
       <Route path = "/view" exact component={viewrep}/>
       <Route path = "/reports" exact component={reportCom}/>
+      <Route path = "/repair&replace" exact component={reportCom}/>
+      <Route path = "/exit" exact component={reportCom}/>
       </div>
     </Router>
   );
