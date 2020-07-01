@@ -6,7 +6,7 @@ export default class reportscomp extends Component{
     {
         return(
             <div>
-                <p>Welcom to reports</p>
+                <p>Welcome to reports</p>
             </div>
         )
     }
