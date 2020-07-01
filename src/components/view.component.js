@@ -11,34 +11,44 @@ export default class ViewComp extends Component{
         return(
             <div className="container">
                 <p>View Inventry</p>
-                    <p><button>Repair and Replacement</button></p>
-                    <p><button>Search</button></p>
-                
-                    <p>Asset ID: </p> <input type ="text"/>  
-                    <p>Username: </p> <input type ="text"/> 
 
-                    <br></br>
-                    <label for="prov">Province :</label> <br></br>
+                <form>
+                <table cellPadding = "10">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
 
-                    <select name="province" id="province">
+                    <tbody>
+                        <tr>
+                            <td><p>Asset ID: </p> <input type ="text" className="form-control"/></td>
+                            <td><p>Username: </p> <input type ="text" className="form-control"/></td>
+                            <td><label for="prov">Province : <select name="province" className="form-control" id="province">
                             <option value="cp">Central Province </option>
                             <option value="ep">Eastern Province</option>
                             <option value="np">Nothern Province</option>
                             <option value="sp">Southern Province</option>
                             <option value="wp">Western Province</option>
 
-                    </select>
-                    
+                    </select></label> </td>
+                    <td><button className="btn btn-primary">Repair and Replacement</button></td>
+                        </tr>
 
-                    <p>Serial Number: </p> <input type ="number"/>
-                    <p>User ID: </p> <input type ="text"/> 
-                    <p>Branch Name: </p> <input type ="text"/>  
+                        <tr>
+                            <td><p>Serial Number: </p> <input type ="number" className="form-control"/></td>
+                            <td><p>User ID: </p> <input type ="text" className="form-control"/></td>
+                            <td><p>Branch Name: </p> <input type ="text" className="form-control"/></td>
 
+                            <td><button className="btn btn-primary">Search</button></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
 
-
-               
-
-                 <div> 
+                <div> 
                     <table classname ="form-control" borderWidth="10" cellPadding="20">
                         <tr>
                             <th>
@@ -59,6 +69,11 @@ export default class ViewComp extends Component{
        
                     </table>
                  </div>
+
+                </form>
+               
+
+                 
 
             </div>
             
