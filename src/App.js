@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter as Router,Route,Link} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import ResponsiveMenu from 'react-responsive-navbar';
 
 import inbound from "./components/inbound.component";
 import outbound from "./components/outbound.component";
