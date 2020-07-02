@@ -3,6 +3,8 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DatePicker from 'react-date-picker';
+import 'react-date-picker/dist/entry.nostyle';
 import { render } from '@testing-library/react';
 
 
@@ -85,14 +87,16 @@ export default class reportscomp extends Component{
                             <td>
                                 <div className="form-group">
                                     {/* <input type="text" className="form-control" value={this.state.start_date} onChange={this.onChangeStartDate}></input> */}
-                                    <Calendar value={this.state.start_date} onChange={this.onChangeStartDate}></Calendar>
+                                    {/* <Calendar ></Calendar> */}
+                                    <DatePicker value={this.state.start_date} onChange={this.onChangeStartDate}></DatePicker>
                                 </div>
                             </td>
 
                             <td>
                                 <div className="form-group">
                                     {/* <input type="text" className="form-control" value={this.state.end_date} onChange={this.onChangeEndDate}></input> */}
-                                    <Calendar value={this.state.end_date} onChange={this.onChangeEndDate}></Calendar>
+                                    {/* <Calendar ></Calendar> */}
+                                    <DatePicker value={this.state.end_date} onChange={this.onChangeEndDate}></DatePicker>
                                 </div>
                             </td>
                         </tr>
@@ -100,15 +104,33 @@ export default class reportscomp extends Component{
                         <tr>
                             <td>
                                 <div className="form-group">
-                                <input type="submit" value="Create Inbound Report" className="btn btn-primary" onClick={this.onSubmitInbound} onClick={notifyGenerated}></input>
-                                <ToastContainer />
+                                <input type="submit" value="Create Inbound Report" className="btn btn-primary" onClick={this.onSubmitInbound}></input>
+                                {/* <ToastContainer 
+                                position="top-center"
+                                autoClose={10000}
+                                hideProgressBar={false}
+                                newestOnTop={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                draggable
+                                pauseOnHover/> */}
                                 </div>
                             </td>
 
                             <td>
                                 <div className="form-group">
                                 <input type="submit" value="Create Outbound Report" className="btn btn-primary" onClick={this.onSubmitOutbound} onClick={notifyGenerated}></input>
-                                <ToastContainer />
+                                <ToastContainer 
+                                position="top-center"
+                                autoClose={5000}
+                                hideProgressBar={false}
+                                newestOnTop={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                draggable
+                                pauseOnHover/>
                                 </div>
                             </td>
 

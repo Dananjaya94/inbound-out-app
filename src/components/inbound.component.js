@@ -3,6 +3,8 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DatePicker from 'react-date-picker';
+import 'react-date-picker/dist/entry.nostyle';
 import { render } from '@testing-library/react';
 
 export default class inbound extends Component{
@@ -154,6 +156,8 @@ export default class inbound extends Component{
             date: new Date(),
             asset_inbound_completed: false
         })
+        toast("Successfully Added");
+
     }
 
     render()
@@ -290,7 +294,7 @@ export default class inbound extends Component{
                             <td>
                             <div className="form-group">
                                 {/* <input type="text" className="form-control" value={this.state.asset_recieved_date} onChange={this.onchange_asset_recieved_date}></input> */}
-                                <Calendar onChange={this.onChangeDate} value={this.state.date}></Calendar>
+                                <DatePicker onChange={this.onChangeDate} value={this.state.date}></DatePicker>
                             </div>
                             </td>
 
@@ -298,8 +302,17 @@ export default class inbound extends Component{
                                 
                             </td>
                             <td>
-                                <input type="submit" value="Create Inbound" className="btn btn-primary" onClick={this.onSubmit} onClick={notifySuccess}></input>
-                                <ToastContainer />
+                                <input type="submit" value="Create Inbound" className="btn btn-primary" onClick={this.onSubmit}></input>
+                                {/* <ToastContainer 
+                                position="top-center"
+                                autoClose={10000}
+                                hideProgressBar={false}
+                                newestOnTop={false}
+                                closeOnClick
+                                rtl={false}
+                                pauseOnFocusLoss
+                                draggable
+                                pauseOnHover/> */}
                             </td>
                         </tr>
                         </tbody>
