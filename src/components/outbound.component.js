@@ -1,5 +1,6 @@
 import React , {Component} from 'react';
 import { render } from '@testing-library/react';
+import DatePicker from 'react-date-picker';
 
 export default class reportscomp extends Component{
     constructor(props) {
@@ -22,9 +23,13 @@ export default class reportscomp extends Component{
         outbound_tracking_no: '',
         outbound_epf_no: '',
         outbound_outbounddate: '',
+        date : new Date()
         
     }
 }
+
+onChangeDate = date => this.setState({ date })
+
 onchange_outbound_province(e)
 {
     this.setState({
@@ -226,8 +231,8 @@ onSubmit(e){
 
                         <td>
                            <div className="form-group">
-                               <input type="text" className="form-control" value={this.state.outbound_outbounddate} onChange={this.onchange_outbound_outbounddate}></input> 
-
+                               {/* <input type="text" ></input>  */}
+                               <DatePicker className="form-control" value={this.state.date} onChange={this.onChangeDate}></DatePicker>
                             </div>
                         </td>
 
