@@ -1,7 +1,5 @@
 import React , {Component} from 'react';
 import { render } from '@testing-library/react';
-//import DatePicker from 'react-datepicker';
-//import 'react-datepicker/dist/react-datepicker.css';
 
 export default class reportscomp extends Component{
     constructor(props) {
@@ -24,8 +22,6 @@ export default class reportscomp extends Component{
         outbound_tracking_no: '',
         outbound_epf_no: '',
         outbound_outbounddate: '',
-       // topic:'react',
-       // date: new Date(),
         
     }
 }
@@ -71,14 +67,7 @@ onchange_outbound_outbounddate(e)
         outbound_outbounddate: e.target.value
     });
 }
-// handleTopicChange(e)
-// {
-//     this.state({
-//         topic: e.target.value
 
-//     });
-// }
-//onChange = date =>this.setState({date})
 
 onSubmit(e){
         
@@ -102,8 +91,7 @@ onSubmit(e){
         outbound_branch_code: '',
         outbound_tracking_no: '',
         outbound_epf_no: '',
-        outbound_outbounddate: '',
-       // topic:''
+        outbound_outbounddate: ''
         })
 
 }
@@ -238,7 +226,7 @@ onSubmit(e){
 
                         <td>
                            <div className="form-group">
-                               <input type="text" className="form-control" value={this.state.asset_reciever_epf} onChange={this.onchange_asset_reciever_epf}></input> 
+                               <input type="text" className="form-control" value={this.state.outbound_outbounddate} onChange={this.onchange_outbound_outbounddate}></input> 
 
                             </div>
                         </td>
@@ -264,47 +252,6 @@ onSubmit(e){
                 </form>
                 </div>
                 </div>
-                            // <div className="split right">
-
-                            //     <table cellPadding="5">
-
-                            //     <thead>
-                            //     <tr>
-                            //         <th></th>
-                            //         <th></th>
-                            //     </tr>
-                            //     </thead>
-                            //     <tbody>
-                            //     <tr>
-                            //         <td>
-                            //             <div className="form-group">
-                            //             <label>Province :</label>
-                                        
-                            //             </div>
-                            //         </td>
-            
-                            //         <td>
-                            //             <div className="form-group">
-                            //             <b><select value={this.state.topic} onchange={this.handleTopicChange}>
-                            //                 <option value="select">select</option>
-                            //                 <option value="western">WESTERN</option>
-                            //                 <option value="southern">SOUTHERN</option>
-                            //                 <option value="nothern">NOTHERN</option>
-                            //                 <option value="uva">UVA</option>
-                            //                 <option value="central">CENTRAL</option>
-                            //             </select>
-                            //             </b>
-                            //             </div>
-                            //         </td>
-                            //     </tr>
-                            //     </tbody>
-                            //     </table>
-                            //     </div>
-            
-                
-              
-                
-
         )
     }
 }
