@@ -14,6 +14,7 @@ export default class reportscomp extends Component{
         this.onchange_outbound_tracking_no = this.onchange_outbound_tracking_no.bind(this);
         this.onchange_outbound_epf_no = this.onchange_outbound_epf_no.bind(this);
        // this.onchange_outbound_outbounddate = this.onchange_outbound_outbounddate.bind(this);
+       this.onSubmit = this.onSubmit.bind(this);
 
 
     this.state = {
@@ -250,7 +251,7 @@ onSubmit(e){
                             
                         
                         <td>
-                            <input type="submit" value="Add Outbound" className="btn btn-primary" onClick={this.onSubmit}></input>
+                            <input type="submit" value="Add Outbound" className="btn btn-primary" onClick={this.onSubmit}></input>{}
                         </td>
                     </tr>
                     </tbody>
