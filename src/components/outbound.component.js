@@ -267,7 +267,7 @@ onSubmit(e){
             <br></br>
             <br></br>
             <h2>Pending Items</h2>
-            <table cellPadding="30">
+            <table className="table-control" cellPadding="30">
             <thead>
     <tr>
       <th>sender ID</th>
