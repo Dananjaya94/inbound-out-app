@@ -335,16 +335,7 @@ export default class inbound extends Component{
                     <div className="col-md-2"></div>
                     <div className="col-md-2">
                         <input type="submit" value="Create Inbound" className="btn btn-primary" onClick={this.onSubmit}></input>
-                                {/* <ToastContainer 
-                                position="top-center"
-                                autoClose={10000}
-                                hideProgressBar={false}
-                                newestOnTop={false}
-                                closeOnClick
-                                rtl={false}
-                                pauseOnFocusLoss
-                                draggable
-                                pauseOnHover/> */}
+                        <ToastContainer />
                     </div>
                 </div>
 

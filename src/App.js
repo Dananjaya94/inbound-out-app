@@ -28,7 +28,7 @@ function App() {
                         history.push(to);
                     }
                 }}
-                style={{'background-color':'blue'}}
+                style={{'backgroundColor':'blue'}}
             >
                 <SideNav.Toggle />
                 <SideNav.Nav defaultSelected="inbound">
