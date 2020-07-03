@@ -112,8 +112,8 @@ export default class ViewComp extends Component{
         return(
             
             
-            <div className="container">
-                <p>View Inventry</p>
+            <div style={{margin:50}}>
+                <h1>View Inverntry</h1>
 
                 <form>
                 <table cellPadding = "10">
@@ -129,18 +129,28 @@ export default class ViewComp extends Component{
                         <tr>
                             <td><p>Asset ID: </p> <input type ="text" value={this.state.asset_id} onChange={this.onchange_asset_id} className="form-control"/></td>
                             <td><p>Username: </p> <input type ="text" id="ussrnm" className="form-control"/></td>
-                            <td><label>Province : <select name="province" id="selectDivision" className="form-control" id="province">
-                                <option value="cp">Central Province </option>
-                                <option value="ep">Eastern Province</option>
-                                <option value="np">Nothern Province</option>
-                                <option value="sp">Southern Province</option>
-                                <option value="wp">Western Province</option>
+                            <td><label>Province : <select name="province" id="selectDivision" className="form-control" onChange={this.on_prov}>
+
+                                <option value={this.prov}>Central Province </option>
+                                <option value={this.prov}>Eastern Province</option>
+                                <option value={this.prov}>Nothern Province</option>
+                                <option value={this.prov}>Southern Province</option>
+                                <option value={this.prov}>Western Province</option>
                                                              </select>
                                 </label> 
                              </td>
-                             <td><button className="btn btn-primary">Repair and Replacement</button></td>
-                        </tr>
+                             <td>
+                                {/* This was where the Repair and Replace button was */}
+                             </td>
+                                 
+                                 <td>
+                                 <button className="btn btn-primary">Repair and Replacement</button>
+                                 <input type="button" value="Search" className="btn btn-primary" onClick={this.onSearch}></input>
+                                 </td>
 
+
+                              </tr>
+                                 
                        
                                                <tr>
                             <td><p>Serial Number: </p> <input type ="number" id="sernum" className="form-control"/></td>
@@ -149,6 +159,7 @@ export default class ViewComp extends Component{
                             
 
                             <td><label>Region : <select name="province" className="form-control" id="province">
+                            
                                 <option value="cp">XD</option>
                                 <option value="ep">XD</option>
                                 <option value="np">XD</option>
@@ -164,14 +175,16 @@ export default class ViewComp extends Component{
 
                             {/* <td><button className="btn btn-primary">Search</button></td> */}
                             <td>
-                            <input type="button" value="Search" className="btn btn-primary" onClick={this.onSearch}></input>
                             </td>
+
+                            
+                                {/* ----serach button was */}
                         </tr>
                     </tbody>
                 </table>
 
                 
-                    <table className ="form-control" cellPadding="20" >
+                    <table cellPadding="30" >
                         <tbody>
                         <tr>
                             <th>
