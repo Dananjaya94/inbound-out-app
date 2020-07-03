@@ -13,7 +13,6 @@ export default class reportscomp extends Component{
         this.onchange_outbound_branch_code = this.onchange_outbound_branch_code.bind(this);
         this.onchange_outbound_tracking_no = this.onchange_outbound_tracking_no.bind(this);
         this.onchange_outbound_epf_no = this.onchange_outbound_epf_no.bind(this);
-        this.onchange_outbound_epf_no = this.onchange_outbound_epf_no.bind(this);
        // this.onchange_outbound_outbounddate = this.onchange_outbound_outbounddate.bind(this);
 
 
@@ -135,13 +134,12 @@ onSubmit(e){
 
                         <td>
                             <div className="form-group">
-                            <b><select value={this.state.topic} onchange={this.handleTopicChange}>
-                                <option value="select">select</option>
-                                <option value="western">WESTERN</option>
-                                <option value="southern">SOUTHERN</option>
-                                <option value="nothern">NOTHERN</option>
-                                <option value="uva">UVA</option>
-                                <option value="central">CENTRAL</option>
+                            <b><select onChange={this.onchange_outbound_province}>
+                                <option value={this.state.outbound_provice}>WESTERN</option>
+                                <option value={this.state.outbound_provice}>SOUTHERN</option>
+                                <option value={this.state.outbound_provice}>NOTHERN</option>
+                                <option value={this.state.outbound_provice}>UVA</option>
+                                <option value={this.state.outbound_provice}>CENTRAL</option>
                             </select>
                             </b>
                             </div>
