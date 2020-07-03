@@ -171,7 +171,7 @@ export default class ViewComp extends Component{
                 </table>
 
                 
-                    <table className ="form-control" cellPadding="20" >
+                    <table className ="table-control" cellPadding="20" >
                         <tbody>
                         <tr>
                             <th>
