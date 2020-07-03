@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/entry.nostyle';
+import axios from 'axios';
 import { render } from '@testing-library/react';
 
 export default class inbound extends Component{
@@ -21,8 +22,6 @@ export default class inbound extends Component{
         this.onchange_asset_description = this.onchange_asset_description.bind(this);
         this.onchange_asset_reciever_epf = this.onchange_asset_reciever_epf.bind(this);
         this.onchange_asset_recieved_location = this.onchange_asset_recieved_location.bind(this);
-        this.onchange_asset_recieved_date = this.onchange_asset_recieved_date.bind(this);
-        this.onchange_asset_expected_outbound_date = this.onchange_asset_expected_outbound_date.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         
@@ -37,14 +36,13 @@ export default class inbound extends Component{
             asset_description:'',
             asset_reciever_epf:'',
             asset_recieved_location:'',
-            asset_recieved_date:'',
             asset_expected_outbound_date:'',
-            date: new Date(),
+            asset_recieved_date: new Date(),
             asset_inbound_completed: false
         }
     }
     
-    onChangeDate = date => this.setState({ date })
+    onChangeDate = asset_recieved_date => this.setState({ asset_recieved_date })
 
     onchange_asset_seq_no(e)
     {
@@ -137,9 +135,25 @@ export default class inbound extends Component{
         console.log(`Description : ${this.state.asset_description}`);
         console.log(`Reciever EPF : ${this.state.asset_reciever_epf}`);
         console.log(`Recieved Location : ${this.state.asset_recieved_location}`);
-        console.log(`Recieved date : ${this.state.asset_recieved_date}`);
-        console.log(`Date Recieved : ${this.state.date}`);
-        console.log(`Expected Outbound Date : ${this.state.asset_expected_outbound_date}`);
+        console.log(`Date Recieved : ${this.state.asset_recieved_date}`);
+        console.log(`Insert Completed : ${this.state.asset_inbound_completed}`)
+
+        const newInbound = {
+            asset_seq_no: this.state.asset_seq_no,
+            asset_make:this.state.asset_make,
+            asset_model:this.state.asset_model,
+            asset_sender_epf:this.state.asset_sender_epf,
+            asset_branch_code:this.state.asset_branch_code,
+            asset_tracking_num:this.state.asset_tracking_num,
+            asset_description:this.state.asset_description,
+            asset_reciever_epf:this.state.asset_reciever_epf,
+            asset_recieved_location:this.state.asset_recieved_location,
+            asset_recieved_date:this.state.asset_recieved_date,
+            asset_inbound_completed:this.state.asset_inbound_completed 
+        }
+
+        axios.post('http://localhost:4000/inboundout/create',newInbound)
+        .then(res => console.log(res.data));
 
         this.setState ({
             asset_seq_no: '',
@@ -170,103 +184,147 @@ export default class inbound extends Component{
                 <h2>Inbound Interface</h2>
                 
                 <form>
-                <div className="form-group">
+
+                    <table cellPadding="10">
+                        <thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div className="form-group">
                                 <label>Asset Sequence Number :</label>
-                                
+                                </div>
+                            </td>
+
+                            <td>
                                 <div className="form-group">
                                 <input type="text" className="form-control" value={this.state.asset_seq_no} onChange={this.onchange_asset_seq_no}></input>
                                 </div>
-
+                            </td>
+                        
+                            <td>
                                 <div className="form-group">
                                 <label>Asset Make :</label>
                                 </div>
+                            </td>
+
+                            <td>
                                 <div className="form-group">
                                 <input type="text" className="form-control" value={this.state.asset_make} onChange={this.onchange_asset_make}></input>
                                 </div>
-                                <br></br>
+                            </td>
+                        </tr>
+                        
 
-                                
+                        <tr>
+                            <td>
                                 <div className="form-group">
                                 <label>Asset Model :</label>
                                 </div>
+                            </td>
 
-                            
+                            <td>
                                 <div className="form-group">
                                 <input type="text" className="form-control" value={this.state.asset_model} onChange={this.onchange_asset_model}></input>
                                 </div>
+                            </td>
 
-                            
+                            <td>
                                 <div className="form-group">
                                 <label>Asset Sender EPF Number :</label>
                                 </div>
-                            
-                            
+                            </td>
+
+                            <td>
                                 <div className="form-group">
                                 <input type="text" className="form-control" value={this.state.asset_sender_epf} onChange={this.onchange_asset_sender_epf}></input>
                                 </div>
-                                <br></br>
+                            </td>
+                        </tr>
 
+                        <tr>
+                            <td>
+                                <div className="form-group">
+                                    <label>Brach Code :</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div className="form-group">
+                                    <input type="text" className="form-control" value={this.state.asset_branch_code} onChange={this.onchange_asset_branch_code}></input>
+                                </div>
+                            </td>
+                            <td>
                                 <div className="form-group">
                                     <label>Asset Tracking Number :</label>
                                 </div>
-                
+                            </td>
 
+                            <td>
                                 <div className="form-group">
                                     <input type="text" className="form-control" value={this.state.asset_tracking_num} onChange={this.onchange_asset_tracking_num}></input>
                                 </div>
-                            
+                            </td>
 
-                            
+                        </tr>
+
+                        <tr>
+                            <td>
                                 <div className="form-group">
                                     <label>Asset Description :</label>
                                 </div>
-                            
-                            
+                            </td>
+
+                            <td>
                                 <div className="form-group">
                                     <input type="text" className="form-control" value={this.state.asset_description} onChange={this.onchange_asset_description}></input>
                                 </div>
-                                <br></br>
-
-                                
+                            </td>
+                            <td>
                                 <div className="form-group">
                                     <label>Asset Reciever EPF :</label>
                                 </div>
-                            
+                            </td>
 
-                            
+                            <td>
                                 <div className="form-group">
                                     <input type="text" className="form-control" value={this.state.asset_reciever_epf} onChange={this.onchange_asset_reciever_epf}></input>
                                 </div>
-                            
+                            </td>
+                        </tr>
 
+                        <tr>
+                            <td>
                                 <div className="form-group">
                                     <label>Asset Recived Location :</label>
                                 </div>
-                        
+                            </td>
 
-                            
+                            <td>
                                 <div className="form-group">
                                 <input type="text" className="form-control" value={this.state.asset_recieved_location} onChange={this.onchange_asset_recieved_location}></input>
                                 </div>
-                                <br></br>
-
-                                
+                            </td>
+                            <td>
                                 <div className="form-group">
                                     <label>Asset Recieved Date :</label>
                                 </div>
-                            
+                            </td>
 
-                            
+                            <td>
                             <div className="form-group">
                                 {/* <input type="text" className="form-control" value={this.state.asset_recieved_date} onChange={this.onchange_asset_recieved_date}></input> */}
-                                <DatePicker onChange={this.onChangeDate} value={this.state.date}></DatePicker>
+                                <DatePicker onChange={this.onChangeDate} value={this.state.asset_recieved_date} timezone={'SL/Asia'}></DatePicker>
                             </div>
-                            
-
-                            
                                 
+                            </td>
                             
-                            
+                        </tr>
+                        <tr>
+                        <td>
                                 <input type="submit" value="Create Inbound" className="btn btn-primary" onClick={this.onSubmit}></input>
                                 {/* <ToastContainer 
                                 position="top-center"
@@ -278,7 +336,12 @@ export default class inbound extends Component{
                                 pauseOnFocusLoss
                                 draggable
                                 pauseOnHover/> */}
-                     </div>       
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    
                 </form>
 
                 
