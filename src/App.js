@@ -10,46 +10,80 @@ import outbound from "./components/outbound.component";
 import viewrep from "./components/view.component";
 import reportCom from "./components/report.component";
 
+import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
+import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 function App() {
 
   return (
+    
+
     <Router>
-      <div className="container">
+    <Route render={({ location, history }) => (
+        <React.Fragment>
+            <SideNav
+                onSelect={(selected) => {
+                    const to = '/' + selected;
+                    if (location.pathname !== to) {
+                        history.push(to);
+                    }
+                }}
+                style={{'background-color':'blue'}}
+            >
+                <SideNav.Toggle />
+                <SideNav.Nav defaultSelected="inbound">
+                    <NavItem eventKey="inbound">
+                        <NavIcon>
+                            <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                        </NavIcon>
+                        <NavText>
+                            Inbound
+                        </NavText>
+                    </NavItem>
+                    <NavItem eventKey="outbound">
+                        <NavIcon>
+                            <i className="fa fa-fw fa-device" style={{ fontSize: '1.75em' }} />
+                        </NavIcon>
+                        <NavText>
+                            Outbound
+                        </NavText>
+                    </NavItem>
 
+                    <NavItem eventKey="view">
+                        <NavIcon>
+                            <i className="fa fa-fw fa-device" style={{ fontSize: '1.75em' }} />
+                        </NavIcon>
+                        <NavText>
+                            View
+                        </NavText>
+                    </NavItem>
 
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <a className="navbar-brand" href="ceyins.lk" target="_blank">
-            <img src={logo} width="50" height="50" alt="Ceyins"></img>
-          </a>
+                    <NavItem eventKey="reports">
+                        <NavIcon>
+                            <i className="fa fa-fw fa-device" style={{ fontSize: '1.75em' }} />
+                        </NavIcon>
+                        <NavText>
+                            Reports
+                        </NavText>
+                    </NavItem>
 
-          <div className="collapse navbar-collapse">
-            <ul className="navbar-nav mr-auto">
-              <li className="navbar-item">
-                <Link to="/" className="nav-link">Inbound</Link>
-              </li>
+                </SideNav.Nav>
+            </SideNav>
+            <main>
+                <Route path="/" exact component={inbound} />
+                <Route path="/inbound" component={inbound} />
+                <Route path="/outbound" component={outbound} />
+                <Route path="/view" component={viewrep} />
+                <Route path="/reports" component={reportCom} />
+            </main>
+        </React.Fragment>
+    )}
+    />
+</Router>
+    
+    
 
-              <li className="navbar-item">
-                <Link to="/outbound" className="nav-link">Outbound</Link>
-              </li>
-
-              <li className="navbar-item">
-                <Link to="/view" className="nav-link">View</Link>
-              </li>
-
-              <li className="navbar-item">
-                <Link to="/reports" className="nav-link">Reports</Link>
-              </li>
-
-            </ul>
-          </div>
-        </nav>
-      <Route path = "/" exact component={inbound}/>
-      <Route path = "/outbound" exact component={outbound}/>
-      <Route path = "/view" exact component={viewrep}/>
-      <Route path = "/reports" exact component={reportCom}/>
-      </div>
-    </Router>
+    
   );
 }
 

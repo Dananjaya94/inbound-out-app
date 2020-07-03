@@ -155,6 +155,8 @@ export default class inbound extends Component{
         axios.post('http://localhost:4000/inboundout/create',newInbound)
         .then(res => console.log(res.data));
 
+        toast("Successfully Added");
+
         this.setState ({
             asset_seq_no: '',
             asset_make:'',
@@ -170,7 +172,7 @@ export default class inbound extends Component{
             date: new Date(),
             asset_inbound_completed: false
         })
-        toast("Successfully Added");
+        
 
     }
 
@@ -181,151 +183,158 @@ export default class inbound extends Component{
             <div style={{margin:20}}>
                 <br></br>
                 <br></br>
-                <h2>Inbound Interface</h2>
+                <div className="row">
+                    <div className="col-md-2"></div>
+                    <div className="col-md-5">
+                        <h2>Inbound Interface</h2>
+                    </div>
+                    <div className="col-md-3"></div>
+                </div>
+                <div className="row">
+                    <div className="col-md-2">
+
+                    </div>
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <label>Asset Sequence Number :</label>
+                        </div>
+                    </div>
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <input type="text" className="form-control" value={this.state.asset_seq_no} onChange={this.onchange_asset_seq_no}></input>
+                        </div>
+                    </div>
+
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <label>Asset Make :</label>
+                        </div>
+                    </div>
+
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <input type="text" className="form-control" value={this.state.asset_make} onChange={this.onchange_asset_make}></input>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div className="row">
+                    <div className="col-md-2"></div>
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <label>Asset Model :</label>
+                        </div>
+                    </div>
+
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <input type="text" className="form-control" value={this.state.asset_model} onChange={this.onchange_asset_model}></input>
+                        </div>
+                    </div>
+
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <label>Asset Sender EPF Number :</label>
+                        </div>
+                    </div>
+
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <input type="text" className="form-control" value={this.state.asset_sender_epf} onChange={this.onchange_asset_sender_epf}></input>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div className="row">
+                    <div className="col-md-2"></div>
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <label>Brach Code :</label>
+                        </div>
+                    </div>
+
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <input type="text" className="form-control" value={this.state.asset_branch_code} onChange={this.onchange_asset_branch_code}></input>
+                        </div>
+                    </div>
+
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <label>Asset Tracking Number :</label>
+                        </div>
+                    </div>
+
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <input type="text" className="form-control" value={this.state.asset_tracking_num} onChange={this.onchange_asset_tracking_num}></input>
+                        </div>
+                    </div>
                 
-                <form>
+                </div>
 
-                    <table cellPadding="10">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <div className="form-group">
-                                <label>Asset Sequence Number :</label>
-                                </div>
-                            </td>
+                <div className="row">
+                    <div className="col-md-2"></div>
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <label>Asset Description :</label>
+                        </div>
+                    </div>
 
-                            <td>
-                                <div className="form-group">
-                                <input type="text" className="form-control" value={this.state.asset_seq_no} onChange={this.onchange_asset_seq_no}></input>
-                                </div>
-                            </td>
-                        
-                            <td>
-                                <div className="form-group">
-                                <label>Asset Make :</label>
-                                </div>
-                            </td>
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <input type="text" className="form-control" value={this.state.asset_description} onChange={this.onchange_asset_description}></input>
+                        </div>
+                    </div>
 
-                            <td>
-                                <div className="form-group">
-                                <input type="text" className="form-control" value={this.state.asset_make} onChange={this.onchange_asset_make}></input>
-                                </div>
-                            </td>
-                        </tr>
-                        
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <label>Asset Reciever EPF :</label>
+                        </div>
+                    </div>
 
-                        <tr>
-                            <td>
-                                <div className="form-group">
-                                <label>Asset Model :</label>
-                                </div>
-                            </td>
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <input type="text" className="form-control" value={this.state.asset_reciever_epf} onChange={this.onchange_asset_reciever_epf}></input>
+                        </div>
+                    </div>
+                
+                </div>
 
-                            <td>
-                                <div className="form-group">
-                                <input type="text" className="form-control" value={this.state.asset_model} onChange={this.onchange_asset_model}></input>
-                                </div>
-                            </td>
+                <div className="row">
+                    <div className="col-md-2"></div>
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <label>Asset Recived Location :</label>
+                        </div>
+                    </div>
 
-                            <td>
-                                <div className="form-group">
-                                <label>Asset Sender EPF Number :</label>
-                                </div>
-                            </td>
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <input type="text" className="form-control" value={this.state.asset_recieved_location} onChange={this.onchange_asset_recieved_location}></input>
+                        </div>
+                    </div>
 
-                            <td>
-                                <div className="form-group">
-                                <input type="text" className="form-control" value={this.state.asset_sender_epf} onChange={this.onchange_asset_sender_epf}></input>
-                                </div>
-                            </td>
-                        </tr>
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            <label>Asset Recieved Date :</label>
+                        </div>
+                    </div>
 
-                        <tr>
-                            <td>
-                                <div className="form-group">
-                                    <label>Brach Code :</label>
-                                </div>
-                            </td>
-                            <td>
-                                <div className="form-group">
-                                    <input type="text" className="form-control" value={this.state.asset_branch_code} onChange={this.onchange_asset_branch_code}></input>
-                                </div>
-                            </td>
-                            <td>
-                                <div className="form-group">
-                                    <label>Asset Tracking Number :</label>
-                                </div>
-                            </td>
+                    <div className="col-md-2">
+                        <div className="form-group">
+                            {/* <input type="text" className="form-control" value={this.state.asset_recieved_date} onChange={this.onchange_asset_recieved_date}></input> */}
+                            <DatePicker onChange={this.onChangeDate} value={this.state.asset_recieved_date} timezone={'SL/Asia'}></DatePicker>
+                        </div>
+                    </div>
+                </div>
 
-                            <td>
-                                <div className="form-group">
-                                    <input type="text" className="form-control" value={this.state.asset_tracking_num} onChange={this.onchange_asset_tracking_num}></input>
-                                </div>
-                            </td>
-
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="form-group">
-                                    <label>Asset Description :</label>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div className="form-group">
-                                    <input type="text" className="form-control" value={this.state.asset_description} onChange={this.onchange_asset_description}></input>
-                                </div>
-                            </td>
-                            <td>
-                                <div className="form-group">
-                                    <label>Asset Reciever EPF :</label>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div className="form-group">
-                                    <input type="text" className="form-control" value={this.state.asset_reciever_epf} onChange={this.onchange_asset_reciever_epf}></input>
-                                </div>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                <div className="form-group">
-                                    <label>Asset Recived Location :</label>
-                                </div>
-                            </td>
-
-                            <td>
-                                <div className="form-group">
-                                <input type="text" className="form-control" value={this.state.asset_recieved_location} onChange={this.onchange_asset_recieved_location}></input>
-                                </div>
-                            </td>
-                            <td>
-                                <div className="form-group">
-                                    <label>Asset Recieved Date :</label>
-                                </div>
-                            </td>
-
-                            <td>
-                            <div className="form-group">
-                                {/* <input type="text" className="form-control" value={this.state.asset_recieved_date} onChange={this.onchange_asset_recieved_date}></input> */}
-                                <DatePicker onChange={this.onChangeDate} value={this.state.asset_recieved_date} timezone={'SL/Asia'}></DatePicker>
-                            </div>
-                                
-                            </td>
-                            
-                        </tr>
-                        <tr>
-                        <td>
-                                <input type="submit" value="Create Inbound" className="btn btn-primary" onClick={this.onSubmit}></input>
+                <div className="row">
+                    <div className="col-md-2"></div>
+                    <div className="col-md-2">
+                        <input type="submit" value="Create Inbound" className="btn btn-primary" onClick={this.onSubmit}></input>
                                 {/* <ToastContainer 
                                 position="top-center"
                                 autoClose={10000}
@@ -336,13 +345,8 @@ export default class inbound extends Component{
                                 pauseOnFocusLoss
                                 draggable
                                 pauseOnHover/> */}
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                    
-                </form>
+                    </div>
+                </div>
 
                 
             </div>
