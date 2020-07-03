@@ -2,6 +2,8 @@ import React , {Component} from 'react';
 import { render } from '@testing-library/react';
 import DatePicker from 'react-date-picker';
 
+
+
 export default class reportscomp extends Component{
     constructor(props) {
         super(props);
@@ -11,8 +13,7 @@ export default class reportscomp extends Component{
         this.onchange_outbound_branch_code = this.onchange_outbound_branch_code.bind(this);
         this.onchange_outbound_tracking_no = this.onchange_outbound_tracking_no.bind(this);
         this.onchange_outbound_epf_no = this.onchange_outbound_epf_no.bind(this);
-        this.onchange_outbound_epf_no = this.onchange_outbound_epf_no.bind(this);
-        this.onchange_outbound_outbounddate = this.onchange_outbound_outbounddate.bind(this);
+       // this.onchange_outbound_outbounddate = this.onchange_outbound_outbounddate.bind(this);
 
 
     this.state = {
@@ -22,7 +23,7 @@ export default class reportscomp extends Component{
         outbound_branch_code: '',
         outbound_tracking_no: '',
         outbound_epf_no: '',
-        outbound_outbounddate: '',
+        //outbound_outbounddate: '',
         date : new Date()
         
     }
@@ -66,12 +67,12 @@ onchange_outbound_epf_no(e)
         outbound_epf_no: e.target.value
     });
 }
-onchange_outbound_outbounddate(e)
-{
-    this.setState({
-        outbound_outbounddate: e.target.value
-    });
-}
+// onchange_outbound_outbounddate(e)
+// {
+//     this.setState({
+//         outbound_outbounddate: e.target.value
+//     });
+// }
 
 
 onSubmit(e){
@@ -83,7 +84,7 @@ onSubmit(e){
         console.log(`Outbound Sender ID : ${this.state.outbound_sender_id}`);
         console.log(`Outbound Sender ID : ${this.state.outbound_branch_code}`);
         console.log(`Outbound Sender ID : ${this.state.outbound_tracking_no}`);
-        console.log('Outbound EPF no : ${this.state.outbound_epf_no}');
+        console.log(`Outbound Sender ID : ${this.state.outbound_epf_no}`);
 
 
 
@@ -96,21 +97,22 @@ onSubmit(e){
         outbound_branch_code: '',
         outbound_tracking_no: '',
         outbound_epf_no: '',
-        outbound_outbounddate: ''
+        date: new Date(),
+        //asset_inbound_completed: false
+        //outbound_outbounddate: ''
         })
 
 }
     render()
     {
-       // const [selectedDate, setSelectedDate] = useState(null);
-
         return(
+            <div className="row">
+                <div className="col">
+                    <div className="leftside">
             <div style={{margin:10}}>
             <br></br>
             <br></br>
             <h2>Outbound Interface</h2>
-            <div className="split left">
-             <div className="centered"></div>
             <form>
 
                 <table cellPadding="5">
@@ -132,13 +134,12 @@ onSubmit(e){
 
                         <td>
                             <div className="form-group">
-                            <b><select value={this.state.topic} onchange={this.handleTopicChange}>
-                                <option value="select">select</option>
-                                <option value="western">WESTERN</option>
-                                <option value="southern">SOUTHERN</option>
-                                <option value="nothern">NOTHERN</option>
-                                <option value="uva">UVA</option>
-                                <option value="central">CENTRAL</option>
+                            <b><select onChange={this.onchange_outbound_province}>
+                                <option value={this.state.outbound_provice}>WESTERN</option>
+                                <option value={this.state.outbound_provice}>SOUTHERN</option>
+                                <option value={this.state.outbound_provice}>NOTHERN</option>
+                                <option value={this.state.outbound_provice}>UVA</option>
+                                <option value={this.state.outbound_provice}>CENTRAL</option>
                             </select>
                             </b>
                             </div>
@@ -257,6 +258,49 @@ onSubmit(e){
                 </form>
                 </div>
                 </div>
+                </div>
+                <div className="col">
+                    <div className="rightside">
+                    <div style={{margin:10}}>
+            <br></br>
+            <br></br>
+            <h2>Pending Items</h2>
+            <table className="table-control" cellPadding="30">
+            <thead>
+    <tr>
+      <th>sender ID</th>
+      <th>branch code</th>
+      <th>tracking No</th>
+      <th>EPF No</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>A0001</td>
+      <td>ES45678</td>
+      <td>9865</td>
+    </tr>
+    <tr>
+    <td>2</td>
+      <td>A0002</td>
+      <td>ES45608</td>
+      <td>9895</td>
+    </tr>
+    <tr>
+    <td>3</td>
+      <td>A0003</td>
+      <td>ES15678</td>
+      <td>9815</td>
+    </tr>
+  </tbody>
+            </table>
+                    </div>
+                </div>
+                </div>
+                </div>
+               
+
         )
     }
 }
