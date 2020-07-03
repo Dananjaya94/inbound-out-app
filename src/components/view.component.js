@@ -81,7 +81,6 @@ export default class ViewComp extends Component{
 
 
 
-
     onSearch(e){
         
         e.preventDefault();

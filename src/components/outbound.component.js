@@ -13,11 +13,12 @@ export default class reportscomp extends Component{
         this.onchange_outbound_branch_code = this.onchange_outbound_branch_code.bind(this);
         this.onchange_outbound_tracking_no = this.onchange_outbound_tracking_no.bind(this);
         this.onchange_outbound_epf_no = this.onchange_outbound_epf_no.bind(this);
+        this.onChangeDate = this.onChangeDate.bind(this);
        // this.onchange_outbound_outbounddate = this.onchange_outbound_outbounddate.bind(this);
 
 
     this.state = {
-        outbound_provice: '',
+        outbound_province: '',
         outbound_branch: '',
         outbound_sender_id: '',
         outbound_branch_code: '',
@@ -34,7 +35,7 @@ onChangeDate = date => this.setState({ date })
 onchange_outbound_province(e)
 {
     this.setState({
-        outbound_provice: e.target.value
+        outbound_province: e.target.value
     });
 }
 onchange_outbound_branch(e)
@@ -78,20 +79,21 @@ onchange_outbound_epf_no(e)
 onSubmit(e){
         
     e.preventDefault();
-        console.log(`Form Submitted :`);
-        console.log(`Outbound Province : ${this.state.outbound_provice}`);
-        console.log(`Outbound Branch : ${this.state.outbound_branch}`);
-        console.log(`Outbound Sender ID : ${this.state.outbound_sender_id}`);
-        console.log(`Outbound Sender ID : ${this.state.outbound_branch_code}`);
-        console.log(`Outbound Sender ID : ${this.state.outbound_tracking_no}`);
-        console.log(`Outbound Sender ID : ${this.state.outbound_epf_no}`);
+    
+    console.log(`Form Submitted :`);
+    console.log(`Outbound Province : ${this.state.outbound_province}`);
+    console.log(`Outbound Branch : ${this.state.outbound_branch}`);
+    console.log(`Outbound Sender ID : ${this.state.outbound_sender_id}`);
+    console.log(`Outbound Sender ID : ${this.state.outbound_branch_code}`);
+    console.log(`Outbound Sender ID : ${this.state.outbound_tracking_no}`);
+    console.log(`Outbound Sender ID : ${this.state.outbound_epf_no}`);
 
 
 
 
 
         this.setState ({
-        outbound_provice: '',
+        outbound_province: '',
         outbound_branch:'',
         outbound_sender_id: '',
         outbound_branch_code: '',
@@ -100,7 +102,7 @@ onSubmit(e){
         date: new Date(),
         //asset_inbound_completed: false
         //outbound_outbounddate: ''
-        })
+        });
 
 }
     render()
@@ -134,7 +136,7 @@ onSubmit(e){
 
                         <td>
                             <div className="form-group">
-                            <b><select onChange={this.onchange_outbound_province}>
+                            <b><select onChange={this.onchange_outbound_province} className="form-control">
                                 <option value={this.state.outbound_provice}>WESTERN</option>
                                 <option value={this.state.outbound_provice}>SOUTHERN</option>
                                 <option value={this.state.outbound_provice}>NOTHERN</option>
