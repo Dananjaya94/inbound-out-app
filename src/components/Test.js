@@ -112,32 +112,17 @@ export default class ViewComp extends Component{
             
             
             <div style={{margin:50}}>
-                <h1>View Inventry</h1>
+                <h1>View Inverntry</h1>
 
                 <form>
-                <div class="row">
-                    <div class="col-md-3">
-                        Asset ID:<input type ="text" value={this.state.asset_id} onChange={this.onchange_asset_id} className="form-control"/>
+                    <div class="row">
+                        <div class="col-md-3">
+                        Asset ID: <input type ="text" className="form-control"/>
+
+                        </div>
+
+
                     </div>
-                    <div class="col-md-3">
-                        Username:<input type ="text" id="ussrnm" className="form-control"/>
-                    </div>
-                    <div class="col-md-3">
-                        Province :<select name="province" id="selectDivision" className="form-control" onChange={this.on_prov}>
-                                    <option value={this.prov}>Central Province </option>
-                                    <option value={this.prov}>Eastern Province</option>
-                                    <option value={this.prov}>Nothern Province</option>
-                                    <option value={this.prov}>Southern Province</option>
-                                    <option value={this.prov}>Western Province</option>
-                                </select>
-                    </div>
-                    <div class="col-md-2">
-                        <button className="btn btn-primary">Repair and Replacement</button>
-                    </div>
-                    <div class="col-md-1">
-                        <input type="button" value="Search" className="btn btn-primary" onClick={this.onSearch}></input>
-                    </div>
-                </div>
 
 
                 <table cellPadding = "10">
@@ -151,26 +136,26 @@ export default class ViewComp extends Component{
 
                     <tbody>
                         <tr>
-                            {/* <td><p>Asset ID: </p> <input type ="text" value={this.state.asset_id} onChange={this.onchange_asset_id} className="form-control"/></td> */}
-                            {/* <td><p>Username: </p> <input type ="text" id="ussrnm" className="form-control"/></td> */}
-                            {/* <td><label>Province : <select name="province" id="selectDivision" className="form-control" onChange={this.on_prov}>
+                            <td><p>Asset ID: </p> <input type ="text" value={this.state.asset_id} onChange={this.onchange_asset_id} className="form-control"/></td>
+                            <td><p>Username: </p> <input type ="text" id="ussrnm" className="form-control"/></td>
+                            <td><label>Province : <select name="province" id="selectDivision" className="form-control" onChange={this.on_prov}>
 
                                 <option value={this.prov}>Central Province </option>
                                 <option value={this.prov}>Eastern Province</option>
                                 <option value={this.prov}>Nothern Province</option>
                                 <option value={this.prov}>Southern Province</option>
                                 <option value={this.prov}>Western Province</option>
-                                                             </select> 
+                                                             </select>
                                 </label> 
-                             </td>*/}
+                             </td>
                              <td>
                                 {/* This was where the Repair and Replace button was */}
                              </td>
                                  
                                  <td>
-                                 {/* <button className="btn btn-primary">Repair and Replacement</button> */}
+                                 <button className="btn btn-primary padding" padding ="5px">Repair and Replacement</button>
                                 
-                                 {/* <input type="button" value="Search" className="btn btn-primary" onClick={this.onSearch}></input> */}
+                                 <input type="button" value="Search" className="btn btn-primary" onClick={this.onSearch}></input>
                                  </td>
 
 
@@ -196,7 +181,7 @@ export default class ViewComp extends Component{
 
 
 
-                             {/* <td><button className="btn btn-primary">Repair and Replacement</button></td> */}
+                             <td><button className="btn btn-primary">Repair and Replacement</button></td>
 
                             {/* <td><button className="btn btn-primary">Search</button></td> */}
                             <td>
