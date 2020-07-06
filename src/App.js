@@ -9,12 +9,13 @@ import inbound from "./components/inbound.component";
 import outbound from "./components/outbound.component";
 import viewrep from "./components/view.component";
 import reportCom from "./components/report.component";
+import ClickOutside from "./ClickOutside";
 
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 function App() {
-
+    
   return (
     
 
@@ -28,7 +29,7 @@ function App() {
                         history.push(to);
                     }
                 }}
-                style={{'backgroundColor':'blue'}}
+                style={{'backgroundColor':'purple'}}
             >
                 <SideNav.Toggle />
                 <SideNav.Nav defaultSelected="inbound">
@@ -79,6 +80,32 @@ function App() {
         </React.Fragment>
     )}
     />
+
+{/* <ClickOutside
+    onClickOutside={() => {
+        this.setState({ expanded: false });
+    }}
+>
+    <SideNav
+        expanded={this.state.expanded}
+        onToggle={(expanded) => {
+            this.setState({ expanded });
+        }}
+    >
+        <SideNav.Toggle />
+        <SideNav.Nav defaultSelected="home">
+            <NavItem eventKey="home">
+                <NavIcon>
+                    <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                </NavIcon>
+                <NavText>
+                    Home
+                </NavText>
+            </NavItem>
+        </SideNav.Nav>
+    </SideNav>
+</ClickOutside> */}
+
 </Router>
     
     
