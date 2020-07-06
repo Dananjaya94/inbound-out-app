@@ -105,7 +105,7 @@ export default class ViewComp extends Component{
             
             // Form elements :
             <div style={{margin:80}}>
-                <h1>View Inventry</h1>
+                <h1>View Inventory</h1>
 
                 <form>
                     <div class="row">
