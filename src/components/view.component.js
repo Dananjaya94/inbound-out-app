@@ -74,13 +74,6 @@ export default class ViewComp extends Component{
 
 
 
-
-
-
-
-
-
-
     onSearch(e){
         
         e.preventDefault();
@@ -110,96 +103,101 @@ export default class ViewComp extends Component{
     {
         return(
             
-            
-            <div style={{margin:50}}>
-                <h1>View Inverntry</h1>
+            // Form elements :
+            <div style={{margin:80}}>
+                <h1>View Inventry</h1>
 
                 <form>
-                <table cellPadding = "10">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
+                    <div class="row">
+                        <div class="col-md-2">
+                            Asset ID:<input type ="text" value={this.state.asset_id} onChange={this.onchange_asset_id} className="form-control"/>
+                        </div>  
+                        
+                        <div class="col-md-2">
+                            Username:<input type ="text" value={this.state.username} onChange={this.onchange_username} className="form-control"/>
+                        </div>
+                        
+                        <div class="col-md-2">
+                            Province :<select name="province" id="selectDivision" className="form-control" onChange={this.on_prov}>
+                                        <option value={this.prov}>Select Province</option>
+                                        <option value={this.prov}>Eastern Province</option>
+                                        <option value={this.prov}>Nothern Province</option>
+                                        <option value={this.prov}>Southern Province</option>
+                                        <option value={this.prov}>Western Province</option>
+                                        <option value={this.prov}>Central Province</option>
+                                    </select>
+                        
+                        </div>
+                    
+                      {/* Simple Select */}
 
-                    <tbody>
-                        <tr>
-                            <td><p>Asset ID: </p> <input type ="text" value={this.state.asset_id} onChange={this.onchange_asset_id} className="form-control"/></td>
-                            <td><p>Username: </p> <input type ="text" id="ussrnm" className="form-control"/></td>
-                            <td><label>Province : <select name="province" id="selectDivision" className="form-control" onChange={this.on_prov}>
+                      <div class="col-md-2">
 
-                                <option value={this.prov}>Central Province </option>
-                                <option value={this.prov}>Eastern Province</option>
-                                <option value={this.prov}>Nothern Province</option>
-                                <option value={this.prov}>Southern Province</option>
-                                <option value={this.prov}>Western Province</option>
-                                                             </select>
-                                </label> 
-                             </td>
-                             <td>
-                                {/* This was where the Repair and Replace button was */}
-                             </td>
-                                 
-                                 <td>
-                                 <button className="btn btn-primary">Repair and Replacement</button>
-                                 <input type="button" value="Search" className="btn btn-primary" onClick={this.onSearch}></input>
-                                 </td>
-
-
-                              </tr>
-                                 
-                       
-                                               <tr>
-                            <td><p>Serial Number: </p> <input type ="number" id="sernum" className="form-control"/></td>
-                            <td><p>User ID: </p> <input type ="text" id="usrid" className="form-control"/></td>
-                            <td><p>Branch Name: </p> <input type ="text" id="brnnm" className="form-control"/></td>
+                           <label>Region : 
+                               <select name="province" className="form-control" id="province">
                             
+                                <option value="cp">Select Region</option>
+                                <option value="ep">*****</option>
+                                <option value="np">*****</option>
+                                <option value="sp">*****</option>
+                                <option value="wp">*****</option>
+                                </select>
 
-                            <td><label>Region : <select name="province" className="form-control" id="province">
+                            </label> 
+                        
+                        </div>
+                    
+                    </div>
+{/* -----------------------Second Row------------ */}
+                     <div class="row">
+                        <div class="col-md-2">
+                            Serial Number:<input type ="text" value={this.state.ser_num} onChange={this.onchange_ser_num} className="form-control"/>
+                        </div>
+
+                        <div class="col-md-2">
+                            User ID:<input type ="text" value={this.state.user_id} onChange={this.onchange_user_id} className="form-control"/>
+                        </div>
+
+                        <div class="col-md-2">
+                            Branch Name:<input type ="text" value={this.state.bra_name} onChange={this.onchange_bra_name} className="form-control"/>
+                        </div>
+                        
+                            <div class="col-md-2">
+                                <button className="btn btn-primary">Repair and Replacement</button>
+                        </div>
+
+                        <div class="col-md-1">
+                                <input type="button" value="Search" className="btn btn-primary" onClick={this.onSearch}></input>
+                        </div>
+
+                        {/* <div class="row">
                             
-                                <option value="cp">XD</option>
-                                <option value="ep">XD</option>
-                                <option value="np">XD</option>
-                                <option value="sp">XD</option>
-                                <option value="wp">XD</option>
-                                                             </select>
-                                </label> 
-                             </td>
+                            <div class="col-md-1">
+                                <input type="button" value="Search" className="btn btn-primary" onClick={this.onSearch}></input>
+                            </div>
+                        </div> */}
 
+                    </div>
 
-
-                             {/* <td><button className="btn btn-primary">Repair and Replacement</button></td> */}
-
-                            {/* <td><button className="btn btn-primary">Search</button></td> */}
-                            <td>
-                            </td>
-
-                            
-                                {/* ----serach button was */}
-                        </tr>
-                    </tbody>
-                </table>
-
+{/* ------------------------------Table Elements------------------------- */}
                 
                     <table cellPadding="30" >
                         <tbody>
-                        <tr>
-                            <th>
-                                Item ID
-                            </th>
-                            <th>
-                                Branch Code
-                            </th>
-                            <th>
-                                Sender EPF
-                            </th>
-                            <th>
-                                Location
-                            </th>
-                        
-                        </tr>
+                            <tr>
+                                <th>
+                                    Item ID |
+                                </th>
+                                <th>
+                                    Branch Code |
+                                </th>
+                                <th>
+                                    Sender EPF |
+                                </th>
+                                <th>
+                                    Location |
+                                </th>
+                            
+                            </tr>
                         </tbody>
                         
        
@@ -207,7 +205,7 @@ export default class ViewComp extends Component{
                  
 
                 
-                    </form>
+                </form>
 
                  
 
