@@ -110,32 +110,28 @@ onSubmit(e){
     {
         return(
             <div className="row">
-                <div className="col">
+             <div className="col">
                     <div className="leftside">
-            <div style={{margin:10}}>
+            <div style={{margin:20}}>
             <br></br>
             <br></br>
+            <div className="row">
+                    
+                    
             <h2>Outbound Interface</h2>
-            <form>
-
-                <table cellPadding="5">
-
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
+                   
+            </div>
+            <div className="row">
+                    <div className="col-md-2"></div>
+                    <div className="col-md-2">
                             <div className="form-group">
                             <label>Province :</label>
-                            
                             </div>
-                        </td>
+              </div>      
+              
+                    <div classname="col-md-2">  
 
-                        <td>
+                        
                             <div className="form-group">
                             <b><select onChange={this.onchange_outbound_province} className="form-control">
                                 <option value={this.state.outbound_provice}>WESTERN</option>
@@ -143,125 +139,123 @@ onSubmit(e){
                                 <option value={this.state.outbound_provice}>NOTHERN</option>
                                 <option value={this.state.outbound_provice}>UVA</option>
                                 <option value={this.state.outbound_provice}>CENTRAL</option>
-                            </select>
+                            </select>{}
                             </b>
                             </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
+                    </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-2"></div>
+                        <div className="col-md-2">
                             <div className="form-group">
                             <label>Branch :</label>
                             </div>
-                        </td>
+                        </div>
+                    <div className="col-md-2">  
+                        <div className="form-group">
+                             <b><select onChange={this.onchange_outbound_branch} className="form-control">
+                                <option value={this.state.outbound_branch}>COLOMBO</option>
+                                <option value={this.state.outbound_branch}>KEGALLE</option>
+                                <option value={this.state.outbound_branch}>KANDY</option>
+                                <option value={this.state.outbound_branch}>KADUWELA</option>
+                                <option value={this.state.outbound_branch}>KELANIYA</option>
+                            </select>
 
-                        <td>
-                            <div className="form-group">
-                            <b><select value={this.state.topic} onchange={this.handleTopicChange}>
+                            {/* <b><select value={this.state.topic} onchange={this.handleTopicChange}>
                                 <option value="select">select</option>
                                 <option value="colombo">WESTERN</option>
                                 <option value="hambanthota">SOUTHERN</option>
                                 <option value="jaffna">NOTHERN</option>
                                 <option value="badullla">UVA</option><option value="kandy
                                 ">CENTRAL</option>
-                            </select>
+                            </select> */}
                             </b>
-                                                        </div>
-                        </td>
-                    </tr>
-                    
-
-                    <tr>
-                        <td>
+                        </div> 
+                    </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-2"></div>
+                        <div className="col-md-2">
                             <div className="form-group">
                             <label>Sender ID :</label>
                             </div>
-                        </td>
+                        </div>
+                        <div className="col-md-2">
 
-                        <td>
                             <div className="form-group">
                             <input type="text" className="form-control" value={this.state.outbound_sender_id} onChange={this.onchange_outbound_sender_id}></input>
                             </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-2"></div>
+                        <div className="col-md-2">
                             <div className="form-group">
                             <label>Branch Code:</label>
                             </div>
-                        </td>
-
-                        <td>
+                        </div>
+                        <div className="col-md-2">
                             <div className="form-group">
                             <input type="text" className="form-control" value={this.state.outbound_branch_code} onChange={this.onchange_outbound_branch_code}></input>
                             </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
+                        </div>
+                    </div>
+                    <div className="row">
+                    <div className="col-md-2"></div>
+                        <div className="col-md-2">
                             <div className="form-group">
-                                <label>Tracking Number :</label>
+                            <label>Tracking Number :</label>
                             </div>
-                        </td>
-
-                        <td>
+                        </div>
+                    
+                    
+                    
+                        <div className="col-md-2">
                             <div className="form-group">
-                                <input type="text" className="form-control" value={this.state.outbound_tracking_no} onChange={this.onchange_outbound_tracking_no}></input>
+                            <input type="text" className="form-control" value={this.state.outbound_tracking_no} onChange={this.onchange_outbound_tracking_no}></input>
                             </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
+                        </div>
+                    </div>
+                    <div className="row">
+                    <div className="col-md-2"></div>
+                        <div className="col-md-2">
                             <div className="form-group">
                                 <label>EPF no :</label>
                             </div>
-                        </td>
-
-                        <td>
+                        </div>
+                        <div className="col-md-2">
                             <div className="form-group">
                                 <input type="text" className="form-control" value={this.state.outbound_epf_no} onChange={this.onchange_outbound_epf_no}></input>
                             </div>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div className="form-group">
+                        </div>
+                    </div>
+                    <div className="row">
+                    <div className="col-md-2"></div>
+                            <div className="col-md-2"> 
+                            <div className="form-group">                          <div className="form-group">
                                 <label>Outbound date :</label>
                             </div>
-                        </td>
-
-                        <td>
-                           <div className="form-group">
+                            </div></div>
+                            <div className="col-md-2">
+                            <div className="form-group">
                                {/* <input type="text" ></input>  */}
                                <DatePicker className="form-control" value={this.state.date} onChange={this.onChangeDate}></DatePicker>
                             </div>
-                        </td>
-
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <tr></tr>
-                        <tr></tr>
-                        <td></td>
-
-                        <td>
-
-                        </td>
-                            
-                        
-                        <td>
+                            </div>
+                    </div>
+                    
+                    <div className="row">
+                    <div className="col-md-2"></div>
+                            <div className="col-md-2"> 
+                            <div className="form-group">  
                             <input type="submit" value="Add Outbound" className="btn btn-primary" onClick={this.onSubmit}></input>{}
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                </form>
-                </div>
-                </div>
-                </div>
+                            </div>
+                
+                    </div>
+                    </div>
+                </div></div></div>
+
+                
                 <div className="col">
                     <div className="rightside">
                     <div style={{margin:10}}>
@@ -298,10 +292,13 @@ onSubmit(e){
     </tr>
   </tbody>
             </table>
-                    </div>
+                </div>
+                
+                </div>
+                
                 </div>
                 </div>
-                </div>
+               
                
 
         )
