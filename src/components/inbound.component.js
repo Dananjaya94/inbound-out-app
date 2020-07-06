@@ -254,10 +254,11 @@ export default class inbound extends Component{
                     <div className="col-md-5">
                         <h2>Inbound Interface</h2>
                     </div>
+                </div>
 
-                    <div className="row">
+                <div className="row">
                         <div className="col-md-2"></div>
-                        <div className="col-md-10">
+                        <div className="col-md-9">
                         <table className="table table-striped" style={{marginTop:20}}>
                         <thead>
                             <tr>
@@ -277,7 +278,6 @@ export default class inbound extends Component{
                         </tbody> */}
                     </table>
                         </div>
-                    </div>
                 </div>
                 <div className="row">
                     
