@@ -6,8 +6,22 @@ import 'react-toastify/dist/ReactToastify.css';
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/entry.nostyle';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 import { render } from '@testing-library/react';
 
+// const TotableInout = props => (
+//     <tr>
+//         <td>{props.inboundoutboundArr.asset_rec_date}</td>
+//         <td>{props.inboundoutboundArr.asset_description}</td>
+//         <td>{props.inboundoutboundArr.asset_seq_no}</td>
+//         <td>{props.inboundoutboundArr.asset_branch_code}</td>
+//         <td>{props.inboundoutboundArr.asset_reciever_name}</td>
+//         <td>{props.inboundoutboundArr.asset_reciever_epf}</td>
+//         <td>{props.inboundoutboundArr.asset_it_office_name}</td>
+//         <td>{props.inboundoutboundArr.asset_it_office_epf}</td>
+//         <td><Link to ={"/edit/"+props.inboundoutboundArr._id}></Link></td>
+//     </tr>
+// )
 export default class inbound extends Component{
     
     constructor(props) {
@@ -21,12 +35,18 @@ export default class inbound extends Component{
         this.onchange_asset_tracking_num = this.onchange_asset_tracking_num.bind(this);
         this.onchange_asset_description = this.onchange_asset_description.bind(this);
         this.onchange_asset_reciever_epf = this.onchange_asset_reciever_epf.bind(this);
+        this.onchange_asset_reciever_name = this.onchange_asset_reciever_name.bind(this);
+        this.onchange_asset_it_officer_name = this.onchange_asset_it_officer_name.bind(this);
+        this.onchange_asset_it_officer_epf = this.onchange_asset_it_officer_epf.bind(this);
         this.onchange_asset_recieved_location = this.onchange_asset_recieved_location.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         
+        
 
         this.state = {
+            inboundoutboundArr: [],
+            asset_outbound_tracking_num:'',
             asset_seq_no: '',
             asset_make:'',
             asset_model:'',
@@ -40,10 +60,28 @@ export default class inbound extends Component{
             asset_it_office_epf:'',
             asset_recieved_location:'',
             asset_expected_outbound_date:'',
-            asset_recieved_date: new Date(),
+            asset_rec_date: new Date(),
             asset_inbound_completed: false
         }
     }
+
+    componentDidMount()
+    {
+        axios.get('http://localhost:4000/inboundout/')
+        .then(response=> {
+            this.setState({inboundoutboundArr : response.data});
+        })
+        .catch(function (error){
+            console.log(error);
+        })
+    }
+
+    // loadOutbounds()
+    // {
+    //     return this.state.inboundoutboundArr.map(function(currentInbound,i){
+    //         return <TotableInout intout={currentInbound} key={i} />;
+    //     });
+    // }
     
     onChangeDate = asset_recieved_date => this.setState({ asset_recieved_date })
 
@@ -86,6 +124,13 @@ export default class inbound extends Component{
     {
         this.setState({
             asset_it_office_name: e.target.value
+        })
+    }
+
+    onchange_asset_outbound_tracking_num(e)
+    {
+        this.setState({
+            asset_outbound_tracking_num: e.target.value
         })
     }
 
@@ -150,29 +195,25 @@ export default class inbound extends Component{
         e.preventDefault();
 
         console.log(`Form Submitted :`);
-        console.log(`Sequence Number : ${this.state.asset_seq_no}`);
-        console.log(`Asset Make : ${this.state.asset_make}`);
-        console.log(`Asset model : ${this.state.asset_model}`);
-        console.log(`Sender EPF : ${this.state.asset_sender_epf}`);
-        console.log(`Brnach code : ${this.state.asset_branch_code}`);
-        console.log(`Tracking Number : ${this.state.asset_tracking_num}`);
+        console.log(`Date Recieved : ${this.state.asset_rec_date}`);
         console.log(`Description : ${this.state.asset_description}`);
-        console.log(`Reciever EPF : ${this.state.asset_reciever_epf}`);
-        console.log(`Recieved Location : ${this.state.asset_recieved_location}`);
-        console.log(`Date Recieved : ${this.state.asset_recieved_date}`);
-        console.log(`Insert Completed : ${this.state.asset_inbound_completed}`)
+        console.log(`Sequence Number : ${this.state.asset_seq_no}`);
+        console.log(`Brnach code : ${this.state.asset_branch_code}`);
+        console.log(`Hand Over User Name : ${this.state.asset_reciever_name}`);
+        console.log(`Hand Over EPF : ${this.state.asset_reciever_epf}`);
+        console.log(`IT Office Name : ${this.state.asset_it_office_name}`);
+        console.log(`IT Officer ID : ${this.state.asset_it_office_epf}`);
 
         const newInbound = {
-            asset_seq_no: this.state.asset_seq_no,
-            asset_make:this.state.asset_make,
-            asset_model:this.state.asset_model,
-            asset_sender_epf:this.state.asset_sender_epf,
-            asset_branch_code:this.state.asset_branch_code,
-            asset_tracking_num:this.state.asset_tracking_num,
+
+            asset_rec_date: this.state.asset_rec_date,
             asset_description:this.state.asset_description,
+            asset_seq_no: this.state.asset_seq_no,
+            asset_branch_code:this.state.asset_branch_code,
+            asset_reciever_name: this.state.asset_reciever_name,
             asset_reciever_epf:this.state.asset_reciever_epf,
-            asset_recieved_location:this.state.asset_recieved_location,
-            asset_recieved_date:this.state.asset_recieved_date,
+            asset_it_office_name:this.state.asset_it_office_name,
+            asset_it_office_epf:this.state.asset_it_office_epf,
             asset_inbound_completed:this.state.asset_inbound_completed 
         }
 
@@ -182,23 +223,21 @@ export default class inbound extends Component{
         toast("Successfully Added");
 
         this.setState ({
+            asset_rec_date : new Date(),
+            asset_description : '',
             asset_seq_no: '',
-            asset_make:'',
-            asset_model:'',
-            asset_sender_epf:'',
-            asset_branch_code:'',
-            asset_tracking_num:'',
-            asset_description:'',
-            asset_reciever_epf:'',
-            asset_recieved_location:'',
-            asset_recieved_date:'',
-            asset_expected_outbound_date:'',
-            date: new Date(),
+            asset_branch_code: '',
+            asset_reciever_name: '',
+            asset_reciever_epf: '',
+            asset_it_office_name: '',
+            asset_it_office_epf: '',
             asset_inbound_completed: false
         })
         
 
     }
+
+    
 
     render()
     {
@@ -209,9 +248,39 @@ export default class inbound extends Component{
                 <br></br>
                 <div className="row">
                     <div className="col-md-2"></div>
+                    <div className="col-md-2">
+
+                    </div>
                     <div className="col-md-5">
                         <h2>Inbound Interface</h2>
                     </div>
+                </div>
+
+                <div className="row">
+                        <div className="col-md-2"></div>
+                        <div className="col-md-9">
+                        <table className="table table-striped" style={{marginTop:20}}>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Item Description</th>
+                                <th>Serial Number</th>
+                                <th>Department</th>
+                                <th>Hand Over User</th>
+                                <th>Hand Over EPF</th>
+                                <th>IT Officer Name</th>
+                                <th>IT officer EPF</th>
+                            </tr>
+                        </thead>
+
+                        {/* <tbody>
+                            {this.loadOutbounds()}
+                        </tbody> */}
+                    </table>
+                        </div>
+                </div>
+                <div className="row">
+                    
                     <div className="col-md-3"></div>
                 </div>
                 <div className="row">
@@ -225,7 +294,7 @@ export default class inbound extends Component{
                     </div>
                     <div className="col-md-2">
                         <div className="form-group">
-                        <DatePicker onChange={this.onChangeDate} value={this.state.asset_recieved_date} timezone={'SL/Asia'}></DatePicker>
+                        <DatePicker onChange={this.onChangeDate} value={this.state.asset_rec_date} timezone={'SL/Asia'}></DatePicker>
                         </div>
                     </div>
 
@@ -309,7 +378,7 @@ export default class inbound extends Component{
 
                     <div className="col-md-2">
                         <div className="form-group">
-                            <input type="text" className="form-control" value={this.state.asset_it_office_name} onChange={this.onchange_asset_recieved_location}></input>
+                            <input type="text" className="form-control" value={this.state.asset_it_office_name} onChange={this.onchange_asset_it_officer_name}></input>
                         </div>
                     </div>
 
