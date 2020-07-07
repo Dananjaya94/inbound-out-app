@@ -7,60 +7,62 @@ import DatePicker from 'react-date-picker';
 export default class reportscomp extends Component{
     constructor(props) {
         super(props);
-        this.onchange_outbound_province = this.onchange_outbound_province.bind(this);
-        this.onchange_outbound_branch = this.onchange_outbound_branch.bind(this);
-        this.onchange_outbound_sender_id = this.onchange_outbound_sender_id.bind(this);
-        this.onchange_outbound_branch_code = this.onchange_outbound_branch_code.bind(this);
-        this.onchange_outbound_tracking_no = this.onchange_outbound_tracking_no.bind(this);
+        this.onchange_outbound_Item_Description = this.onchange_outbound_Item_Description.bind(this);
+        this.onchange_outbound_Serial_No = this.onchange_outbound_Serial_No.bind(this);
+        this.onchange_outbound_Dept_Branch = this.onchange_outbound_Dept_Branch.bind(this);
+        this.onchange_outbound_Handover_Username = this.onchange_outbound_Handover_Username.bind(this);
+        this.onchange_outbound_It_Officername = this.onchange_outbound_It_Officername.bind(this);
         this.onchange_outbound_epf_no = this.onchange_outbound_epf_no.bind(this);
+        this.onchange_outbound_it_officer_id = this.onchange_outbound_it_officer_id.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
        // this.onchange_outbound_outbounddate = this.onchange_outbound_outbounddate.bind(this);
        this.onSubmit = this.onSubmit.bind(this);
 
 
     this.state = {
-        outbound_province: '',
-        outbound_branch: '',
-        outbound_sender_id: '',
-        outbound_branch_code: '',
-        outbound_tracking_no: '',
-        outbound_epf_no: '',
-        //outbound_outbounddate: '',
-        date : new Date()
+       
         
+        date : new Date(),
+        outbound_Item_Description: '',
+        outbound_Serial_No:'',
+        outbound_Dept_Branch: '',
+        outbound_Handover_Username: '',
+        outbound_It_Officername: '',
+        outbound_epf_no: '',
+        outbound_it_officer_id: ''
     }
 }
 
 onChangeDate = date => this.setState({ date })
 
-onchange_outbound_province(e)
+onchange_outbound_Item_Description(e)
 {
     this.setState({
-        outbound_province: e.target.value
+        outbound_Item_Description: e.target.value
     });
 }
-onchange_outbound_branch(e)
+onchange_outbound_Serial_No(e)
 {
     this.setState({
-        outbound_branch: e.target.value
+        outbound_Serial_No: e.target.value
     });
 }
-onchange_outbound_sender_id(e)
+onchange_outbound_Dept_Branch(e)
 {
     this.setState({
-        outbound_sender_id: e.target.value
+        outbound_Dept_Branch: e.target.value
     });
 }
-onchange_outbound_branch_code(e)
+onchange_outbound_Handover_Username(e)
 {
     this.setState({
-        outbound_branch_code: e.target.value
+        outbound_Handover_Username: e.target.value
     });
 }
-onchange_outbound_tracking_no(e)
+onchange_outbound_It_Officername(e)
 {
     this.setState({
-        outbound_tracking_no: e.target.value
+        outbound_It_Officername: e.target.value
     });
 }
 onchange_outbound_epf_no(e)
@@ -68,13 +70,14 @@ onchange_outbound_epf_no(e)
     this.setState({
         outbound_epf_no: e.target.value
     });
-}s
-// onchange_outbound_outbounddate(e)
-// {
-//     this.setState({
-//         outbound_outbounddate: e.target.value
-//     });
-// }
+}
+onchange_outbound_it_officer_id(e)
+{
+    this.setState({
+        outbound_it_officer_id: e.target.value
+    });
+}
+
 
 
 onSubmit(e){
@@ -82,27 +85,28 @@ onSubmit(e){
     e.preventDefault();
     
     console.log(`Form Submitted :`);
-    console.log(`Outbound Province : ${this.state.outbound_province}`);
-    console.log(`Outbound Branch : ${this.state.outbound_branch}`);
-    console.log(`Outbound Sender ID : ${this.state.outbound_sender_id}`);
-    console.log(`Outbound Sender ID : ${this.state.outbound_branch_code}`);
-    console.log(`Outbound Sender ID : ${this.state.outbound_tracking_no}`);
-    console.log(`Outbound Sender ID : ${this.state.outbound_epf_no}`);
+    console.log(`outbound_Item_Description : ${this.state.outbound_Item_Description}`);
+    console.log(`utbound_Serial_No : ${this.state.outbound_Serial_No}`);
+    console.log(`utbound_Dept_Branch : ${this.state.outbound_Dept_Branch}`);
+    console.log(`outbound_Handover_Username : ${this.state.outbound_Handover_Username}`);
+    console.log(`outbound_It_Officername : ${this.state.outbound_It_Officername}`);
+    console.log(`outbound_epf_no : ${this.state.outbound_epf_no}`);
+    console.log(`outbound_it_officer_id : ${this.state.outbound_it_officer_id}`);
 
 
 
 
 
         this.setState ({
-        outbound_province: '',
-        outbound_branch:'',
-        outbound_sender_id: '',
-        outbound_branch_code: '',
-        outbound_tracking_no: '',
-        outbound_epf_no: '',
         date: new Date(),
-        //asset_inbound_completed: false
-        //outbound_outbounddate: ''
+        outbound_Item_Description: '',
+        outbound_Serial_No:'',
+        outbound_Dept_Branch: '',
+        outbound_Handover_Username: '',
+        outbound_It_Officername: '',
+        outbound_epf_no: '',
+        outbound_it_officer_id:''
+        
         });
 
 }
@@ -129,22 +133,16 @@ onSubmit(e){
                     <div className="col-md-4"></div>
                     <div className="col-md-4">
                             <div className="form-group">
-                            <label>Province :</label>
+                            <label>Outbound date :</label>
                             </div>
               </div>      
-              
-                    <div classname="col-md-3">  
+
+                    <div classname="col-md-4">  
 
                         
                             <div className="form-group">
-                            <b><select onChange={this.onchange_outbound_province} className="form-control">
-                                <option value={this.state.outbound_provice}>WESTERN</option>
-                                <option value={this.state.outbound_provice}>SOUTHERN</option>
-                                <option value={this.state.outbound_provice}>NOTHERN</option>
-                                <option value={this.state.outbound_provice}>UVA</option>
-                                <option value={this.state.outbound_provice}>CENTRAL</option>
-                            </select>{}
-                            </b>
+                            <DatePicker onChange={this.onChangeDate} value={this.state.asset_recieved_date} timezone={'SL/Asia'}></DatePicker>
+                            
                             </div>
                     </div>
                     </div>
@@ -152,21 +150,12 @@ onSubmit(e){
                         <div className="col-md-4"></div>
                         <div className="col-md-4">
                             <div className="form-group">
-                            <label>Branch :</label>
+                            <label>Item Description :</label>
                             </div>
                         </div>
-                    <div className="col-md-3">  
+                    <div className="col-md-4">  
                         <div className="form-group">
-                             <b><select onChange={this.onchange_outbound_branch} className="form-control">
-                                <option value={this.state.outbound_branch}>COLOMBO</option>
-                                <option value={this.state.outbound_branch}>KEGALLE</option>
-                                <option value={this.state.outbound_branch}>KANDY</option>
-                                <option value={this.state.outbound_branch}>KADUWELA</option>
-                                <option value={this.state.outbound_branch}>KELANIYA</option>
-                            </select>
-
-                            {}
-                            </b>
+                        <input type="text" className="form-control" value={this.state.outbound_Item_Description} onChange={this.onchange_outbound_Item_Description}></input>
                         </div> 
                     </div>
                     </div>
@@ -174,13 +163,13 @@ onSubmit(e){
                         <div className="col-md-4"></div>
                         <div className="col-md-4">
                             <div className="form-group">
-                            <label>Sender ID :</label>
+                            <label>Serial No :</label>
                             </div>
                         </div>
                         <div className="col-md-4">
 
                             <div className="form-group">
-                            <input type="text" className="form-control" value={this.state.outbound_sender_id} onChange={this.onchange_outbound_sender_id}></input>
+                            <input type="text" className="form-control" value={this.state.outbound_Serial_No} onChange={this.onchange_outbound_Serial_No}></input>
                             </div>
                         </div>
                     </div>
@@ -188,28 +177,21 @@ onSubmit(e){
                         <div className="col-md-4"></div>
                         <div className="col-md-4">
                             <div className="form-group">
-                            <label>Branch Code:</label>
+                            <label>Dept/Branch Code:</label>
                             </div>
                         </div>
                         <div className="col-md-4">
                             <div className="form-group">
-                            <input type="text" className="form-control" value={this.state.outbound_branch_code} onChange={this.onchange_outbound_branch_code}></input>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row">
-                    <div className="col-md-4"></div>
-                        <div className="col-md-4">
-                            <div className="form-group">
-                            <label>Tracking Number :</label>
-                            </div>
-                        </div>
-                    
-                    
-                    
-                        <div className="col-md-4">
-                            <div className="form-group">
-                            <input type="text" className="form-control" value={this.state.outbound_tracking_no} onChange={this.onchange_outbound_tracking_no}></input>
+                            <b><select onChange={this.onchange_outbound_Dept_Branch} className="form-control">
+                                <option value={this.state.outbound_Dept_Branch}>COLOMBO</option>
+                                <option value={this.state.outbound_Dept_Branch}>KEGALLE</option>
+                                <option value={this.state.outbound_Dept_Branch}>KANDY</option>
+                                <option value={this.state.outbound_Dept_Branch}>KADUWELA</option>
+                                <option value={this.state.outbound_Dept_Branch}>KELANIYA</option>
+                            </select>
+
+                            {}
+                            </b>
                             </div>
                         </div>
                     </div>
@@ -217,7 +199,23 @@ onSubmit(e){
                     <div className="col-md-4"></div>
                         <div className="col-md-4">
                             <div className="form-group">
-                                <label>EPF no :</label>
+                            <label>Hand over User Name :</label>
+                            </div>
+                        </div>
+                    
+                    
+                    
+                        <div className="col-md-4">
+                            <div className="form-group">
+                            <input type="text" className="form-control" value={this.state.outbound_Handover_Username} onChange={this.onchange_outbound_Handover_Username}></input>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                    <div className="col-md-4"></div>
+                        <div className="col-md-4">
+                            <div className="form-group">
+                                <label>Hand Over User EPF :</label>
                             </div>
                         </div>
                         <div className="col-md-4">
@@ -229,23 +227,40 @@ onSubmit(e){
                     <div className="row">
                     <div className="col-md-4"></div>
                             <div className="col-md-4"> 
-                            <div className="form-group">                          <div className="form-group">
-                                <label>Outbound date :</label>
-                            </div>
+                            <div className="form-group">                          
+                                <label>IT Officer Name :</label>
+                            
                             </div></div>
                             <div className="col-md-4">
                             <div className="form-group">
                                {/* <input type="text" ></input>  */}
-                               <DatePicker onChange={this.onChangeDate} value={this.state.asset_recieved_date} timezone={'SL/Asia'}></DatePicker>
+                               <input type="text" className="form-control" value={this.state.outbound_It_Officername} onChange={this.onchange_outbound_It_Officername}></input>
                             </div>
                             </div>
                     </div>
+                    <div className="row">
+                    <div className="col-md-4"></div>
+                            <div className="col-md-4"> 
+                            <div className="form-group">                          
+                                <label>IT Officer ID :</label>
+                            
+                            </div></div>
+                            <div className="col-md-4">
+                            <div className="form-group">
+                               {/* <input type="text" ></input>  */}
+                               <input type="text" className="form-control" value={this.state.outbound_it_officer_id} onChange={this.onchange_outbound_it_officer_id}></input>
+                            </div>
+                            </div>
+                    </div>
+
                     
                     <div className="row">
                     <div className="col-md-4"></div>
                             <div className="col-md-4"> 
-                            <div className="form-group">  
+                            <div className="form-group"> 
+                            <div className="btn-group mr-2"> 
                             <input type="submit" value="Add Outbound" className="btn btn-primary" onClick={this.onSubmit}></input>{}
+                            </div>
                             </div>
                 
                     </div>
@@ -259,7 +274,7 @@ onSubmit(e){
             <br></br>
             <br></br>
             <h2>Pending Items</h2>
-            <table className="table-control" cellPadding="30">
+            <table className="table table-striped" cellPadding="30">
             <thead>
     <tr>
       <th>sender ID</th>
