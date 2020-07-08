@@ -46,6 +46,7 @@ export default class inbound extends Component{
 
         this.state = {
             inboundoutboundArr: [],
+            inboundDetails: [],
             asset_outbound_tracking_num:'',
             asset_seq_no: '',
             asset_make:'',
@@ -67,7 +68,7 @@ export default class inbound extends Component{
 
     componentDidMount()
     {
-        axios.get('http://localhost:4000/inboundout/')
+        axios.get('http://localhost:4000/inbound/')
         .then(response=> {
             this.setState({inboundoutboundArr : response.data});
         })
@@ -223,6 +224,7 @@ export default class inbound extends Component{
         toast("Successfully Added");
 
         this.setState ({
+            inboundDetails: [],
             asset_rec_date : new Date(),
             asset_description : '',
             asset_seq_no: '',
