@@ -34,6 +34,7 @@ export default class inbound extends Component{
 
         this.state = {
             inboundoutboundArr: [],
+            inboundDT: [],
             asset_outbound_tracking_num:'',
             asset_seq_no: '',
             asset_make:'',
@@ -54,11 +55,12 @@ export default class inbound extends Component{
         }
     }
 
-    componentDidMount()
+    componentWillMount()
     {
         axios.get('http://localhost:4000/inbound/')
-        .then(response=> {
-            this.setState({inboundoutboundArr : response.data});
+        .then(data=> {
+            this.setState({inboundoutboundArr : data.data});
+            console.log(data);
         })
         .catch(function (error){
             console.log(error);
@@ -202,14 +204,19 @@ export default class inbound extends Component{
             asset_reciever_name: this.state.asset_reciever_name,
             asset_reciever_epf:this.state.asset_reciever_epf,
             asset_it_office_name:this.state.asset_it_office_name,
-            asset_it_office_epf:this.state.asset_it_office_epf,
-            asset_inbound_completed:this.state.asset_inbound_completed 
+            asset_it_office_epf:this.state.asset_it_office_epf
         }
 
-        axios.post('http://localhost:4000/inboundout/create',newInbound)
-        .then(res => console.log(res.data));
+        axios.post('http://localhost:4000/inbound/add',newInbound)
+        .then(res => toast(res.data));
 
-        toast("Successfully Added");
+    //     axios.post('http://localhost:3000', employee)
+    //   .then(res => {
+    //       const persons = res.data;
+    //       this.setState({ persons });
+    //     }) 
+
+        this.renderInboundData(this.state.inboundoutboundArr);
 
         this.setState ({
             inboundDetails: [],
@@ -227,10 +234,53 @@ export default class inbound extends Component{
 
     }
 
-    renderInbound = inboundDetails
+    renderInboundData(inboundDT){
+        let tableContent = (inboundDT === undefined || inboundDT === null || inboundDT.length === 0) ? null : (
+            inboundDT.data.map((item) => {
+                return (
+                    <tr key = {item.inbound_id}>
+                        <td>{item.inbound_id}</td>
+                        <td>{item.inbound_date}</td>
+                        <td>{item.inbound_itemdescription}</td>
+                        <td>{item.inbound_serialnumber}</td>
+                        <td>{item.inbound_departmentorbranch}</td>
+                        <td>{item.inbound_handoverusername}</td>
+                        <td>{item.inbound_handoveruserepf}</td>
+                        <td>{item.inbound_itofficername}</td>
+                        <td>{item.inbound_itofficerepf}</td>
+                    </tr>
+                );
+            })
+        );
+
+        return (
+            
+                <table id="inboundTable" cellPadding="10">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Item Description</th>
+                            <th>Serial Number</th>
+                            <th>Department</th>
+                            <th>Hand over User</th>
+                            <th>Hand Over EPF</th>
+                            <th>It Officer</th>
+                            <th>It Officer EPF</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {tableContent}
+                    </tbody>
+                </table>
+           
+        );
+    }
 
     render()
     {
+        let content = this.renderInboundData(this.state.inboundoutboundArr);
+        
         const notifySuccess = () => toast("Successfully Added");
         const { inboundDetails } =this.state;
         return(
@@ -240,36 +290,14 @@ export default class inbound extends Component{
                 <div className="row">
                     <div className="col-md-2"></div>
                     <div className="col-md-2">
-
+                        
                     </div>
                     <div className="col-md-5">
                         <h2>Inbound Interface</h2>
                     </div>
                 </div>
 
-                <div className="row">
-                        <div className="col-md-2"></div>
-                        <div className="col-md-9">
-                        <table className="table table-striped" style={{marginTop:20}}>
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Item Description</th>
-                                <th>Serial Number</th>
-                                <th>Department</th>
-                                <th>Hand Over User</th>
-                                <th>Hand Over EPF</th>
-                                <th>IT Officer Name</th>
-                                <th>IT officer EPF</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {inboundDetails.map(this.renderInbound)}
-                        </tbody>
-                    </table>
-                        </div>
-                </div>
+                
                 <div className="row">
                     
                     <div className="col-md-3"></div>
@@ -394,6 +422,13 @@ export default class inbound extends Component{
                         <input type="submit" value="Create Inbound" className="btn btn-primary" onClick={this.onSubmit}></input>
                         <ToastContainer />
                     </div>
+                </div>
+
+                <div className="row">
+                        <div className="col-md-2"></div>
+                        <div className="col-md-9">
+                        {content}
+                        </div>
                 </div>
 
                 

@@ -2,6 +2,11 @@ import React , {Component} from 'react';
 import { render } from '@testing-library/react';
 import DatePicker from 'react-date-picker';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import axios from 'axios';
+
 
 
 export default class reportscomp extends Component{
@@ -21,7 +26,8 @@ export default class reportscomp extends Component{
 
     this.state = {
        
-        
+        OutboundAllData: [],
+        OutBoundDT: [],
         date : new Date(),
         outbound_Item_Description: '',
         outbound_Serial_No:'',
@@ -31,6 +37,60 @@ export default class reportscomp extends Component{
         outbound_epf_no: '',
         outbound_it_officer_id: ''
     }
+}
+
+componentDidMount()
+{
+    axios.get('http://localhost:4000/outbound/')
+        .then(data=> {
+            this.setState({OutboundAllData : data.data});
+            console.log(data);
+        })
+        .catch(function (error){
+            console.log(error);
+        })
+}
+
+renderOutboundData(OutBoundDT){
+    let tableContent = (OutBoundDT === undefined || OutBoundDT === null || OutBoundDT.length === 0) ? null : (
+        OutBoundDT.data.map((item) => {
+            return (
+                <tr key = {item.outbound_id}>
+                    <td>{item.outbound_id}</td>
+                    <td>{item.outbound_date}</td>
+                    <td>{item.outbound_itemdescription}</td>
+                    <td>{item.outbound_serialnumber}</td>
+                    <td>{item.outbound_departmentorbranch}</td>
+                    <td>{item.outbound_handoverusername}</td>
+                    <td>{item.outbound_handoveruserepf}</td>
+                    <td>{item.outbound_itofficername}</td>
+                    <td>{item.outbound_itofficerepf}</td>
+                </tr>
+            );
+        })
+    );
+
+    return (
+            <table id="inboundTable" cellPadding="10">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Date</th>
+                        <th>Item Description</th>
+                        <th>Serial Number</th>
+                        <th>Department</th>
+                        <th>Hand over User</th>
+                        <th>Hand Over EPF</th>
+                        <th>It Officer</th>
+                        <th>It Officer EPF</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {tableContent}
+                </tbody>
+            </table>
+       
+    );
 }
 
 onChangeDate = date => this.setState({ date })
@@ -93,7 +153,17 @@ onSubmit(e){
     console.log(`outbound_epf_no : ${this.state.outbound_epf_no}`);
     console.log(`outbound_it_officer_id : ${this.state.outbound_it_officer_id}`);
 
+    const AddingOutBound = {
+        outbound_Item_Description:this.state.outbound_Item_Description,
+        outbound_Serial_No:this.state.outbound_Serial_No,
+        outbound_Dept_Branch:this.state.outbound_Dept_Branch,
+        outbound_Handover_Username:this.state.outbound_Handover_Username,
+        outbound_epf_no:this.state.outbound_epf_no,
+        outbound_it_officer_id:this.state.outbound_it_officer_id
+    }
 
+    axios.post('http://localhost:4000/outbound/add',AddingOutBound)
+        .then(res => toast(res.data));
 
 
 
@@ -112,6 +182,7 @@ onSubmit(e){
 }
     render()
     {
+        let content = this.renderOutboundData(this.state.OutboundAllData);
         return(
             <div className="row">
              <div className="col">
@@ -137,7 +208,7 @@ onSubmit(e){
                             </div>
               </div>      
 
-                    <div classname="col-md-4">  
+                    <div className="col-md-4">  
 
                         
                             <div className="form-group">
@@ -274,36 +345,7 @@ onSubmit(e){
             <br></br>
             <br></br>
             <h2>Pending Items</h2>
-            <table className="table table-striped" cellPadding="30">
-            <thead>
-    <tr>
-      <th>sender ID</th>
-      <th>branch code</th>
-      <th>tracking No</th>
-      <th>EPF No</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>A0001</td>
-      <td>ES45678</td>
-      <td>9865</td>
-    </tr>
-    <tr>
-    <td>2</td>
-      <td>A0002</td>
-      <td>ES45608</td>
-      <td>9895</td>
-    </tr>
-    <tr>
-    <td>3</td>
-      <td>A0003</td>
-      <td>ES15678</td>
-      <td>9815</td>
-    </tr>
-  </tbody>
-            </table>
+            {content}
                 </div>
                 
                 </div>
