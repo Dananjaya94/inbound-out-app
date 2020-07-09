@@ -9,19 +9,7 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import { render } from '@testing-library/react';
 
-// const TotableInout = props => (
-//     <tr>
-//         <td>{props.inboundoutboundArr.asset_rec_date}</td>
-//         <td>{props.inboundoutboundArr.asset_description}</td>
-//         <td>{props.inboundoutboundArr.asset_seq_no}</td>
-//         <td>{props.inboundoutboundArr.asset_branch_code}</td>
-//         <td>{props.inboundoutboundArr.asset_reciever_name}</td>
-//         <td>{props.inboundoutboundArr.asset_reciever_epf}</td>
-//         <td>{props.inboundoutboundArr.asset_it_office_name}</td>
-//         <td>{props.inboundoutboundArr.asset_it_office_epf}</td>
-//         <td><Link to ={"/edit/"+props.inboundoutboundArr._id}></Link></td>
-//     </tr>
-// )
+
 export default class inbound extends Component{
     
     constructor(props) {
@@ -46,7 +34,6 @@ export default class inbound extends Component{
 
         this.state = {
             inboundoutboundArr: [],
-            inboundDetails: [],
             asset_outbound_tracking_num:'',
             asset_seq_no: '',
             asset_make:'',
@@ -62,7 +49,8 @@ export default class inbound extends Component{
             asset_recieved_location:'',
             asset_expected_outbound_date:'',
             asset_rec_date: new Date(),
-            asset_inbound_completed: false
+            asset_inbound_completed: false,
+            inboundDetails: []
         }
     }
 
@@ -239,11 +227,12 @@ export default class inbound extends Component{
 
     }
 
-    
+    renderInbound = inboundDetails
 
     render()
     {
         const notifySuccess = () => toast("Successfully Added");
+        const { inboundDetails } =this.state;
         return(
             <div style={{margin:20}}>
                 <br></br>
@@ -275,9 +264,9 @@ export default class inbound extends Component{
                             </tr>
                         </thead>
 
-                        {/* <tbody>
-                            {this.loadOutbounds()}
-                        </tbody> */}
+                        <tbody>
+                            {inboundDetails.map(this.renderInbound)}
+                        </tbody>
                     </table>
                         </div>
                 </div>
