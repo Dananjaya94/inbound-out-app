@@ -114,13 +114,16 @@ onSubmit(e){
     {
         return(
             <div className="row">
+               
              <div className="col">
+             <div className="col-md-1"></div>
                     <div className="leftside">
             <div style={{margin:20}}>
             <br></br>
             <br></br>
+            <div className="col-md-3"></div>
             <div className="row">
-            <div className="col-md-4"></div>
+            <div className="col-md-5"></div>
 
             
                     
@@ -131,6 +134,7 @@ onSubmit(e){
             </div>
             <div className="row">
                     <div className="col-md-4"></div>
+
                     <div className="col-md-4">
                             <div className="form-group">
                             <label>Outbound date :</label>
@@ -255,8 +259,8 @@ onSubmit(e){
 
                     
                     <div className="row">
-                    <div className="col-md-4"></div>
-                            <div className="col-md-4"> 
+                    <div className="col-md-5"></div>
+                            <div className="col-md-5"> 
                             <div className="form-group"> 
                             <div className="btn-group mr-2"> 
                             <input type="submit" value="Add Outbound" className="btn btn-primary" onClick={this.onSubmit}></input>{}
