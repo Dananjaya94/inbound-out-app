@@ -9,19 +9,19 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import { render } from '@testing-library/react';
 
-// const TotableInout = props => (
-//     <tr>
-//         <td>{props.inboundoutboundArr.asset_rec_date}</td>
-//         <td>{props.inboundoutboundArr.asset_description}</td>
-//         <td>{props.inboundoutboundArr.asset_seq_no}</td>
-//         <td>{props.inboundoutboundArr.asset_branch_code}</td>
-//         <td>{props.inboundoutboundArr.asset_reciever_name}</td>
-//         <td>{props.inboundoutboundArr.asset_reciever_epf}</td>
-//         <td>{props.inboundoutboundArr.asset_it_office_name}</td>
-//         <td>{props.inboundoutboundArr.asset_it_office_epf}</td>
-//         <td><Link to ={"/edit/"+props.inboundoutboundArr._id}></Link></td>
-//     </tr>
-// )
+const TotableInout = props => (
+    <tr>
+        <td>{props.totblinout.inbound_id}</td>
+        <td>{props.totblinout.inbound_date}</td>
+        <td>{props.totblinout.inbound_itemdescription}</td>
+        <td>{props.totblinout.inbound_serialnumber}</td>
+        <td>{props.totblinout.inbound_departmentorbranch}</td>
+        <td>{props.totblinout.inbound_handoverusername}</td>
+        <td>{props.totblinout.inbound_handoveruserepf}</td>
+        <td>{props.totblinout.inbound_itofficername}</td>
+        <td>{props.totblinout.inbound_itofficerid}</td>
+    </tr>
+)
 export default class inbound extends Component{
     
     constructor(props) {
@@ -41,10 +41,25 @@ export default class inbound extends Component{
         this.onchange_asset_recieved_location = this.onchange_asset_recieved_location.bind(this);
         this.onChangeDate = this.onChangeDate.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+
+        this.getHeader = this.getHeader.bind(this);
+        this.getRowsData = this.getRowsData.bind(this);
+        this.getKeys = this.getKeys.bind(this);
         
         
 
         this.state = {
+            InboundData: [{
+                inbound_id : '',
+                inbound_date: '',
+                inbound_itemdescription: '',
+                inbound_serialnumber: '',
+                inbound_departmentorbranch: '',
+                inbound_handoverusername: '',
+                inbound_handoveruserepf: '',
+                inbound_itofficername: '',
+                inbound_itofficerid: ''
+            }],
             inboundoutboundArr: [],
             inboundDetails: [],
             asset_outbound_tracking_num:'',
@@ -68,24 +83,87 @@ export default class inbound extends Component{
 
     componentDidMount()
     {
-        axios.get('http://localhost:4000/inbound/')
-        .then(response=> {
-            this.setState({inboundoutboundArr : response.data});
-        })
-        .catch(function (error){
-            console.log(error);
-        })
+        // axios.get('http://localhost:4000/inbound/')
+        // .then(response=> {
+        //     this.setState({inboundDetails : response.data});
+        // })
+        // .catch(function (error){
+        //     console.log(error);
+        // })
+
+        // axios.get('http://localhost:4000/inbound/')
+        // .then(resp => {
+            
+        //     console.log(resp.data);
+        // });
+
+
+        axios.get('http://localhost:4000/inbound/', { responseType: 'json' }).
+        then(response => {
+                this.setState({ inboundDetails: response.json });
+                console.log(response.data);
+            });
+        // const proxyurl = "https://cors-anywhere.herokuapp.com/";
+        
+        //this.getInboundDetails();
+
+        // axios({
+        //     method: "get",
+        //     url: "http://localhost:4000/inbound/",
+        //     withCredentials: true,
+        //     headers: {
+        //       "Access-Control-Allow-Origin": "127.0.0.1:4000",
+        //       "Content-Type": "application/json",
+        //       "Access-Control-Allow-Methods": "GET,PUT,POST,OPTIONS",
+        //       "Access-Control-Allow-Headers": "authorization",
+        //       Accept: "application/json"
+        //     }
+        //   })
+        //   .then(response => {
+        //     if (response && response.data) {
+        //       this.setState({ inboundDetails: response.data });
+        //     }
+        //   })
+        //   .catch(error => console.log(error));
+
+
+//           const proxyurl = "https://cors-anywhere.herokuapp.com/";
+// const url = "http://localhost:4000/inbound/"; // site that doesn’t send Access-Control-*
+// fetch(proxyurl + url)
+// .then(response => {
+//     if (response && response.data) {
+//       this.setState({ inboundDetails: response.data });
+//       console.log(this.state.inboundDetails);
+//     }
+//   })
+// .then(response => response.text())
+// .then(contents => console.log(contents))
+// .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"))
+
     }
 
-    // loadOutbounds()
-    // {
-    //     return this.state.inboundoutboundArr.map(function(currentInbound,i){
-    //         return <TotableInout intout={currentInbound} key={i} />;
-    //     });
+    // getOutbounds = _ => {
+    //     fetch('http://localhost:4000/inbound/')
+    //     .then(response => response.json())
+    //     .then(({ data }) => {
+    //         console.log(data)
+    //     })
+    //     .catch(err => console.error(err))
     // }
-    
-    onChangeDate = asset_recieved_date => this.setState({ asset_recieved_date })
 
+    loadOutbounds()
+    {
+        return this.state.inboundDetails.map(function(currntitm , i){
+            return <TotableInout totblinout = {currntitm} key={i}/>
+        })
+    }
+    
+// renderOutBounds = ({inbound_id ,inbound_date,inbound_itemdescription,inbound_serialnumber,
+//     inbound_departmentorbranch,inbound_handoverusername,inbound_handoveruserepf,inbound_itofficername,
+//     inbound_itofficerid}) => <div key={inbound_id}>{inbound_id}</div>
+
+    onChangeDate = asset_recieved_date => this.setState({ asset_recieved_date })
+    
     onchange_asset_seq_no(e)
     {
         this.setState({
@@ -241,9 +319,40 @@ export default class inbound extends Component{
 
     
 
+    getInboundDetails = _ => {
+        fetch('http/localhost:4000/inbound')
+        .then(response => response.json())
+        .then(response => this.setState({ inboundDetails : response.json}))
+        .then(( {data }) => {
+            console.log(data)
+        })
+        .catch(err => console.error(err))
+    }
+
+    getKeys = function(){
+        return Object.keys(this.props.inboundDetails[0]);
+    }
+    
+    getHeader = function(){
+        var keys = this.getKeys();
+        return keys.map((key, index)=>{
+            return <th key={key}>{key.toUpperCase()}</th>
+ })
+    }
+    
+    getRowsData = function(){
+        var items = this.props.inboundDetails;
+        var keys = this.getKeys();
+        return items.map((row, index)=>{
+            return <tr key={index}><RenderRow key={index} data={row} keys={keys}/></tr>
+        }) 
+    }
+
     render()
     {
+        const data = this.state.inboundDetails;
         const notifySuccess = () => toast("Successfully Added");
+        const { inboundDetails } = this.state;
         return(
             <div style={{margin:20}}>
                 <br></br>
@@ -264,6 +373,8 @@ export default class inbound extends Component{
                         <table className="table table-striped" style={{marginTop:20}}>
                         <thead>
                             <tr>
+                            {/* {this.getHeader()} */}
+                                {/* <th>ID</th>
                                 <th>Date</th>
                                 <th>Item Description</th>
                                 <th>Serial Number</th>
@@ -271,13 +382,32 @@ export default class inbound extends Component{
                                 <th>Hand Over User</th>
                                 <th>Hand Over EPF</th>
                                 <th>IT Officer Name</th>
-                                <th>IT officer EPF</th>
+                                <th>IT officer EPF</th> */}
                             </tr>
                         </thead>
+                        <tbody>
 
-                        {/* <tbody>
-                            {this.loadOutbounds()}
-                        </tbody> */}
+                            {/* {this.getRowsData()} */}
+                            {/* <tr><td key={data.inbound_id}>{data.inbound_id}</td>
+                            <td key={data.inbound_id}>{data.inbound_date}</td>
+                            <td key={data.inbound_id}>{data.inbound_itemdescription}</td>
+                            <td key={data.inbound_id}>{data.inbound_serialnumber}</td>
+                            <td key={data.inbound_id}>{data.inbound_departmentorbranch}</td>
+                            <td key={data.inbound_id}>{data.inbound_handoverusername}</td>
+                            <td key={data.inbound_id}>{data.inbound_handoveruserepf}</td>
+                            <td key={data.inbound_id}>{data.inbound_itofficername}</td>
+                            <td key={data.inbound_id}>{data.inbound_itofficerid}</td></tr>
+                             */}
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            {/* {this.loadOutbounds()} */}
+                        </tbody>
                     </table>
                         </div>
                 </div>
@@ -411,4 +541,10 @@ export default class inbound extends Component{
             </div>
         )
     }
+    
+}
+const RenderRow = (props) =>{
+    return props.keys.map((key, index)=>{
+        return <td key={props.inboundDetails[key]}>{props.inboundDetails[key]}</td>
+        })
 }
