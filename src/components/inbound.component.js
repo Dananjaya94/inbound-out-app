@@ -76,6 +76,8 @@ export default class inbound extends Component{
     
     onChangeDate = asset_recieved_date => this.setState({ asset_recieved_date })
 
+    refreshInbound = res => this.componentDidMount();
+
     onchange_asset_seq_no(e)
     {
         this.setState({
