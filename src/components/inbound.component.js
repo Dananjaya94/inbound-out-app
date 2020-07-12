@@ -76,8 +76,6 @@ export default class inbound extends Component{
     
     onChangeDate = asset_recieved_date => this.setState({ asset_recieved_date })
 
-    refreshInbound = res => this.componentDidMount();
-
     onchange_asset_seq_no(e)
     {
         this.setState({
@@ -250,6 +248,7 @@ export default class inbound extends Component{
                         <td>{item.inbound_handoveruserepf}</td>
                         <td>{item.inbound_itofficername}</td>
                         <td>{item.inbound_itofficerepf}</td>
+                        <td><input type="submit" value="Recieve Item" className="btn btn-primary"></input></td>
                     </tr>
                 );
             })
@@ -269,6 +268,7 @@ export default class inbound extends Component{
                             <th>Hand Over EPF</th>
                             <th>It Officer</th>
                             <th>It Officer EPF</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>

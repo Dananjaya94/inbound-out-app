@@ -1,4 +1,5 @@
 import React , {Component, useImperativeHandle} from 'react';
+import axios from 'axios';
 import { render } from '@testing-library/react';
 
 
@@ -24,8 +25,33 @@ export default class ViewComp extends Component{
             user_id:'',
             prov:'',
             bra_name:'',
-            search_complete: false
+            search_complete: false,
+            inboundDT: [],
+            outboundDT: [],
+            inboundoutboundArr1: [],
+            inboundoutboundArr2: []
         }
+    }
+
+    componentWillMount()
+    {
+        axios.get('http://localhost:4000/inbound/')
+        .then(data=> {
+            this.setState({inboundoutboundArr1 : data.data});
+            console.log(data);
+        })
+        .catch(function (error){
+            console.log(error);
+        })
+
+        axios.get('http://localhost:4000/outbound')
+        .then(data => {
+            this.setState({inboundoutboundArr1 : data.data});
+            console.log(data);
+        })
+        .catch(function(error){
+            console.log(error);
+        })
     }
 
     onchange_asset_id(e)
@@ -98,9 +124,129 @@ export default class ViewComp extends Component{
         });
     }
 
+    renderInboundData(inboundDT){
+        let tableContent = (inboundDT === undefined || inboundDT === null || inboundDT.length === 0) ? null : (
+            inboundDT.data.map((item) => {
+                return (
+                    <tr key = {item.outbound_id}>
+                        <td>{item.inbound_id}</td>
+                        <td>{item.inbound_date}</td>
+                        <td>{item.inbound_itemdescription}</td>
+                        <td>{item.inbound_serialnumber}</td>
+                        <td>{item.inbound_departmentorbranch}</td>
+                        <td>{item.inbound_handoverusername}</td>
+                        <td>{item.inbound_handoveruserepf}</td>
+                        <td>{item.inbound_itofficername}</td>
+                        <td>{item.inbound_itofficerepf}</td>
+                        <td><input type="submit" value="Recieve Item" className="btn btn-primary"></input></td>
+                    </tr>
+                );
+            })
+        );
+
+        return (
+            
+                <table id="inboundTable" cellPadding="10">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Item Description</th>
+                            <th>Serial Number</th>
+                            <th>Department</th>
+                            <th>Hand over User</th>
+                            <th>Hand Over EPF</th>
+                            <th>It Officer</th>
+                            <th>It Officer EPF</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {tableContent}
+                    </tbody>
+                </table>
+           
+        );
+    }
+
+
+    renderOutboundData(outboundDT){
+        let tableContent = (outboundDT === undefined || outboundDT === null || outboundDT.length === 0) ? null : (
+            outboundDT.data.map((item) => {
+                return (
+                    <tr key = {item.outbound_id}>
+                    <td>{item.outbound_id}</td>
+                    <td>{item.outbound_date}</td>
+                    <td>{item.outbound_itemdescription}</td>
+                    <td>{item.outbound_serialnumber}</td>
+                    <td>{item.outbound_departmentorbranch}</td>
+                    <td>{item.outbound_handoverusername}</td>
+                    <td>{item.outbound_handoveruserepf}</td>
+                    <td>{item.outbound_itofficername}</td>
+                    <td>{item.outbound_itofficerepf}</td>
+                </tr>
+                );
+            })
+        );
+
+        return (
+            
+                <table id="inboundTable" cellPadding="10">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Item Description</th>
+                            <th>Serial Number</th>
+                            <th>Department</th>
+                            <th>Hand over User</th>
+                            <th>Hand Over EPF</th>
+                            <th>It Officer</th>
+                            <th>It Officer EPF</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {tableContent}
+                    </tbody>
+                </table>
+           
+        );
+    }
+
+    onchange_username(e)
+    {
+        this.setState({
+            username: e.target.value
+        });
+    }
+
+    onchange_ser_num(e)
+    {
+        this.setState({
+            ser_num: e.target.value
+        });
+    }
+
+    onchange_user_id(e)
+    {
+        this.setState({
+            user_id: e.target.value
+        });
+    }
+
+    onchange_bra_name(e)
+    {
+        this.setState({
+            bra_name: e.target.value
+        });
+    }
 
     render()
     {
+        let content = this.renderInboundData(this.state.inboundoutboundArr1);
+        let content2 = this.renderOutboundData(this.state.inboundoutboundArr2);
+
         return(
             
             // Form elements :
@@ -108,16 +254,16 @@ export default class ViewComp extends Component{
                 <h1>View Inventory</h1>
 
                 <form>
-                    <div class="row">
-                        <div class="col-md-2">
+                    <div className="row">
+                        <div className="col-md-2">
                             Asset ID:<input type ="text" value={this.state.asset_id} onChange={this.onchange_asset_id} className="form-control"/>
                         </div>  
                         
-                        <div class="col-md-2">
+                        <div className="col-md-2">
                             Username:<input type ="text" value={this.state.username} onChange={this.onchange_username} className="form-control"/>
                         </div>
                         
-                        <div class="col-md-2">
+                        <div className="col-md-2">
                             Province :<select name="province" id="selectDivision" className="form-control" onChange={this.on_prov}>
                                         <option value={this.prov}>Select Province</option>
                                         <option value={this.prov}>Eastern Province</option>
@@ -131,7 +277,7 @@ export default class ViewComp extends Component{
                     
                       {/* Simple Select */}
 
-                      <div class="col-md-2">
+                      <div className="col-md-2">
 
                            <label>Region : 
                                <select name="province" className="form-control" id="province">
@@ -149,24 +295,24 @@ export default class ViewComp extends Component{
                     
                     </div>
 {/* -----------------------Second Row------------ */}
-                     <div class="row">
-                        <div class="col-md-2">
+                     <div className="row">
+                        <div className="col-md-2">
                             Serial Number:<input type ="text" value={this.state.ser_num} onChange={this.onchange_ser_num} className="form-control"/>
                         </div>
 
-                        <div class="col-md-2">
+                        <div className="col-md-2">
                             User ID:<input type ="text" value={this.state.user_id} onChange={this.onchange_user_id} className="form-control"/>
                         </div>
 
-                        <div class="col-md-2">
+                        <div className="col-md-2">
                             Branch Name:<input type ="text" value={this.state.bra_name} onChange={this.onchange_bra_name} className="form-control"/>
                         </div>
                         
-                            <div class="col-md-2">
+                            <div className="col-md-2">
                                 <button className="btn btn-primary">Repair and Replacement</button>
                         </div>
 
-                        <div class="col-md-1">
+                        <div className="col-md-1">
                                 <input type="button" value="Search" className="btn btn-primary" onClick={this.onSearch}></input>
                         </div>
 
@@ -181,27 +327,15 @@ export default class ViewComp extends Component{
 
 {/* ------------------------------Table Elements------------------------- */}
                 
-                    <table cellPadding="30" >
-                        <tbody>
-                            <tr>
-                                <th>
-                                    Item ID |
-                                </th>
-                                <th>
-                                    Branch Code |
-                                </th>
-                                <th>
-                                    Sender EPF |
-                                </th>
-                                <th>
-                                    Location |
-                                </th>
-                            
-                            </tr>
-                        </tbody>
-                        
-       
-                    </table>
+                    <div className="leftside">
+                        <h3>Ibound Details</h3>
+                        {content}
+                    </div>
+
+                    <div className="rightside">
+                        <h3>Outbound Details</h3>
+                        {content2}
+                    </div>
                  
 
                 

@@ -52,3 +52,6 @@ td, th {
 tr:nth-child(even) {
   background-color: #dddddd;
 } */
+
+table tbody { height:200px; overflow-y:scroll; display:block; }
+table thead { display:block; }
