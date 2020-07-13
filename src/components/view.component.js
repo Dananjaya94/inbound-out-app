@@ -1,10 +1,11 @@
 import React , {Component, useImperativeHandle} from 'react';
 import axios from 'axios';
+
 import { ToastContainer, toast } from 'react-toastify';
 import { render } from '@testing-library/react';
 
 
-
+//https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Table%20Search&selectedStory=Basic%20Search%20Table&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
 
 
 export default class ViewComp extends Component{
