@@ -1,5 +1,6 @@
 import React , {Component, useImperativeHandle} from 'react';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 import { render } from '@testing-library/react';
 
 
@@ -12,7 +13,7 @@ export default class ViewComp extends Component{
 
         this.onchange_asset_id = this.onchange_asset_id.bind(this);
         this.on_ser_num = this.on_ser_num.bind(this);
-        this.on_username = this.on_username.bind(this);
+        this.on_usrName = this.on_usrName.bind(this);
         this.on_user_id = this.on_user_id.bind(this);
         this.on_prov = this.on_prov.bind(this);
         this.on_bra_name = this.on_bra_name.bind(this);
@@ -21,7 +22,7 @@ export default class ViewComp extends Component{
         this.state = {
             asset_id: '',
             ser_num:'',
-            username:'',
+            usrName:'',
             user_id:'',
             prov:'',
             bra_name:'',
@@ -29,7 +30,8 @@ export default class ViewComp extends Component{
             inboundDT: [],
             outboundDT: [],
             inboundoutboundArr1: [],
-            inboundoutboundArr2: []
+            inboundoutboundArr2: [],
+            SearchInbound: []
         }
     }
 
@@ -68,10 +70,10 @@ export default class ViewComp extends Component{
         });
     }
 
-    on_username(e)
+    on_usrName(e)
     {
         this.setState({
-            username:e.target.value
+            usrName:e.target.value
         });
     }
 
@@ -107,7 +109,7 @@ export default class ViewComp extends Component{
         console.log(`Searching Asset :`);
         console.log(`Asset ID : ${this.state.asset_id}`);
         console.log(`Serial Number : ${this.state.ser_num}`);
-        console.log(`Username : ${this.state.username}`);
+        console.log(`Username : ${this.state.usrName}`);
         console.log(`User ID : ${this.state.user_id}`);
         console.log(`Province : ${this.state.prov}`);
         console.log(`Branch Name : ${this.state.bra_name}`);
@@ -122,9 +124,25 @@ export default class ViewComp extends Component{
             bra_name:''
             
         });
+
+        const userName = {
+            usrName: this.state.usrName
+        };
+
+        axios.post('http://localhost:4000/view/search',userName)
+        .then(data => {
+            this.setState({SearchInbound : data.data});
+            this.renderInboundData(this.state.SearchInbound);
+            console.log(data);
+        })
+        .catch(function(error){
+            console.log(error);
+        })
+
     }
 
     renderInboundData(inboundDT){
+        console.log("Inbound Data Rendering");
         let tableContent1 = (inboundDT === undefined || inboundDT === null || inboundDT.length === 0) ? null : (
             inboundDT.data.map((item1) => {
                 return (
@@ -246,7 +264,7 @@ export default class ViewComp extends Component{
                     <div className="row">
                         <div className="col-md-3"></div>
                         <div className="col-md-3">
-                            Username:<input type ="text" value={this.state.username} onChange={this.onchange_username} className="form-control"/>
+                            Username:<input type ="text" value={this.state.usrName} onChange={this.on_usrName} className="form-control"/>
                         </div>
                         <div className="col-md-3">
                             User ID:<input type ="text" value={this.state.user_id} onChange={this.onchange_user_id} className="form-control"/>
@@ -268,7 +286,7 @@ export default class ViewComp extends Component{
                         </div>
 
                         <div className="col-md-5" >
-                            <input type="button" value="Repair and Replacement" style={{width:"100%"}} className="btn btn-primary"></input>
+                            <a href="http://10.10.1.220/repair" target="_blank"><input type="button" value="Repair and Replacement" style={{width:"100%"}} className="btn btn-primary"></input></a>
                         </div>
         
 

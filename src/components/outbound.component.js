@@ -154,6 +154,7 @@ onSubmit(e){
     console.log(`outbound_it_officer_id : ${this.state.outbound_it_officer_id}`);
 
     const AddingOutBound = {
+        date: this.state.date,
         outbound_Item_Description:this.state.outbound_Item_Description,
         outbound_Serial_No:this.state.outbound_Serial_No,
         outbound_Dept_Branch:this.state.outbound_Dept_Branch,
@@ -183,6 +184,7 @@ onSubmit(e){
     render()
     {
         let content = this.renderOutboundData(this.state.OutboundAllData);
+        const notifySuccess = () => toast("Successfully Added");
         return(
             <div className="row">
              <div className="col">
@@ -212,7 +214,7 @@ onSubmit(e){
 
                         
                             <div className="form-group">
-                            <DatePicker onChange={this.onChangeDate} value={this.state.asset_recieved_date} timezone={'SL/Asia'}></DatePicker>
+                            <DatePicker onChange={this.onChangeDate} value={this.state.date} timezone={'SL/Asia'}></DatePicker>
                             
                             </div>
                     </div>
@@ -253,16 +255,15 @@ onSubmit(e){
                         </div>
                         <div className="col-md-4">
                             <div className="form-group">
-                            <b><select onChange={this.onchange_outbound_Dept_Branch} className="form-control">
+                                <input type="text" onChange={this.onchange_outbound_Dept_Branch} value={this.state.outbound_Dept_Branch} className="form-control"></input>
+                            {/* <b><select onChange={this.onchange_outbound_Dept_Branch} className="form-control">
                                 <option value={this.state.outbound_Dept_Branch}>COLOMBO</option>
                                 <option value={this.state.outbound_Dept_Branch}>KEGALLE</option>
                                 <option value={this.state.outbound_Dept_Branch}>KANDY</option>
                                 <option value={this.state.outbound_Dept_Branch}>KADUWELA</option>
                                 <option value={this.state.outbound_Dept_Branch}>KELANIYA</option>
-                            </select>
+                            </select> */}
 
-                            {}
-                            </b>
                             </div>
                         </div>
                     </div>
