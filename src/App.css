@@ -53,5 +53,10 @@ tr:nth-child(even) {
   background-color: #dddddd;
 } */
 
-table tbody { height:200px; overflow-y:scroll; display:block; }
-table thead { display:block; }
+.tableFixHead          { overflow-y: auto; height: 210px; float:right;}
+.tableFixHead thead th { position: sticky; top: 0; }
+
+/* Just common table stuff. Really. */
+table  { border-collapse: collapse; width: 85%; }
+
+th     { background:#eee; }

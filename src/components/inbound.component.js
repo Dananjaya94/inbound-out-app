@@ -55,7 +55,7 @@ export default class inbound extends Component{
         }
     }
 
-    componentWillMount()
+    componentDidMount()
     {
         axios.get('http://localhost:4000/inbound/')
         .then(data=> {
@@ -256,7 +256,7 @@ export default class inbound extends Component{
 
         return (
             
-                <table id="inboundTable" cellPadding="10">
+                <table className="tableFixHead" style={{overflowX:"auto"}} id="inboundTable" cellPadding="6">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -428,7 +428,7 @@ export default class inbound extends Component{
 
                 <div className="row">
                         <div className="col-md-2"></div>
-                        <div className="col-md-9">
+                        <div className="tableFixHead">
                         {content}
                         </div>
                 </div>
