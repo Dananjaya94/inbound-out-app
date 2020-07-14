@@ -56,15 +56,15 @@ renderOutboundData(OutBoundDT){
         OutBoundDT.data.map((item) => {
             return (
                 <tr key = {item.outbound_id}>
-                    <td>{item.outbound_id}</td>
+                    {/* <td>{item.outbound_id}</td> */}
                     <td>{item.outbound_date}</td>
                     <td>{item.outbound_itemdescription}</td>
                     <td>{item.outbound_serialnumber}</td>
                     <td>{item.outbound_departmentorbranch}</td>
                     <td>{item.outbound_handoverusername}</td>
-                    <td>{item.outbound_handoveruserepf}</td>
+                    {/* <td>{item.outbound_handoveruserepf}</td> */}
                     <td>{item.outbound_itofficername}</td>
-                    <td>{item.outbound_itofficerepf}</td>
+                    {/* <td>{item.outbound_itofficerepf}</td> */}
                 </tr>
             );
         })
@@ -74,15 +74,15 @@ renderOutboundData(OutBoundDT){
             <table id="inboundTable" cellPadding="10">
                 <thead>
                     <tr>
-                        <th>ID</th>
+                        {/* <th>ID</th> */}
                         <th>Date</th>
                         <th>Item Description</th>
                         <th>Serial Number</th>
                         <th>Department</th>
                         <th>Hand over User</th>
-                        <th>Hand Over EPF</th>
+                        {/* <th>Hand Over EPF</th> */}
                         <th>It Officer</th>
-                        <th>It Officer EPF</th>
+                        {/* <th>It Officer EPF</th> */}
                     </tr>
                 </thead>
                 <tbody>
@@ -160,6 +160,7 @@ onSubmit(e){
         outbound_Dept_Branch:this.state.outbound_Dept_Branch,
         outbound_Handover_Username:this.state.outbound_Handover_Username,
         outbound_epf_no:this.state.outbound_epf_no,
+        outbound_It_Officername: this.state.outbound_It_Officername,
         outbound_it_officer_id:this.state.outbound_it_officer_id
     }
 
@@ -342,10 +343,10 @@ onSubmit(e){
                 
                 <div className="col">
                     <div className="rightside">
-                    <div style={{margin:20}}>
+                    <div style={{margin:20, height:500}} className="tableFixHead">
             <br></br>
             <br></br>
-            <h2>Pending Items</h2>
+            <h2>Outbound Items</h2>
             {content}
                 </div>
                 

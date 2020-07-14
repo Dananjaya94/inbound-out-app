@@ -57,7 +57,7 @@ export default class inbound extends Component{
 
     componentDidMount()
     {
-        axios.get('http://localhost:4000/inbound/')
+        axios.get('http://localhost:4000/outbound/')
         .then(data=> {
             this.setState({inboundoutboundArr : data.data});
             console.log(data);
@@ -238,16 +238,16 @@ export default class inbound extends Component{
         let tableContent = (inboundDT === undefined || inboundDT === null || inboundDT.length === 0) ? null : (
             inboundDT.data.map((item) => {
                 return (
-                    <tr key = {item.inbound_id}>
-                        <td>{item.inbound_id}</td>
-                        <td>{item.inbound_date}</td>
-                        <td>{item.inbound_itemdescription}</td>
-                        <td>{item.inbound_serialnumber}</td>
-                        <td>{item.inbound_departmentorbranch}</td>
-                        <td>{item.inbound_handoverusername}</td>
-                        <td>{item.inbound_handoveruserepf}</td>
-                        <td>{item.inbound_itofficername}</td>
-                        <td>{item.inbound_itofficerepf}</td>
+                    <tr key = {item.outbound_id}>
+                        <td>{item.outbound_id}</td>
+                        <td>{item.outbound_date}</td>
+                        <td>{item.outbound_itemdescription}</td>
+                        <td>{item.outbound_serialnumber}</td>
+                        <td>{item.outbound_departmentorbranch}</td>
+                        <td>{item.outbound_handoverusername}</td>
+                        <td>{item.outbound_handoveruserepf}</td>
+                        <td>{item.outbound_itofficername}</td>
+                        <td>{item.outbound_itofficerepf}</td>
                         <td><input type="submit" value="Recieve Item" className="btn btn-primary"></input></td>
                     </tr>
                 );
