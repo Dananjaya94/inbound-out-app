@@ -133,6 +133,7 @@ export default class reportscomp extends Component{
 
     printDocument() {  
         
+        toast("Pdf Generated");
         const input = document.getElementById('inboundTable');  
         html2canvas(input)  
           .then((canvas) => {  

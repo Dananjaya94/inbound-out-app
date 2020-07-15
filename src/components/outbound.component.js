@@ -207,7 +207,7 @@ onSubmit(e){
                     <div className="col-md-4"></div>
                     <div className="col-md-4">
                             <div className="form-group">
-                            <label>Outbound date :</label>
+                             Outbound date : 
                             </div>
               </div>      
 
@@ -224,7 +224,7 @@ onSubmit(e){
                         <div className="col-md-4"></div>
                         <div className="col-md-4">
                             <div className="form-group">
-                            <label>Item Description :</label>
+                             Item Description : 
                             </div>
                         </div>
                     <div className="col-md-4">  
@@ -237,7 +237,7 @@ onSubmit(e){
                         <div className="col-md-4"></div>
                         <div className="col-md-4">
                             <div className="form-group">
-                            <label>Serial No :</label>
+                             Serial No : 
                             </div>
                         </div>
                         <div className="col-md-4">
@@ -251,7 +251,7 @@ onSubmit(e){
                         <div className="col-md-4"></div>
                         <div className="col-md-4">
                             <div className="form-group">
-                            <label>Dept/Branch Code:</label>
+                             Dept/Branch Code: 
                             </div>
                         </div>
                         <div className="col-md-4">
@@ -272,7 +272,7 @@ onSubmit(e){
                     <div className="col-md-4"></div>
                         <div className="col-md-4">
                             <div className="form-group">
-                            <label>Hand over User Name :</label>
+                             Hand over User Name : 
                             </div>
                         </div>
                     
@@ -288,7 +288,7 @@ onSubmit(e){
                     <div className="col-md-4"></div>
                         <div className="col-md-4">
                             <div className="form-group">
-                                <label>Hand Over User EPF :</label>
+                                 Hand Over User EPF : 
                             </div>
                         </div>
                         <div className="col-md-4">
@@ -301,7 +301,7 @@ onSubmit(e){
                     <div className="col-md-4"></div>
                             <div className="col-md-4"> 
                             <div className="form-group">                          
-                                <label>IT Officer Name :</label>
+                                 IT Officer Name : 
                             
                             </div></div>
                             <div className="col-md-4">
@@ -315,7 +315,7 @@ onSubmit(e){
                     <div className="col-md-4"></div>
                             <div className="col-md-4"> 
                             <div className="form-group">                          
-                                <label>IT Officer ID :</label>
+                                 IT Officer ID : 
                             
                             </div></div>
                             <div className="col-md-4">
@@ -330,10 +330,8 @@ onSubmit(e){
                     <div className="row">
                     <div className="col-md-4"></div>
                             <div className="col-md-4"> 
-                            <div className="form-group"> 
                             <div className="btn-group mr-2"> 
                             <input type="submit" value="Add Outbound" className="btn btn-primary" onClick={this.onSubmit}></input>{}
-                            </div>
                             </div>
                 
                     </div>

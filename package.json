@@ -11,6 +11,7 @@
     "boostrap": "^2.0.0",
     "bootstrap": "^4.5.0",
     "html2canvas": "^1.0.0-rc.5",
+    "jquery": "^3.5.1",
     "jspdf": "^1.5.3",
     "jspdf-autotable": "^3.5.6",
     "react": "^16.13.1",
