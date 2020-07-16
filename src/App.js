@@ -35,7 +35,7 @@ function App() {
                 <SideNav.Nav defaultSelected="inbound">
                     <NavItem eventKey="inbound">
                         <NavIcon>
-                            <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                            <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em'}} />
                         </NavIcon>
                         <NavText>
                             Inbound

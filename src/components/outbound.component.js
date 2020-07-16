@@ -6,7 +6,44 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import axios from 'axios';
+import $ from 'jquery';
+ 
 
+$(document).ready(function(){
+
+
+    $("#submitOutbound").click(function(){
+
+      var out_des = $("#out_des").val();
+
+      var out_date = $("#out_date").val();
+      var out_sernum = $("#out_sernum").val();
+      var out_bra = $("#out_bra").val();
+      var out_usrnm = $("#out_usrnm").val();
+      var out_usrepf = $("#out_usrepf").val();
+      var out_offnm = $("#out_offnm").val();
+      var out_offepf = $("#out_offepf").val();
+
+       var month = $('input[name$="month"]').val();
+       var day = $('input[name$="day"]').val();
+       var year = $('input[name$="year"]').val();
+
+       var fullyear = year+"/"+month+"/"+day;
+
+
+
+
+      
+
+      var HtmlStr = '<tr><td>'+fullyear+'</td><td>'+out_des+'</td><td>'+out_sernum+'</td><td>'+out_bra+'</td><td>'+out_usrnm+'</td><td>'+out_offnm+'</td></tr>';
+
+      $('table tbody').append(HtmlStr);
+      
+
+    });
+
+
+});
 
 
 export default class reportscomp extends Component{
@@ -215,7 +252,7 @@ onSubmit(e){
 
                         
                             <div className="form-group">
-                            <DatePicker onChange={this.onChangeDate} value={this.state.date} timezone={'SL/Asia'}></DatePicker>
+                            <DatePicker id="out_date" onChange={this.onChangeDate} value={this.state.date} timezone={'SL/Asia'}></DatePicker>
                             
                             </div>
                     </div>
@@ -229,7 +266,7 @@ onSubmit(e){
                         </div>
                     <div className="col-md-4">  
                         <div className="form-group">
-                        <input type="text" className="form-control" value={this.state.outbound_Item_Description} onChange={this.onchange_outbound_Item_Description}></input>
+                        <input id="out_des" type="text" className="form-control" value={this.state.outbound_Item_Description} onChange={this.onchange_outbound_Item_Description}></input>
                         </div> 
                     </div>
                     </div>
@@ -243,7 +280,7 @@ onSubmit(e){
                         <div className="col-md-4">
 
                             <div className="form-group">
-                            <input type="text" className="form-control" value={this.state.outbound_Serial_No} onChange={this.onchange_outbound_Serial_No}></input>
+                            <input id="out_sernum" type="text" className="form-control" value={this.state.outbound_Serial_No} onChange={this.onchange_outbound_Serial_No}></input>
                             </div>
                         </div>
                     </div>
@@ -256,7 +293,7 @@ onSubmit(e){
                         </div>
                         <div className="col-md-4">
                             <div className="form-group">
-                                <input type="text" onChange={this.onchange_outbound_Dept_Branch} value={this.state.outbound_Dept_Branch} className="form-control"></input>
+                                <input id="out_bra" type="text" onChange={this.onchange_outbound_Dept_Branch} value={this.state.outbound_Dept_Branch} className="form-control"></input>
                             {/* <b><select onChange={this.onchange_outbound_Dept_Branch} className="form-control">
                                 <option value={this.state.outbound_Dept_Branch}>COLOMBO</option>
                                 <option value={this.state.outbound_Dept_Branch}>KEGALLE</option>
@@ -280,7 +317,7 @@ onSubmit(e){
                     
                         <div className="col-md-4">
                             <div className="form-group">
-                            <input type="text" className="form-control" value={this.state.outbound_Handover_Username} onChange={this.onchange_outbound_Handover_Username}></input>
+                            <input id="out_usrnm" type="text" className="form-control" value={this.state.outbound_Handover_Username} onChange={this.onchange_outbound_Handover_Username}></input>
                             </div>
                         </div>
                     </div>
@@ -293,7 +330,7 @@ onSubmit(e){
                         </div>
                         <div className="col-md-4">
                             <div className="form-group">
-                                <input type="text" className="form-control" value={this.state.outbound_epf_no} onChange={this.onchange_outbound_epf_no}></input>
+                                <input id="out_usrepf" type="text" className="form-control" value={this.state.outbound_epf_no} onChange={this.onchange_outbound_epf_no}></input>
                             </div>
                         </div>
                     </div>
@@ -307,7 +344,7 @@ onSubmit(e){
                             <div className="col-md-4">
                             <div className="form-group">
                                {/* <input type="text" ></input>  */}
-                               <input type="text" className="form-control" value={this.state.outbound_It_Officername} onChange={this.onchange_outbound_It_Officername}></input>
+                               <input id="out_offnm" type="text" className="form-control" value={this.state.outbound_It_Officername} onChange={this.onchange_outbound_It_Officername}></input>
                             </div>
                             </div>
                     </div>
@@ -321,7 +358,7 @@ onSubmit(e){
                             <div className="col-md-4">
                             <div className="form-group">
                                {/* <input type="text" ></input>  */}
-                               <input type="text" className="form-control" value={this.state.outbound_it_officer_id} onChange={this.onchange_outbound_it_officer_id}></input>
+                               <input id="out_offepf" type="text" className="form-control" value={this.state.outbound_it_officer_id} onChange={this.onchange_outbound_it_officer_id}></input>
                             </div>
                             </div>
                     </div>
@@ -331,7 +368,7 @@ onSubmit(e){
                     <div className="col-md-4"></div>
                             <div className="col-md-4"> 
                             <div className="btn-group mr-2"> 
-                            <input type="submit" value="Add Outbound" className="btn btn-primary" onClick={this.onSubmit}></input>{}
+                            <input id="submitOutbound" type="submit" value="Add Outbound" className="btn btn-primary" onClick={this.onSubmit}></input>{}
                             </div>
                 
                     </div>

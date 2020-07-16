@@ -375,7 +375,7 @@ export default class inbound extends Component{
                     </div>
                     <div className="col-md-2">
                         <div className="form-group">
-                        <DatePicker onChange={this.onChangeDate} value={this.state.asset_rec_date} timezone={'SL/Asia'}></DatePicker>
+                        <DatePicker id="in_date" onChange={this.onChangeDate} value={this.state.asset_rec_date} timezone={'SL/Asia'}></DatePicker>
                         </div>
                     </div>
 
@@ -492,11 +492,14 @@ export default class inbound extends Component{
                         <ToastContainer />
                     </div>
                 </div>
+                <div className="row">
+                    <br/>
+                </div>
 
                 <div className="row">
                         <div className="col-md-2"></div>
                         <div className="tableFixHead">
-                        {content}
+                            {content}
                         </div>
                 </div>
 
