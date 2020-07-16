@@ -14,7 +14,7 @@ var newInbound = {};
 $(document).ready(function(){
 
     // code to read selected table row cell data (values).
-    $("#inboundTable").on('click','.btnSelect',function(){
+    $("#inboundMyTable").on('click','.btnSelect',function(){
          // get the current row
          var currentRow=$(this).closest("tr"); 
          
@@ -277,6 +277,7 @@ export default class inbound extends Component{
     //     }) 
 
         this.renderInboundData(this.state.inboundoutboundArr);
+        window.location.reload(false);
 
         this.setState ({
             inboundDetails: [],
@@ -316,7 +317,7 @@ export default class inbound extends Component{
 
         return (
             
-                <table id="myTable" className="tableFixHead" style={{overflowX:"auto"}} id="inboundTable" cellPadding="6">
+                <table id="inboundMyTable" className="tableFixHead" style={{overflowX:"auto"}} cellPadding="6">
                     <thead>
                         <tr>
                             <th>ID</th>

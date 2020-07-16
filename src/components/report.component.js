@@ -9,6 +9,8 @@ import 'react-date-picker/dist/entry.nostyle';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
+
+
 import axios from 'axios';
 import html2canvas from 'html2canvas';
 
@@ -133,6 +135,7 @@ export default class reportscomp extends Component{
 
     printDocument() {  
         
+
         toast("Pdf Generated");
         const input = document.getElementById('inboundTable');  
         html2canvas(input)  

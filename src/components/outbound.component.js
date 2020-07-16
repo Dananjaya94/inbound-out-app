@@ -204,6 +204,7 @@ onSubmit(e){
     axios.post('http://localhost:4000/outbound/add',AddingOutBound)
         .then(res => toast(res.data));
 
+        window.location.reload(false);
 
 
         this.setState ({
@@ -214,7 +215,9 @@ onSubmit(e){
         outbound_Handover_Username: '',
         outbound_It_Officername: '',
         outbound_epf_no: '',
-        outbound_it_officer_id:''
+        outbound_it_officer_id:'',
+        OutboundAllData: [],
+        OutBoundDT: []
         
         });
 

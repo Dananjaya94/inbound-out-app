@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Children } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter as Router,Route,Link} from "react-router-dom";
@@ -31,11 +31,12 @@ function App() {
                 }}
                 style={{'backgroundColor':'purple'}}
             >
+                {/* defaultSelected="inbound" */}
                 <SideNav.Toggle />
-                <SideNav.Nav defaultSelected="inbound">
+                <SideNav.Nav >
                     <NavItem eventKey="inbound">
                         <NavIcon>
-                            <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em'}} />
+                            <i className="fa fa-fw fa-inbound" style={{ fontSize: '1.75em'}} />
                         </NavIcon>
                         <NavText>
                             Inbound
