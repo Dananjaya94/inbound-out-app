@@ -1,12 +1,16 @@
 import React , {Component, useImperativeHandle} from 'react';
 import axios from 'axios';
 
+import DataTable from 'react-data-table-component';
+
 import { ToastContainer, toast } from 'react-toastify';
 import { render } from '@testing-library/react';
 
 
 //https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Table%20Search&selectedStory=Basic%20Search%20Table&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
 
+var rowsss = [];
+var cols = [];
 
 export default class ViewComp extends Component{
     constructor(props) {
@@ -41,7 +45,7 @@ export default class ViewComp extends Component{
         axios.get('http://localhost:4000/inbound/')
         .then(data=> {
             this.setState({inboundoutboundArr1 : data.data});
-            console.log(data);
+            console.log(this.inboundoutboundArr1.data);
         })
         .catch(function (error){
             console.log(error);
@@ -145,16 +149,18 @@ export default class ViewComp extends Component{
     renderInboundData(inboundDT){
         console.log("Inbound Data Rendering");
         let tableContent1 = (inboundDT === undefined || inboundDT === null || inboundDT.length === 0) ? null : (
-            inboundDT.data.map((item1) => {
+            inboundDT.data.rows.map((item1,i) => {
                 return (
-                    <tr key = {item1.inbound_id}>
-                        <td>{item1.inbound_date}</td>
-                        <td>{item1.inbound_itemdescription}</td>
-                        <td>{item1.inbound_departmentorbranch}</td>
-                        <td>{item1.inbound_handoverusername}</td>
-                        <td>{item1.inbound_itofficername}</td>
+                    <tr key = {item1[i+0]}>
+                        <td>{item1[i+1]}</td>
+                        <td>{item1[i+2]}</td>
+                        <td>{item1[i+3]}</td>
+                        <td>{item1[i+4]}</td>
+                        <td>{item1[i+5]}</td>
                     </tr>
+                    
                 );
+                i = i + 1;
             })
         );
 
@@ -302,7 +308,12 @@ export default class ViewComp extends Component{
                     </div>
                         <div className="col-md-4">
                             <div className="leftside" className="tableFixHead">
-                                {content}
+                                {/* {content} */}
+                                <DataTable
+                                title="Inbound Data"
+                                columns={cols}
+                                data={rowsss}
+                                ></DataTable>
                             </div>
                         </div>
                         <div className="col-md-5">
