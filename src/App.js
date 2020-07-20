@@ -10,6 +10,7 @@ import outbound from "./components/outbound.component";
 import viewrep from "./components/view.component";
 import reportCom from "./components/report.component";
 import ClickOutside from "./ClickOutside";
+import exampl from "./components/example.conponent";
 
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
