@@ -61,7 +61,6 @@ table  { border-collapse: collapse; width: 85%; }
 
 th     { background:#eee; }
 
-
 table.dataTable thead .sorting:after,
 table.dataTable thead .sorting:before,
 table.dataTable thead .sorting_asc:after,
