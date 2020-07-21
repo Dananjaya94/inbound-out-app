@@ -12,6 +12,8 @@ import reportCom from "./components/report.component";
 import ClickOutside from "./ClickOutside";
 import exampl from "./components/example.conponent";
 
+import exp from "./components/example.conponent";
+
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
@@ -78,6 +80,7 @@ function App() {
                 <Route path="/outbound" component={outbound} />
                 <Route path="/view" component={viewrep} />
                 <Route path="/reports" component={reportCom} />
+                <Route path="/exp" component={exp}/>
             </main>
         </React.Fragment>
     )}
