@@ -62,7 +62,6 @@ $(document).ready(function(){
 
     $("#tbloutbound1").on('click','tr',function(){
     
-        alert('row clicked');
 
         var currentRow=$(this).closest("tr"); 
          
@@ -159,11 +158,17 @@ $.ajax({
 
                             { title: "Description" },
 
+                            { title: "Serial Number" },
+
                             { title: "Department" },
 
                             { title: "User" },
 
+                            { title: "User EPF"},
+
                             { title: "Officer" },
+
+                            { title: "Officer EPF"},
 
                         ]
 
@@ -377,18 +382,18 @@ export default class inbound extends Component{
         console.log(`IT Office Name : ${this.state.asset_it_office_name}`);
         console.log(`IT Officer ID : ${this.state.asset_it_office_epf}`);
 
-        // const newInbound = {
+        const newInbound = {
 
-        //     asset_out_id: this.state.asset_out_id,
-        //     asset_rec_date: this.state.asset_rec_date,
-        //     asset_description:this.state.asset_description,
-        //     asset_seq_no: this.state.asset_seq_no,
-        //     asset_branch_code:this.state.asset_branch_code,
-        //     asset_reciever_name: this.state.asset_reciever_name,
-        //     asset_reciever_epf:this.state.asset_reciever_epf,
-        //     asset_it_office_name:this.state.asset_it_office_name,
-        //     asset_it_office_epf:this.state.asset_it_office_epf
-        // }
+            asset_out_id: this.state.asset_out_id,
+            asset_rec_date: this.state.asset_rec_date,
+            asset_description:this.state.asset_description,
+            asset_seq_no: this.state.asset_seq_no,
+            asset_branch_code:this.state.asset_branch_code,
+            asset_reciever_name: this.state.asset_reciever_name,
+            asset_reciever_epf:this.state.asset_reciever_epf,
+            asset_it_office_name:this.state.asset_it_office_name,
+            asset_it_office_epf:this.state.asset_it_office_epf
+        }
 
         axios.post('http://localhost:4000/inbound/add',newInbound)
         .then(res => toast(res.data));
@@ -399,7 +404,7 @@ export default class inbound extends Component{
     //       this.setState({ persons });
     //     }) 
 
-        this.renderInboundData(this.state.inboundoutboundArr);
+        //this.renderInboundData(this.state.inboundoutboundArr);
         window.location.reload(false);
 
         this.setState ({
@@ -418,50 +423,50 @@ export default class inbound extends Component{
 
     }
 
-    renderInboundData(inboundDT){
-        let tableContent = (inboundDT === undefined || inboundDT === null || inboundDT.length === 0) ? null : (
-            inboundDT.data.map((item) => {
-                return (
-                    <tr key = {item.outbound_id}>
-                        <td>{item.outbound_id}</td>
-                        <td>{item.outbound_date}</td>
-                        <td>{item.outbound_itemdescription}</td>
-                        <td>{item.outbound_serialnumber}</td>
-                        <td>{item.outbound_departmentorbranch}</td>
-                        <td>{item.outbound_handoverusername}</td>
-                        <td>{item.outbound_handoveruserepf}</td>
-                        <td>{item.outbound_itofficername}</td>
-                        <td>{item.outbound_itofficerepf}</td>
-                        <td><input type="submit" value="Recieve Item" className="btnSelect"></input></td>
-                    </tr>
-                );
-            })
-        );
+    // renderInboundData(inboundDT){
+    //     let tableContent = (inboundDT === undefined || inboundDT === null || inboundDT.length === 0) ? null : (
+    //         inboundDT.data.map((item) => {
+    //             return (
+    //                 <tr key = {item.outbound_id}>
+    //                     <td>{item.outbound_id}</td>
+    //                     <td>{item.outbound_date}</td>
+    //                     <td>{item.outbound_itemdescription}</td>
+    //                     <td>{item.outbound_serialnumber}</td>
+    //                     <td>{item.outbound_departmentorbranch}</td>
+    //                     <td>{item.outbound_handoverusername}</td>
+    //                     <td>{item.outbound_handoveruserepf}</td>
+    //                     <td>{item.outbound_itofficername}</td>
+    //                     <td>{item.outbound_itofficerepf}</td>
+    //                     <td><input type="submit" value="Recieve Item" className="btnSelect"></input></td>
+    //                 </tr>
+    //             );
+    //         })
+    //     );
 
-        return (
+    //     return (
             
-                <table id="inboundMyTable" className="tableFixHead" style={{overflowX:"auto"}} cellPadding="6">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Date</th>
-                            <th>Item Description</th>
-                            <th>Serial Number</th>
-                            <th>Department</th>
-                            <th>Hand over User</th>
-                            <th>Hand Over EPF</th>
-                            <th>It Officer</th>
-                            <th>It Officer EPF</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tableContent}
-                    </tbody>
-                </table>
+    //             <table id="inboundMyTable" className="tableFixHead" style={{overflowX:"auto"}} cellPadding="6">
+    //                 <thead>
+    //                     <tr>
+    //                         <th>ID</th>
+    //                         <th>Date</th>
+    //                         <th>Item Description</th>
+    //                         <th>Serial Number</th>
+    //                         <th>Department</th>
+    //                         <th>Hand over User</th>
+    //                         <th>Hand Over EPF</th>
+    //                         <th>It Officer</th>
+    //                         <th>It Officer EPF</th>
+    //                         <th></th>
+    //                     </tr>
+    //                 </thead>
+    //                 <tbody>
+    //                     {tableContent}
+    //                 </tbody>
+    //             </table>
            
-        );
-    }
+    //     );
+    // }
 
     render()
     {
@@ -622,9 +627,12 @@ export default class inbound extends Component{
 
                 <div className="row">
                         <div className="col-md-2"></div>
-                        <div className="tableFixHead">
+                        <div className="col-md-10">
+                        <div>
                             <table id="tbloutbound1"></table>
                         </div>
+                        </div>
+                        
                 </div>
 
                 

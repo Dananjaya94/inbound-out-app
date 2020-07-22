@@ -52,11 +52,17 @@ $.ajax({
 
                             { title: "Description" },
 
+                            { title: "Serial Number" },
+
                             { title: "Department" },
 
                             { title: "User" },
 
+                            { title: "User EPF"},
+
                             { title: "Officer" },
+
+                            { title: "Officer EPF"},
 
                         ]
 
