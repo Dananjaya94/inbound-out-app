@@ -5,8 +5,10 @@ import dt from 'datatables.net';
 
 var arr = {};
 var inboundData = {};
-var rowsss = [];
-var colls = [];
+var inrowsss = [];
+var incolls = [];
+var outrowsss = [];
+var outcolls = [];
 
 $.ajax({
     type: "GET",
@@ -24,23 +26,23 @@ $.ajax({
 
                   $.each(data, function (index, value) {
 
-                      colls = [];
-                      rowsss= [];
+                      incolls = [];
+                      inrowsss= [];
 
                       var tempArray = new Array;
                       console.log(value);
                       for (var o in value.metaData) {
-                          colls.push(value.metaData[o]);
+                          incolls.push(value.metaData[o]);
                       }
 
                       for (var i in value.rows) {
-                          rowsss.push(value.rows[i]);
+                          inrowsss.push(value.rows[i]);
                       }
-                      console.log(rowsss);
+                      console.log(inrowsss);
                       
                       $('#tblinbound').DataTable({
 
-                        data: rowsss,
+                        data: inrowsss,
 
                         columns: [
 
@@ -60,28 +62,67 @@ $.ajax({
 
                     });
 
-                    //   //console.log(rowsss);
-                    //   obj = {};
-                    //   objects = [];
-                    //   for(var x in rowsss){
-                    //     //console.log(x);
-                    //     let y = 0;
-                    //               obj = {
-                    //                       INBOUND_ID:rowsss[x][y],
-                    //                       INBOUND_DATE:rowsss[x][y+1],
-                    //                       INBOUND_DESCRIPTION:rowsss[x][y+2],
-                    //                       INBOUND_BRANCHORDEPARTMENT:rowsss[x][y+3],
-                    //                       INBOUND_HANDOVERUSERNAME:rowsss[x][y+4],
-                    //                       INBOUND_ITOFFICERNAME:rowsss[x][y+5]
-                    //                     }
-                    //               //console.log(obj);
+                  })
+      },
 
-                    //               objects.push(obj);
-                        
-                          
+      error: function (jqXHR, exception) {
 
-                    //   }
-                    //  console.log(objects);
+      }
+
+});
+
+$.ajax({
+    type: "GET",
+
+        url: "http://localhost:4000/outbound",
+        contentType: "application/json",
+        beforeSend: function () {
+        },
+
+        success: function (data) {
+
+
+
+            //console.log(data);
+
+                  $.each(data, function (index, value) {
+
+                      outcolls = [];
+                      outrowsss= [];
+
+                      var tempArray = new Array;
+                      console.log(value);
+                      for (var o in value.metaData) {
+                          outcolls.push(value.metaData[o]);
+                      }
+
+                      for (var i in value.rows) {
+                          outrowsss.push(value.rows[i]);
+                      }
+                      console.log(outrowsss);
+                      
+                      $('#tbloutbound').DataTable({
+
+                        data: outrowsss,
+
+                        columns: [
+
+                            { title: "Id" },
+
+                            { title: "Date" },
+
+                            { title: "Description" },
+
+                            { title: "Department" },
+
+                            { title: "User" },
+
+                            { title: "Officer" },
+
+                        ]
+
+                    });
+
                   })
       },
 
@@ -99,7 +140,9 @@ export default class ViewComponent extends Component
 
         this.state = {
             inboundRows: [],
-            inboundDT: []
+            inboundDT: [],
+            outboundRows: [],
+            outboundDT:[]
         }
     }
 
@@ -107,6 +150,12 @@ export default class ViewComponent extends Component
     {
         this.inboundRows = indt;
         console.log(indt);
+    }
+
+    setOutboundData(outdt)
+    {
+        this.outboundRows = outdt;
+        console.log(outdt);
     }
     
     renderInboundData(inboundt)
@@ -116,7 +165,7 @@ export default class ViewComponent extends Component
 
     render()
     {
-        let cont = this.renderInboundData(this.rowsss);
+        let cont = this.renderInboundData(this.inrowsss);
         return(
             <div className="container">
                 <div className="row">
@@ -128,6 +177,14 @@ export default class ViewComponent extends Component
                     <div className="col-md-9">
                         <h2>View Component</h2>
                         <table id="tblinbound">
+
+                        </table>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-md-3"></div>
+                    <div className="col-md-9">
+                        <table id="tbloutbound">
 
                         </table>
                     </div>
