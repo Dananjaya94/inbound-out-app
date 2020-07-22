@@ -7,10 +7,16 @@ import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/entry.nostyle';
 import axios from 'axios';
 import $ from 'jquery';
+import dt from 'datatables.net';
 import {Link} from 'react-router-dom';
 import { render } from '@testing-library/react';
 
 var newInbound = {};
+
+var outrowsss = [];
+var outcolls = [];
+
+
 $(document).ready(function(){
 
     // code to read selected table row cell data (values).
@@ -53,6 +59,123 @@ $(document).ready(function(){
         }
 
     });
+
+    $("#tbloutbound1").on('click','tr',function(){
+    
+        alert('row clicked');
+
+        var currentRow=$(this).closest("tr"); 
+         
+         var col1=currentRow.find("td:eq(0)").html(); // get current row 1st TD value
+         var col2=currentRow.find("td:eq(1)").text(); // get current row 2nd TD
+         var col3=currentRow.find("td:eq(2)").text(); // get current row 3rd TD
+         var col4=currentRow.find("td:eq(3)").text(); // get current row 3rd TD
+         var col5=currentRow.find("td:eq(4)").text(); // get current row 3rd TD
+         var col6=currentRow.find("td:eq(5)").text(); // get current row 3rd TD
+         var col7=currentRow.find("td:eq(6)").text(); // get current row 3rd TD
+         var col8=currentRow.find("td:eq(7)").text(); // get current row 3rd TD
+         var col9=currentRow.find("td:eq(8)").text(); // get current row 3rd TD
+         var data=col1+"\n"+col2+"\n"+col3+"\n"+col4;
+         
+         $('#inb_id').val(col1);
+         $('#inb_des').val(col3);
+         $('#inb_ser').val(col4);
+         $('#inb_bra').val(col5);
+         $('#inb_asstrec').val(col6);
+         $('#inb_asstrecepf').val(col7);
+         $('#inb_itofnm').val(col8);
+         $('#inb_itofepf').val(col9);
+
+
+         newInbound = {
+
+            asset_out_id: col1,
+            asset_rec_date: col2,
+            asset_description:col3,
+            asset_seq_no: col4,
+            asset_branch_code:col5,
+            asset_reciever_name: col6,
+            asset_reciever_epf:col7,
+            asset_it_office_name:col8,
+            asset_it_office_epf:col9
+        }
+
+    });
+});
+
+// var table = $('#tbloutbound1').DataTable();
+ 
+// table.on( 'select', function ( e, dt, type, indexes ) {
+//     if ( type === 'row' ) {
+//         var data = table.rows( indexes ).data().pluck( 'id' );
+//         alert(data);
+ 
+//         // do something with the ID of the selected items
+//     }
+// } );
+
+
+
+
+$.ajax({
+    type: "GET",
+
+        url: "http://localhost:4000/outbound",
+        contentType: "application/json",
+        beforeSend: function () {
+        },
+
+        success: function (data) {
+
+
+
+            //console.log(data);
+
+                  $.each(data, function (index, value) {
+
+                      outcolls = [];
+                      outrowsss= [];
+
+                      var tempArray = new Array;
+                      console.log(value);
+                      for (var o in value.metaData) {
+                          outcolls.push(value.metaData[o]);
+                      }
+
+                      for (var i in value.rows) {
+                          outrowsss.push(value.rows[i]);
+                      }
+                      console.log(outrowsss);
+                      
+                      $('#tbloutbound1').DataTable({
+
+                        data: outrowsss,
+
+                        columns: [
+
+                            { title: "Id" },
+
+                            { title: "Date" },
+
+                            { title: "Description" },
+
+                            { title: "Department" },
+
+                            { title: "User" },
+
+                            { title: "Officer" },
+
+                        ]
+
+                    });
+
+                  })
+      },
+
+      error: function (jqXHR, exception) {
+
+      }
+
 });
 
 export default class inbound extends Component{
@@ -342,7 +465,7 @@ export default class inbound extends Component{
 
     render()
     {
-        let content = this.renderInboundData(this.state.inboundoutboundArr);
+        //let content = this.renderInboundData(this.state.inboundoutboundArr);
         
         const notifySuccess = () => toast("Successfully Added");
         const { inboundDetails } =this.state;
@@ -500,7 +623,7 @@ export default class inbound extends Component{
                 <div className="row">
                         <div className="col-md-2"></div>
                         <div className="tableFixHead">
-                            {content}
+                            <table id="tbloutbound1"></table>
                         </div>
                 </div>
 

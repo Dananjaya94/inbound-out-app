@@ -170,20 +170,24 @@ export default class ViewComponent extends Component
             <div className="container">
                 <div className="row">
                     <div className="col-md-3"></div>
-                    <div className="col-md-9"></div>"
+                    <div className="col-md-9">
+                    <h2>View Component</h2></div>"
                 </div>
                 <div className="row">
                     <div className="col-md-3"></div>
                     <div className="col-md-9">
-                        <h2>View Component</h2>
+                        
+                        <h4>Inbound Details</h4>
                         <table id="tblinbound">
 
                         </table>
                     </div>
                 </div>
+                <hr></hr>
                 <div className="row">
                     <div className="col-md-3"></div>
                     <div className="col-md-9">
+                        <h4>Outbound Details</h4>
                         <table id="tbloutbound">
 
                         </table>
