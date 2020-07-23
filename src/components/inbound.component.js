@@ -382,18 +382,18 @@ export default class inbound extends Component{
         console.log(`IT Office Name : ${this.state.asset_it_office_name}`);
         console.log(`IT Officer ID : ${this.state.asset_it_office_epf}`);
 
-        const newInbound = {
+        // newInbound = {
 
-            asset_out_id: this.state.asset_out_id,
-            asset_rec_date: this.state.asset_rec_date,
-            asset_description:this.state.asset_description,
-            asset_seq_no: this.state.asset_seq_no,
-            asset_branch_code:this.state.asset_branch_code,
-            asset_reciever_name: this.state.asset_reciever_name,
-            asset_reciever_epf:this.state.asset_reciever_epf,
-            asset_it_office_name:this.state.asset_it_office_name,
-            asset_it_office_epf:this.state.asset_it_office_epf
-        }
+        //     asset_out_id: this.state.asset_out_id,
+        //     asset_rec_date: this.state.asset_rec_date,
+        //     asset_description:this.state.asset_description,
+        //     asset_seq_no: this.state.asset_seq_no,
+        //     asset_branch_code:this.state.asset_branch_code,
+        //     asset_reciever_name: this.state.asset_reciever_name,
+        //     asset_reciever_epf:this.state.asset_reciever_epf,
+        //     asset_it_office_name:this.state.asset_it_office_name,
+        //     asset_it_office_epf:this.state.asset_it_office_epf
+        // }
 
         axios.post('http://localhost:4000/inbound/add',newInbound)
         .then(res => toast(res.data));
@@ -405,7 +405,7 @@ export default class inbound extends Component{
     //     }) 
 
         //this.renderInboundData(this.state.inboundoutboundArr);
-        window.location.reload(false);
+        //window.location.reload(false);
 
         this.setState ({
             inboundDetails: [],
