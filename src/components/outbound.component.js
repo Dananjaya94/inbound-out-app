@@ -7,7 +7,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import axios from 'axios';
 import $ from 'jquery';
- 
+
+var outrowsss = [];
+var outcolls = [];
+
 
 $(document).ready(function(){
 
@@ -45,6 +48,64 @@ $(document).ready(function(){
 
 });
 
+$.ajax({
+    type: "GET",
+
+        url: "http://localhost:4000/outboundSelection",
+        contentType: "application/json",
+        beforeSend: function () {
+        },
+
+        success: function (data) {
+
+
+
+            //console.log(data);
+
+                  $.each(data, function (index, value) {
+
+                      outcolls = [];
+                      outrowsss= [];
+
+                      var tempArray = new Array;
+                      console.log(value);
+                      for (var o in value.metaData) {
+                          outcolls.push(value.metaData[o]);
+                      }
+
+                      for (var i in value.rows) {
+                          outrowsss.push(value.rows[i]);
+                      }
+                      console.log(outrowsss);
+                      
+                      $('#tbloutbound2').DataTable({
+
+                        data: outrowsss,
+
+                        columns: [
+
+                            { title: "Id" },
+
+                            { title: "Description" },
+
+                            { title: "Serial Number" },
+
+                            { title: "Department" },
+
+                           
+
+                        ]
+
+                    });
+
+                  })
+      },
+
+      error: function (jqXHR, exception) {
+
+      }
+
+});
 
 export default class reportscomp extends Component{
     constructor(props) {
@@ -80,7 +141,7 @@ componentDidMount()
 {
     axios.get('http://localhost:4000/outbound/')
         .then(data=> {
-            this.setState({OutboundAllData : data.data});
+            this.setState({OutboundAllData : data.result});
             console.log(data);
         })
         .catch(function (error){
@@ -225,6 +286,7 @@ onSubmit(e){
     render()
     {
         let content = this.renderOutboundData(this.state.OutboundAllData);
+        console.log(this.state.OutboundAllData);
         const notifySuccess = () => toast("Successfully Added");
         return(
             <div className="row">
@@ -385,7 +447,7 @@ onSubmit(e){
             <br></br>
             <br></br>
             <h2>Outbound Items</h2>
-            {content}
+            <table id = "tbloutbound2"></table>
                 </div>
                 
                 </div>

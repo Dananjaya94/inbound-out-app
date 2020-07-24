@@ -9,6 +9,7 @@ import 'react-date-picker/dist/entry.nostyle';
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
+import $ from 'jquery';
 
 
 import axios from 'axios';
@@ -16,7 +17,75 @@ import html2canvas from 'html2canvas';
 
 import { render } from '@testing-library/react';
 
+var outrowsss = [];
+var outcolls = [];
 
+$.ajax({
+    type: "GET",
+
+        url: "http://localhost:4000/outbound",
+        contentType: "application/json",
+        beforeSend: function () {
+        },
+
+        success: function (data) {
+
+
+
+            //console.log(data);
+
+                  $.each(data, function (index, value) {
+
+                      outcolls = [];
+                      outrowsss= [];
+
+                      var tempArray = new Array;
+                      console.log(value);
+                      for (var o in value.metaData) {
+                          outcolls.push(value.metaData[o]);
+                      }
+
+                      for (var i in value.rows) {
+                          outrowsss.push(value.rows[i]);
+                      }
+                      console.log(outrowsss);
+                      
+                      $('#tblReport').DataTable({
+
+                        data: outrowsss,
+
+                        columns: [
+
+                            { title: "Id" },
+
+                            { title: "Date" },
+
+                            { title: "Description" },
+
+                            { title: "Serial Number" },
+
+                            { title: "Department" },
+
+                            { title: "User" },
+
+                            { title: "User EPF"},
+
+                            { title: "Officer" },
+
+                            { title: "Officer EPF"},
+
+                        ]
+
+                    });
+
+                  })
+      },
+
+      error: function (jqXHR, exception) {
+
+      }
+
+});
 
 export default class reportscomp extends Component{
 
@@ -137,7 +206,7 @@ export default class reportscomp extends Component{
         
 
         toast("Pdf Generated");
-        const input = document.getElementById('inboundTable');  
+        const input = document.getElementById('tblReport');  
         html2canvas(input)  
           .then((canvas) => {  
             var imgWidth = 200;  
@@ -168,7 +237,7 @@ export default class reportscomp extends Component{
     const notifySuccess = () => toast("Successfully Added");
     const notifyGenerated = () => toast("Successfully Generated");
 
-    let content = this.renderInboundData(this.state.InboundOutboundData);
+    //let content = this.renderInboundData(this.state.InboundOutboundData);
 
         return(
             <div className="container">
@@ -184,33 +253,28 @@ export default class reportscomp extends Component{
                 </div>
 
                 <div className="row">
-                    <div className="col-md-12" className="tableFixHead">
-                    {content}
+                    <div className="col-md-12" >
+                    {/* {content} */}
+
+                    <table id="tblReport"></table>
+
                     </div>
                 </div>
 
                 <div className="row">
                 <table cellPadding="20" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
 
                     <tbody>
                         <tr>
                             <td>
                                 <div className="form-group">
-                                    <label>Start Date :</label>
+                                    {/* <label>Start Date :</label> */}
                                 </div>
                             </td>
 
                             <td>
                                 <div className="form-group">
-                                    <label>End Date :</label>
+                                    {/* <label>End Date :</label> */}
                                 </div>
                             </td>
 
@@ -221,7 +285,7 @@ export default class reportscomp extends Component{
                                 <div className="form-group">
                                     {/* <input type="text" className="form-control" value={this.state.start_date} onChange={this.onChangeStartDate}></input> */}
                                     {/* <Calendar ></Calendar> */}
-                                    <DatePicker value={this.state.start_date} onChange={this.onChangeStartDate}></DatePicker>
+                                    {/* <DatePicker value={this.state.start_date} onChange={this.onChangeStartDate}></DatePicker> */}
                                 </div>
                             </td>
 
@@ -229,7 +293,7 @@ export default class reportscomp extends Component{
                                 <div className="form-group">
                                     {/* <input type="text" className="form-control" value={this.state.end_date} onChange={this.onChangeEndDate}></input> */}
                                     {/* <Calendar ></Calendar> */}
-                                    <DatePicker value={this.state.end_date} onChange={this.onChangeEndDate} onClick={this.onSubmitInbound}></DatePicker>
+                                    {/* <DatePicker value={this.state.end_date} onChange={this.onChangeEndDate} onClick={this.onSubmitInbound}></DatePicker> */}
                                 </div>
                             </td>
                         </tr>
@@ -237,7 +301,7 @@ export default class reportscomp extends Component{
                         <tr>
                             <td>
                                 <div className="form-group">
-                                <input type="submit" value="Create Inbound Report" className="btn btn-primary" onClick={this.onSubmitInbound} onClick={this.printDocument}></input>
+                                <input type="submit" value="Create Report" className="btn btn-primary" onClick={this.onSubmitInbound} onClick={this.printDocument}></input>
                                 {/* <ToastContainer 
                                 position="top-center"
                                 autoClose={10000}
@@ -253,7 +317,7 @@ export default class reportscomp extends Component{
 
                             <td>
                                 <div className="form-group">
-                                <input type="submit" value="Create Outbound Report" className="btn btn-primary" onClick={this.onSubmitOutbound} onClick={notifyGenerated}></input>
+                                {/* <input type="submit" value="Create Report" className="btn btn-primary" onClick={this.onSubmitOutbound} onClick={notifyGenerated}></input> */}
                                 <ToastContainer 
                                 position="top-center"
                                 autoClose={5000}
