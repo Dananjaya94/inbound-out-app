@@ -8,11 +8,82 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import $ from 'jquery';
 
+import Downshift from 'downshift';
+var Typeahead = require('react-typeahead').Typeahead;
+
 var outrowsss = [];
 var outcolls = [];
 
+var utrowsss1 = [];
+var outcolss1 = [];
+
 
 $(document).ready(function(){
+
+    
+    $(function () {
+
+        var availableTags = [
+      "ActionScript",
+      "AppleScript",
+      "Asp",
+      "BASIC",
+      "C",
+      "C++",
+      "Clojure",
+      "COBOL",
+      "ColdFusion",
+      "Erlang",
+      "Fortran",
+      "Groovy",
+      "Haskell",
+      "Java",
+      "JavaScript",
+      "Lisp",
+      "Perl",
+      "PHP",
+      "Python",
+      "Ruby",
+      "Scala",
+      "Scheme"
+    ];
+    $( "#bra_name" ).autocomplete({
+      source: availableTags
+    });
+        // $("#bra_name").autocomplete({
+        //     source: function (request, response) {
+        //         $.ajax({
+        //             url: 'http://localhost:4000/loadBranchDescription',
+        //             data: "{ 'prefix': '" + request.term + "'}",
+        //             dataType: "json",
+        //             type: "POST",
+        //             contentType: "application/json; charset=utf-8",
+        //             success: function (data) {
+        //                 response($.map(data.d, function (item) {
+        //                     return {
+        //                         label: item.split('-')[0],
+        //                         val: item.split('-')[1]
+        //                     }
+        //                 }))
+        //             },
+        //             error: function (response) {
+        //                 //alert(response.responseText);
+        //                 alert("No Match");
+        //             },
+        //             failure: function (response) {
+        //                 alert(response.responseText);
+        //             }
+        //         });
+        //     },
+        //     select: function (e, i) {
+        //         $("[id$=hfCustomerId]").val(i.item.val);
+        //     },
+        //     minLength: 1
+        // });
+    });
+
+   
+     
 
 
     $("#submitOutbound").click(function(){
@@ -47,6 +118,8 @@ $(document).ready(function(){
 
 
 });
+
+
 
 $.ajax({
     type: "GET",
@@ -106,6 +179,51 @@ $.ajax({
       }
 
 });
+
+
+$.ajax({
+    type: "GET",
+
+        url: "http://localhost:4000/loadBranchDescription",
+        contentType: "application/json",
+        dataType: "json",
+        beforeSend: function () {
+        },
+
+        success: function (data) {
+
+
+
+            //console.log(data);
+
+                  $.each(data, function (index, value) {
+
+                    outcolss1 = [];
+                      utrowsss1= [];
+
+                      var tempArray = new Array;
+                      console.log(value);
+                      for (var o in value.metaData) {
+                        outcolss1.push(value.metaData[o]);
+                      }
+
+                      for (var i in value.rows) {
+                          
+                        utrowsss1.push(value.rows[i][0]);
+                      }
+                      console.log(utrowsss1);
+                  })
+      },
+
+      error: function (jqXHR, exception) {
+
+      }
+
+});
+
+
+
+
 
 export default class reportscomp extends Component{
     constructor(props) {
@@ -285,8 +403,9 @@ onSubmit(e){
 }
     render()
     {
+        
         let content = this.renderOutboundData(this.state.OutboundAllData);
-        console.log(this.state.OutboundAllData);
+
         const notifySuccess = () => toast("Successfully Added");
         return(
             <div className="row">
@@ -358,14 +477,12 @@ onSubmit(e){
                         </div>
                         <div className="col-md-4">
                             <div className="form-group">
-                                <input id="out_bra" type="text" onChange={this.onchange_outbound_Dept_Branch} value={this.state.outbound_Dept_Branch} className="form-control"></input>
-                            {/* <b><select onChange={this.onchange_outbound_Dept_Branch} className="form-control">
-                                <option value={this.state.outbound_Dept_Branch}>COLOMBO</option>
-                                <option value={this.state.outbound_Dept_Branch}>KEGALLE</option>
-                                <option value={this.state.outbound_Dept_Branch}>KANDY</option>
-                                <option value={this.state.outbound_Dept_Branch}>KADUWELA</option>
-                                <option value={this.state.outbound_Dept_Branch}>KELANIYA</option>
-                            </select> */}
+                                <input id="bra_name" type="text" className="form-control" value={this.state.onchange_outbound_Dept_Branch}></input>
+                            {/* <Typeahead
+    options={utrowsss1}
+    maxVisible={50}
+    onChange = {this.onchange_outbound_Dept_Branch}
+    value = {this.state.onchange_outbound_Dept_Branch}></Typeahead> */}
 
                             </div>
                         </div>
