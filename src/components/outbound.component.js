@@ -7,9 +7,15 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import axios from 'axios';
 import $ from 'jquery';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import Downshift from 'downshift';
 var Typeahead = require('react-typeahead').Typeahead;
+
+
+
+
 
 var outrowsss = [];
 var outcolls = [];
@@ -17,70 +23,15 @@ var outcolls = [];
 var utrowsss1 = [];
 var outcolss1 = [];
 
+var serialmeta = [];
+var seraildata = [];
+
+var itofficermeta = [];
+var itofficeid = [];
+var itofficername = [];
+
 
 $(document).ready(function(){
-
-    
-    $(function () {
-
-        var availableTags = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
-    $( "#bra_name" ).autocomplete({
-      source: availableTags
-    });
-        // $("#bra_name").autocomplete({
-        //     source: function (request, response) {
-        //         $.ajax({
-        //             url: 'http://localhost:4000/loadBranchDescription',
-        //             data: "{ 'prefix': '" + request.term + "'}",
-        //             dataType: "json",
-        //             type: "POST",
-        //             contentType: "application/json; charset=utf-8",
-        //             success: function (data) {
-        //                 response($.map(data.d, function (item) {
-        //                     return {
-        //                         label: item.split('-')[0],
-        //                         val: item.split('-')[1]
-        //                     }
-        //                 }))
-        //             },
-        //             error: function (response) {
-        //                 //alert(response.responseText);
-        //                 alert("No Match");
-        //             },
-        //             failure: function (response) {
-        //                 alert(response.responseText);
-        //             }
-        //         });
-        //     },
-        //     select: function (e, i) {
-        //         $("[id$=hfCustomerId]").val(i.item.val);
-        //     },
-        //     minLength: 1
-        // });
-    });
 
    
      
@@ -221,6 +172,89 @@ $.ajax({
 
 });
 
+$.ajax({
+    type: "GET",
+
+        url: "http://localhost:4000/serialnumber",
+        contentType: "application/json",
+        dataType: "json",
+        beforeSend: function () {
+        },
+
+        success: function (data) {
+
+
+
+            //console.log(data);
+
+                  $.each(data, function (index, value) {
+
+                    seraildata = [];
+                      serialmeta= [];
+
+                      var tempArray = new Array;
+                      console.log(value);
+                      for (var o in value.metaData) {
+                        serialmeta.push(value.metaData[o]);
+                      }
+
+                      for (var i in value.rows) {
+                          
+                        seraildata.push(value.rows[i][0]);
+                      }
+                      console.log(seraildata);
+                  })
+      },
+
+      error: function (jqXHR, exception) {
+
+      }
+
+});
+
+$.ajax({
+    type: "GET",
+
+        url: "http://localhost:4000/itofficers",
+        contentType: "application/json",
+        dataType: "json",
+        beforeSend: function () {
+        },
+
+        success: function (data) {
+
+
+
+            //console.log(data);
+
+                  $.each(data, function (index, value) {
+
+                    itofficermeta = [];
+                      itofficername= [];
+                      itofficeid = [];
+
+                      var tempArray = new Array;
+                      console.log(value);
+                      for (var o in value.metaData) {
+                        itofficermeta.push(value.metaData[o]);
+                      }
+
+                      for (var i in value.rows) {
+                          
+                        itofficeid.push(value.rows[i][0]);
+                        itofficername.push(value.rows[i][1]);
+                      }
+                      console.log(itofficeid);
+                      console.log(itofficername);
+                  })
+      },
+
+      error: function (jqXHR, exception) {
+
+      }
+
+});
+
 
 
 
@@ -254,6 +288,7 @@ export default class reportscomp extends Component{
         outbound_it_officer_id: ''
     }
 }
+
 
 componentDidMount()
 {
@@ -464,7 +499,13 @@ onSubmit(e){
                         <div className="col-md-4">
 
                             <div className="form-group">
-                            <input id="out_sernum" type="text" className="form-control" value={this.state.outbound_Serial_No} onChange={this.onchange_outbound_Serial_No}></input>
+                                <Autocomplete
+                                id = "combo-box-demo"
+                                options = {seraildata}
+                                style = {{ width: 190}}
+                                onChange = {this.onchange_outbound_Serial_No}
+                                renderInput={(params1) => <TextField {...params1} label="Combo Box" variant="outlined"></TextField>}></Autocomplete>
+                            {/* <input id="out_sernum" type="text" className="form-control" value={this.state.outbound_Serial_No} onChange={this.onchange_outbound_Serial_No}></input> */}
                             </div>
                         </div>
                     </div>
@@ -477,13 +518,13 @@ onSubmit(e){
                         </div>
                         <div className="col-md-4">
                             <div className="form-group">
-                                <input id="bra_name" type="text" className="form-control" value={this.state.onchange_outbound_Dept_Branch}></input>
-                            {/* <Typeahead
-    options={utrowsss1}
-    maxVisible={50}
-    onChange = {this.onchange_outbound_Dept_Branch}
-    value = {this.state.onchange_outbound_Dept_Branch}></Typeahead> */}
-
+                            <Autocomplete
+                            id="combo-box-demo"
+                            options={utrowsss1}
+                            style={{ width: 190 }}
+                            onChange = {this.onchange_outbound_Dept_Branch}
+                            renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
+    />
                             </div>
                         </div>
                     </div>
@@ -499,6 +540,7 @@ onSubmit(e){
                     
                         <div className="col-md-4">
                             <div className="form-group">
+                                
                             <input id="out_usrnm" type="text" className="form-control" value={this.state.outbound_Handover_Username} onChange={this.onchange_outbound_Handover_Username}></input>
                             </div>
                         </div>
@@ -526,7 +568,14 @@ onSubmit(e){
                             <div className="col-md-4">
                             <div className="form-group">
                                {/* <input type="text" ></input>  */}
-                               <input id="out_offnm" type="text" className="form-control" value={this.state.outbound_It_Officername} onChange={this.onchange_outbound_It_Officername}></input>
+                               <Autocomplete
+                                id = "combo-box-demo"
+                                options = {itofficername}
+                                style = {{width: 190}}
+                                onChange = {this.onchange_outbound_It_Officername}
+                                renderInput={(params2) => <TextField {...params2} label="Combo box" variant="outlined"></TextField>}
+                                ></Autocomplete>
+                               {/* <input id="out_offnm" type="text" className="form-control" value={this.state.outbound_It_Officername} onChange={this.onchange_outbound_It_Officername}></input> */}
                             </div>
                             </div>
                     </div>
