@@ -447,8 +447,6 @@ onSubmit(e){
              <div className="col">
                     <div className="leftside">
             <div style={{margin:20}}>
-            <br></br>
-            <br></br>
             <div className="row">
             <div className="col-md-4"></div>
 
@@ -503,7 +501,11 @@ onSubmit(e){
                                 id = "combo-box-demo"
                                 options = {seraildata}
                                 style = {{ width: 190}}
-                                onChange = {this.onchange_outbound_Serial_No}
+                                onChange={(event, newInputValue) => {
+                                    this.setState({
+                                        outbound_Serial_No: newInputValue
+                                    })
+                                  }}
                                 renderInput={(params1) => <TextField {...params1} label="Combo Box" variant="outlined"></TextField>}></Autocomplete>
                             {/* <input id="out_sernum" type="text" className="form-control" value={this.state.outbound_Serial_No} onChange={this.onchange_outbound_Serial_No}></input> */}
                             </div>
@@ -522,7 +524,11 @@ onSubmit(e){
                             id="combo-box-demo"
                             options={utrowsss1}
                             style={{ width: 190 }}
-                            onChange = {this.onchange_outbound_Dept_Branch}
+                            onChange={(event, newInputValue1) => {
+                                this.setState({
+                                    outbound_Dept_Branch: newInputValue1
+                                })
+                              }}
                             renderInput={(params) => <TextField {...params} label="Combo box" variant="outlined" />}
     />
                             </div>
@@ -572,7 +578,11 @@ onSubmit(e){
                                 id = "combo-box-demo"
                                 options = {itofficername}
                                 style = {{width: 190}}
-                                onChange = {this.onchange_outbound_It_Officername}
+                                onChange={(event, newInputValue2) => {
+                                    this.setState({
+                                        outbound_It_Officername: newInputValue2
+                                    })
+                                  }}
                                 renderInput={(params2) => <TextField {...params2} label="Combo box" variant="outlined"></TextField>}
                                 ></Autocomplete>
                                {/* <input id="out_offnm" type="text" className="form-control" value={this.state.outbound_It_Officername} onChange={this.onchange_outbound_It_Officername}></input> */}

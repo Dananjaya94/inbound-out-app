@@ -13,7 +13,7 @@ var outcolls = [];
 $.ajax({
     type: "GET",
 
-        url: "http://localhost:4000/inbound",
+        url: "http://localhost:4000/inboundselected",
         contentType: "application/json",
         beforeSend: function () {
         },
@@ -41,7 +41,7 @@ $.ajax({
                       console.log(inrowsss);
                       
                       $('#tblinbound').DataTable({
-
+                        "scrollY": "100px",
                         data: inrowsss,
 
                         columns: [
@@ -52,17 +52,11 @@ $.ajax({
 
                             { title: "Description" },
 
-                            { title: "Serial Number" },
-
                             { title: "Department" },
 
                             { title: "User" },
 
-                            { title: "User EPF"},
-
                             { title: "Officer" },
-
-                            { title: "Officer EPF"},
 
                         ]
 
@@ -174,16 +168,20 @@ export default class ViewComponent extends Component
         let cont = this.renderInboundData(this.inrowsss);
         return(
             <div className="container">
-                <div className="row">
-                    <div className="col-md-3"></div>
-                    <div className="col-md-9">
-                    <h2>View Component</h2></div>"
+                <div className = "row">
+                    <div className = "col-md-3"></div>
+                    <div className = "col-md-9">
+                    <h2>View Component</h2>  
+                    </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-3"></div>
+                    
+                    <div className="col-md-3" id = "inner">
+                    <h4>Inbound Details</h4>
+                    </div>
                     <div className="col-md-9">
+                      
                         
-                        <h4>Inbound Details</h4>
                         <table id="tblinbound">
 
                         </table>
@@ -191,9 +189,10 @@ export default class ViewComponent extends Component
                 </div>
                 <hr></hr>
                 <div className="row">
-                    <div className="col-md-3"></div>
+                    <div className="col-md-3" id = "inner">
+                    <h4>Outbound Details</h4>
+                    </div>
                     <div className="col-md-9">
-                        <h4>Outbound Details</h4>
                         <table id="tbloutbound">
 
                         </table>
