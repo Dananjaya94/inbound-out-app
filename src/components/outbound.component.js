@@ -10,6 +10,14 @@ import $ from 'jquery';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+
 import Downshift from 'downshift';
 var Typeahead = require('react-typeahead').Typeahead;
 
@@ -259,7 +267,7 @@ $.ajax({
 
 
 
-export default class reportscomp extends Component{
+export default class OutboundComp extends Component{
     constructor(props) {
         super(props);
         this.onchange_outbound_Item_Description = this.onchange_outbound_Item_Description.bind(this);
@@ -278,7 +286,7 @@ export default class reportscomp extends Component{
        
         OutboundAllData: [],
         OutBoundDT: [],
-        date : new Date(),
+        date : new Date,
         outbound_Item_Description: '',
         outbound_Serial_No:'',
         outbound_Dept_Branch: '',
@@ -403,9 +411,10 @@ onSubmit(e){
     console.log(`outbound_It_Officername : ${this.state.outbound_It_Officername}`);
     console.log(`outbound_epf_no : ${this.state.outbound_epf_no}`);
     console.log(`outbound_it_officer_id : ${this.state.outbound_it_officer_id}`);
-
+    console.log(this.state.date);
+    
     const AddingOutBound = {
-        date: this.state.date,
+        date:this.state.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }),
         outbound_Item_Description:this.state.outbound_Item_Description,
         outbound_Serial_No:this.state.outbound_Serial_No,
         outbound_Dept_Branch:this.state.outbound_Dept_Branch,
@@ -469,6 +478,8 @@ onSubmit(e){
 
                         
                             <div className="form-group">
+
+                            
                             <DatePicker id="out_date" onChange={this.onChangeDate} value={this.state.date} timezone={'SL/Asia'}></DatePicker>
                             
                             </div>
@@ -498,7 +509,7 @@ onSubmit(e){
 
                             <div className="form-group">
                                 <Autocomplete
-                                id = "combo-box-demo"
+                                id = "combo-box-demo1"
                                 options = {seraildata}
                                 style = {{ width: 190}}
                                 onChange={(event, newInputValue) => {
@@ -521,7 +532,7 @@ onSubmit(e){
                         <div className="col-md-4">
                             <div className="form-group">
                             <Autocomplete
-                            id="combo-box-demo"
+                            id="combo-box-demo2"
                             options={utrowsss1}
                             style={{ width: 190 }}
                             onChange={(event, newInputValue1) => {
@@ -575,7 +586,7 @@ onSubmit(e){
                             <div className="form-group">
                                {/* <input type="text" ></input>  */}
                                <Autocomplete
-                                id = "combo-box-demo"
+                                id = "combo-box-demo3"
                                 options = {itofficername}
                                 style = {{width: 190}}
                                 onChange={(event, newInputValue2) => {
