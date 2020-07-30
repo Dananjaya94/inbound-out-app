@@ -11,6 +11,8 @@ import viewrep from "./components/view.component";
 import reportCom from "./components/report.component";
 import ClickOutside from "./ClickOutside";
 import exampl from "./components/example.conponent";
+import signIn from "./components/signin";
+
 
 import exp from "./components/example.conponent";
 
@@ -76,7 +78,7 @@ function App() {
                 </SideNav.Nav>
             </SideNav>
             <main>
-                <Route path="/" exact component={inbound} />
+                <Route path="/" exact component={signIn} />
                 <Route path="/inbound" component={inbound} />
                 <Route path="/outbound" component={outbound} />
                 <Route path="/view" component={viewrep} />

@@ -632,7 +632,7 @@ export default class inbound extends Component{
                     </div>
                     <div className="col-md-2"><br></br></div>
                     <div className="col-md-2">
-                        <input type="submit" value="Create Inbound" className="btn btn-primary" onClick={this.onSubmit}></input>
+                        <input type="submit" value="Mark Inbound" className="btn btn-primary" onClick={this.onSubmit}></input>
                         <ToastContainer />
                     </div>
                 </div>

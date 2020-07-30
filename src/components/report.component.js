@@ -23,7 +23,7 @@ var outcolls = [];
 $.ajax({
     type: "GET",
 
-        url: "http://localhost:4000/outbound",
+        url: "http://localhost:4000/inoutfulldetails/",
         contentType: "application/json",
         beforeSend: function () {
         },
@@ -73,6 +73,8 @@ $.ajax({
                             { title: "Officer" },
 
                             { title: "Officer EPF"},
+
+                            { title: "Type"},
 
                         ]
 
