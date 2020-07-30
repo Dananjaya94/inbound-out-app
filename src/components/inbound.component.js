@@ -16,6 +16,17 @@ var newInbound = {};
 var outrowsss = [];
 var outcolls = [];
 
+var col1;
+var col2;
+var col3;
+var col4;
+var col5;
+var col6;
+var col7;
+var col8;
+var col9;
+
+var f;
 
 $(document).ready(function(){
 
@@ -24,15 +35,15 @@ $(document).ready(function(){
          // get the current row
          var currentRow=$(this).closest("tr"); 
          
-         var col1=currentRow.find("td:eq(0)").html(); // get current row 1st TD value
-         var col2=currentRow.find("td:eq(1)").text(); // get current row 2nd TD
-         var col3=currentRow.find("td:eq(2)").text(); // get current row 3rd TD
-         var col4=currentRow.find("td:eq(3)").text(); // get current row 3rd TD
-         var col5=currentRow.find("td:eq(4)").text(); // get current row 3rd TD
-         var col6=currentRow.find("td:eq(5)").text(); // get current row 3rd TD
-         var col7=currentRow.find("td:eq(6)").text(); // get current row 3rd TD
-         var col8=currentRow.find("td:eq(7)").text(); // get current row 3rd TD
-         var col9=currentRow.find("td:eq(8)").text(); // get current row 3rd TD
+         col1=currentRow.find("td:eq(0)").html(); // get current row 1st TD value
+         col2=currentRow.find("td:eq(1)").text(); // get current row 2nd TD
+         col3=currentRow.find("td:eq(2)").text(); // get current row 3rd TD
+         col4=currentRow.find("td:eq(3)").text(); // get current row 3rd TD
+         col5=currentRow.find("td:eq(4)").text(); // get current row 3rd TD
+         col6=currentRow.find("td:eq(5)").text(); // get current row 3rd TD
+         col7=currentRow.find("td:eq(6)").text(); // get current row 3rd TD
+         col8=currentRow.find("td:eq(7)").text(); // get current row 3rd TD
+         col9=currentRow.find("td:eq(8)").text(); // get current row 3rd TD
          var data=col1+"\n"+col2+"\n"+col3+"\n"+col4;
          
          $('#inb_id').val(col1);
@@ -44,11 +55,13 @@ $(document).ready(function(){
          $('#inb_itofnm').val(col8);
          $('#inb_itofepf').val(col9);
 
+         
+
 
          newInbound = {
 
             asset_out_id: col1,
-            asset_rec_date: col2,
+            asset_rec_date: f,
             asset_description:col3,
             asset_seq_no: col4,
             asset_branch_code:col5,
@@ -65,15 +78,15 @@ $(document).ready(function(){
 
         var currentRow=$(this).closest("tr"); 
          
-         var col1=currentRow.find("td:eq(0)").html(); // get current row 1st TD value
-         var col2=currentRow.find("td:eq(1)").text(); // get current row 2nd TD
-         var col3=currentRow.find("td:eq(2)").text(); // get current row 3rd TD
-         var col4=currentRow.find("td:eq(3)").text(); // get current row 3rd TD
-         var col5=currentRow.find("td:eq(4)").text(); // get current row 3rd TD
-         var col6=currentRow.find("td:eq(5)").text(); // get current row 3rd TD
-         var col7=currentRow.find("td:eq(6)").text(); // get current row 3rd TD
-         var col8=currentRow.find("td:eq(7)").text(); // get current row 3rd TD
-         var col9=currentRow.find("td:eq(8)").text(); // get current row 3rd TD
+         col1=currentRow.find("td:eq(0)").html(); // get current row 1st TD value
+         col2=currentRow.find("td:eq(1)").text(); // get current row 2nd TD
+         col3=currentRow.find("td:eq(2)").text(); // get current row 3rd TD
+         col4=currentRow.find("td:eq(3)").text(); // get current row 3rd TD
+         col5=currentRow.find("td:eq(4)").text(); // get current row 3rd TD
+         col6=currentRow.find("td:eq(5)").text(); // get current row 3rd TD
+         col7=currentRow.find("td:eq(6)").text(); // get current row 3rd TD
+         col8=currentRow.find("td:eq(7)").text(); // get current row 3rd TD
+         col9=currentRow.find("td:eq(8)").text(); // get current row 3rd TD
          var data=col1+"\n"+col2+"\n"+col3+"\n"+col4;
          
          $('#inb_id').val(col1);
@@ -85,11 +98,14 @@ $(document).ready(function(){
          $('#inb_itofnm').val(col8);
          $('#inb_itofepf').val(col9);
 
+         console.log(col2);
+         f = new Date(col2);
+         
 
          newInbound = {
 
             asset_out_id: col1,
-            asset_rec_date: col2,
+            asset_rec_date: f.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }),
             asset_description:col3,
             asset_seq_no: col4,
             asset_branch_code:col5,
@@ -476,8 +492,7 @@ export default class inbound extends Component{
         const { inboundDetails } =this.state;
         return(
             <div style={{margin:20}}>
-                <br></br>
-                <br></br>
+                
                 <div className="row">
                     <div className="col-md-2"></div>
                     <div className="col-md-2">
@@ -504,7 +519,7 @@ export default class inbound extends Component{
                     </div>
                     <div className="col-md-2">
                         <div className="form-group">
-                        <DatePicker id="in_date" onChange={this.onChangeDate} value={this.state.asset_rec_date} timezone={'SL/Asia'}></DatePicker>
+                        <DatePicker disabled id="in_date" onChange={this.onChangeDate} value={this.state.asset_rec_date} timezone={'SL/Asia'}></DatePicker>
                         </div>
                     </div>
 
