@@ -32,7 +32,7 @@
     "downshift": "^6.0.2",
     "html2canvas": "^1.0.0-rc.5",
     "javascript": "^1.0.0",
-    "jquery": "^1.12.4",
+    "jquery": "^3.5.0",
     "jquery-autocomplete": "^1.2.8",
     "jquery-ui": "^1.12.1",
     "jspdf": "^1.5.3",
