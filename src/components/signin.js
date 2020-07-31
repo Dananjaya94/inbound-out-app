@@ -13,6 +13,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+import inbound from './inbound.component';
+import {BrowserRouter as Router,Route} from "react-router-dom";
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -49,8 +52,13 @@ const useStyles = makeStyles((theme) => ({
 export default function SignIn() {
   const classes = useStyles();
 
-  
+  const routeChange = () =>{
+    this.history.pushState(null, '/inbound');
+  }
+
+
   return (
+    
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -93,6 +101,7 @@ export default function SignIn() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick = {routeChange}
           >
             Sign In
           </Button>
@@ -113,6 +122,12 @@ export default function SignIn() {
       <Box mt={8}>
         <Copyright />
       </Box>
+
+      <Router>
+        <Route path="/inbound" component={inbound}/>
+        </Router>
+
+
     </Container>
   );
 }
