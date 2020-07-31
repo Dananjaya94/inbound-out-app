@@ -6,6 +6,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/entry.nostyle';
 
+import Report from 'react-data-report';
+
 import * as jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
@@ -258,7 +260,9 @@ export default class reportscomp extends Component{
                     <div className="col-md-12" >
                     {/* {content} */}
 
-                    <table id="tblReport"></table>
+                    <table id="tblReport" className = "innerreport"></table>
+                    <br></br>
+                    {/* <Report data={outrowsss} opening={(<h1>This is an opening content.</h1>)}/> */}
 
                     </div>
                 </div>
@@ -293,6 +297,7 @@ export default class reportscomp extends Component{
 
                             <td>
                                 <div className="form-group">
+                                    
                                     {/* <input type="text" className="form-control" value={this.state.end_date} onChange={this.onChangeEndDate}></input> */}
                                     {/* <Calendar ></Calendar> */}
                                     {/* <DatePicker value={this.state.end_date} onChange={this.onChangeEndDate} onClick={this.onSubmitInbound}></DatePicker> */}
@@ -330,6 +335,7 @@ export default class reportscomp extends Component{
                                 pauseOnFocusLoss
                                 draggable
                                 pauseOnHover/>
+                                
                                 </div>
                             </td>
 

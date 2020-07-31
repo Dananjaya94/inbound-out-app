@@ -93,3 +93,12 @@ table.dataTable{clear:both;margin-top:6px !important;margin-bottom:6px !importan
   #inner{
   margin:auto;
   }
+
+  .outerreport{
+    min-height:100vh;
+    display:flex;
+    }
+    
+    .innerreport{
+    margin:auto;
+    }
