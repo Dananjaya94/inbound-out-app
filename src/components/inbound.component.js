@@ -490,6 +490,11 @@ export default class inbound extends Component{
         
         const notifySuccess = () => toast("Successfully Added");
         const { inboundDetails } =this.state;
+
+        const LoginContainer = () => (
+            window.location.reload(false)
+          )
+
         return(
             <div style={{margin:20}}>
                 
@@ -630,10 +635,12 @@ export default class inbound extends Component{
                     <div className="col-md-2">
                         <input id="inb_id" type = "text" className="form-control" value={this.state.asset_out_id} onChange={this.onChange_asset_outid}></input>
                     </div>
-                    <div className="col-md-2"><br></br></div>
                     <div className="col-md-2">
-                        <input type="submit" value="Mark Inbound" className="btn btn-primary" onClick={this.onSubmit}></input>
+                    <input type="submit" value="Mark Inbound" className="btn btn-primary" onClick={this.onSubmit}></input>
                         <ToastContainer />
+                    </div>
+                    <div className="col-md-2">
+                        <input type="submit" value="Open Repair Replacements" className="btn btn-primary"></input>
                     </div>
                 </div>
                 <div className="row">
