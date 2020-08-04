@@ -7,6 +7,8 @@ import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/entry.nostyle';
 import axios from 'axios';
 import $ from 'jquery';
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import dt from 'datatables.net';
 import {Link} from 'react-router-dom';
 import { render } from '@testing-library/react';
@@ -117,6 +119,9 @@ $(document).ready(function(){
 
     });
 });
+
+
+
 
 // var table = $('#tbloutbound1').DataTable();
  
@@ -636,20 +641,29 @@ export default class inbound extends Component{
                         <input id="inb_id" type = "text" className="form-control" value={this.state.asset_out_id} onChange={this.onChange_asset_outid}></input>
                     </div>
                     <div className="col-md-2">
-                    <input type="submit" value="Mark Inbound" className="btn btn-primary" onClick={this.onSubmit}></input>
-                        <ToastContainer />
                     </div>
                     <div className="col-md-2">
-                        <input type="submit" value="Open Repair Replacements" className="btn btn-primary"></input>
+                    <input type="submit" value="Mark Inbound" className="btn btn-primary" onClick={this.onSubmit}></input>
+                        <ToastContainer />
+                        {/* <input type="submit" value="Open Repair Replacements" className="btn btn-primary"></input> */}
                     </div>
                 </div>
                 <div className="row">
                     <br/>
                 </div>
 
+                <div className = "row">
+                    <div className = "col-md-2"></div>
+                    <div className = "col-md-2"></div>
+                    <div className = "col-md-2">
+                    
+                    </div>
+                    <div className = "col-md-6"></div>
+                </div>
+
                 <div className="row">
-                        <div className="col-md-2"></div>
-                        <div className="col-md-10">
+                        <div className="col-md-1"></div>
+                        <div className="col-md-11">
                         <div>
                             <table id="tbloutbound1"></table>
                         </div>

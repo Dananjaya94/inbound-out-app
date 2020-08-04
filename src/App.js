@@ -12,7 +12,6 @@ import reportCom from "./components/report.component";
 import ClickOutside from "./ClickOutside";
 import exampl from "./components/example.conponent";
 import signIn from "./components/signin";
-import OutbiundRepair from "./components/repair.outbound.component";
 
 
 import exp from "./components/example.conponent";
@@ -51,7 +50,7 @@ function App() {
                     </NavItem>
                     <NavItem eventKey="outbound">
                         <NavIcon>
-                            <i className="fa fa-fw fa-device" style={{ fontSize: '1.75em' }} />
+                            <i className="fa fa-fw fa-outbound" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
                             Outbound
@@ -60,7 +59,7 @@ function App() {
 
                     <NavItem eventKey="view">
                         <NavIcon>
-                            <i className="fa fa-fw fa-device" style={{ fontSize: '1.75em' }} />
+                            <i className="fa fa-fw fa-view" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
                             View
@@ -69,22 +68,12 @@ function App() {
 
                     <NavItem eventKey="reports">
                         <NavIcon>
-                            <i className="fa fa-fw fa-device" style={{ fontSize: '1.75em' }} />
+                            <i className="fa fa-fw fa-reports" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
                         <NavText>
                             Reports
                         </NavText>
                     </NavItem>
-
-                    <NavItem eventKey="repairout">
-                        <NavIcon>
-                            <i className="fa fa-fw fa-device" style={{ fontSize: '1.75em' }} />
-                        </NavIcon>
-                        <NavText>
-                            Repair - Outbound
-                        </NavText>
-                    </NavItem>
-
                 </SideNav.Nav>
             </SideNav>
             <main>
@@ -93,8 +82,6 @@ function App() {
                 <Route path="/outbound" component={outbound} />
                 <Route path="/view" component={viewrep} />
                 <Route path="/reports" component={reportCom} />
-                <Route path="/exp" component={exp}/>
-                <Route path="/repairout" component={OutbiundRepair}/>
             </main>
         </React.Fragment>
     )}
