@@ -224,16 +224,24 @@ export default function SignIn() {
       }
 
       const handleSubmit = (e) => {
-        alert(username);
             let loginData = {
               email : username,
               password : password
-            }
+            };
             axios.post("http://localhost:4000/uservalidation", loginData)
             .then(response => {
-              if(response.data.results)
+              console.log(response);
+              alert(response);
+              // alert(response.data.results);
+              if(response.data.true)
               {
-                handleSuccessAuth(response.data);
+                console.log("True");
+                // handleSuccessAuth(response.data);
+                window.history.push("/inbound");
+              }
+              else
+              {
+                alert("Incorrect Username or Password");
               }
             })
             .catch(error => {alert("Error : ",error)});
