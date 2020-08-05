@@ -229,9 +229,18 @@ export default function SignIn() {
               email : username,
               password : password
             }
-            axios.post("http://localhost:4000/uservalidation", loginData,{withCredentials: true})
-            .then(response => {alert("Res from login : " , response)})
-            .catch(error => {console.log("Error : ",error)});
+            axios.post("http://localhost:4000/uservalidation", loginData)
+            .then(response => {
+              if(response.data.results)
+              {
+                handleSuccessAuth(response.data);
+              }
+            })
+            .catch(error => {alert("Error : ",error)});
+          }
+
+          const handleSuccessAuth =  (data) => {
+            window.history.push("/inbound");
           }
   return (
     <Container component="main" maxWidth="xs">
