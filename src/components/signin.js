@@ -173,6 +173,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useHistory } from "react-router-dom";
 
 import axios from 'axios';
 
@@ -214,6 +215,7 @@ var password = '';
 
 export default function SignIn() {
   const classes = useStyles();
+  let history = useHistory();
 
   const handleChnageUserName = (e) => {
         username = e.target.value
@@ -233,11 +235,11 @@ export default function SignIn() {
               console.log(response);
               alert(response.data);
               // alert(response.data.results);
-              if(response.data.true)
+              if(response.data)
               {
-                console.log("True");
+                alert("1.....true");
                 // handleSuccessAuth(response.data);
-                window.history.push("/inbound");
+                history.push('/someRoute');
               }
               else
               {
