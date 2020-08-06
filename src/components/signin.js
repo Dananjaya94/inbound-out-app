@@ -231,7 +231,7 @@ export default function SignIn() {
             axios.post("http://localhost:4000/uservalidation", loginData)
             .then(response => {
               console.log(response);
-              alert(response);
+              alert(response.data);
               // alert(response.data.results);
               if(response.data.true)
               {
