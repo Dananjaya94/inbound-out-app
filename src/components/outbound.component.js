@@ -19,6 +19,7 @@ import {
 } from '@material-ui/pickers';
 
 import Downshift from 'downshift';
+import { Button } from '@material-ui/core';
 var Typeahead = require('react-typeahead').Typeahead;
 
 
@@ -111,7 +112,7 @@ $.ajax({
                       console.log(outrowsss);
                       
                       $('#tbloutbound2').DataTable({
-
+                        "scrollY": "100px",
                         data: outrowsss,
 
                         columns: [
@@ -635,6 +636,22 @@ onSubmit(e){
             <br></br>
             <h2>Outbound Items</h2>
             <table id = "tbloutbound2"></table>
+                </div>
+                <div className = "row">
+                    <div className = "col-md-11">
+                    {/* <Autocomplete
+                                id = "combo-box-demo4"
+                                options = {vendorrows}
+                                style = {{width: 190}}
+                                onChange={(event, newInputValue4) => {
+                                    this.setState({
+                                        seleted_vendor_name: newInputValue4
+                                    })
+                                  }}
+                                renderInput={(params4) => <TextField {...params4} label="Select Vendor" variant="outlined"></TextField>}
+                                ></Autocomplete> */}
+                    <a href = "http://10.10.1.220/repair/login.aspx?uname=RESHANG" target = "_blank" className = "btn btn-primary" style = {{width:"100%"}}>Send to Repair</a>
+                    </div>
                 </div>
                 
                 </div>

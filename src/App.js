@@ -12,6 +12,7 @@ import reportCom from "./components/report.component";
 import ClickOutside from "./ClickOutside";
 import exampl from "./components/example.conponent";
 import signIn from "./components/signin";
+import repairandreplacements from "./components/repairandreplacement.component";
 
 
 import exp from "./components/example.conponent";
@@ -74,6 +75,16 @@ function App() {
                             Reports
                         </NavText>
                     </NavItem>
+
+                    <NavItem eventKey="repairandrep">
+                        <NavIcon>
+                            <i className="fa fa-fw fa-repairandrep" style={{ fontSize: '1.75em' }} />
+                        </NavIcon>
+                        <NavText>
+                            Repair and Replacement
+                        </NavText>
+                    </NavItem>
+
                 </SideNav.Nav>
             </SideNav>
             <main>
@@ -82,6 +93,7 @@ function App() {
                 <Route path="/outbound" component={outbound} />
                 <Route path="/view" component={viewrep} />
                 <Route path="/reports" component={reportCom} />
+                <Route path="/repairandrep" component={repairandreplacements}/>
             </main>
         </React.Fragment>
     )}

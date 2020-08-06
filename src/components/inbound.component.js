@@ -7,8 +7,10 @@ import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/entry.nostyle';
 import axios from 'axios';
 import $ from 'jquery';
+
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+
 import dt from 'datatables.net';
 import {Link} from 'react-router-dom';
 import { render } from '@testing-library/react';
@@ -247,7 +249,8 @@ export default class inbound extends Component{
             asset_expected_outbound_date:'',
             asset_rec_date: new Date(),
             asset_inbound_completed: false,
-            inboundDetails: []
+            inboundDetails: [],
+            seleted_vendor_name: ''
         }
     }
 
