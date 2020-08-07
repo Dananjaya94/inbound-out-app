@@ -22,6 +22,7 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 
 function App() {
+    let HideSideNav = window.location.pathname === '/' ? null : <SideNav/>
     
   return (
     

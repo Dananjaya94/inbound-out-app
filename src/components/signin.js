@@ -175,6 +175,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { useHistory } from "react-router-dom";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import axios from 'axios';
 
 function Copyright() {
@@ -234,19 +237,19 @@ export default function SignIn() {
             .then(response => {
               console.log(response);
               alert(response.data);
-              // alert(response.data.results);
-              if(response.data)
+              if((response.data)===true)
               {
-                alert("1.....true");
+                alert("Success");
                 // handleSuccessAuth(response.data);
-                history.push('/someRoute');
+                history.push('/inbound');
+                window.location.reload(false);
               }
               else
               {
                 alert("Incorrect Username or Password");
               }
             })
-            .catch(error => {alert("Error : ",error)});
+            .catch(error => {console.log("Error : ",error); alert("Error")});
           }
 
           const handleSuccessAuth =  (data) => {
@@ -293,7 +296,7 @@ export default function SignIn() {
           />
           <Button
           onClick = {handleSubmit}
-            type="submit"
+            type="button"
             fullWidth
             variant="contained"
             color="primary"
