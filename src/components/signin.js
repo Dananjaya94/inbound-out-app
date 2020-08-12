@@ -180,6 +180,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import axios from 'axios';
 
+import { userService } from './userServices';
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -241,6 +243,7 @@ export default function SignIn() {
               {
                 alert("Success");
                 // handleSuccessAuth(response.data);
+                userService.login(username,password);
                 history.push('/inbound');
                 window.location.reload(false);
               }
