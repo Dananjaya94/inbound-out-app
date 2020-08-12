@@ -53,7 +53,7 @@ $.ajax({
                       console.log(outrowsss);
                       
                       $('#tblReport').DataTable({
-
+                        "scrollY": "400px",
                         data: outrowsss,
 
                         columns: [

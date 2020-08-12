@@ -35,6 +35,7 @@ function App() {
                     const to = '/' + selected;
                     if (location.pathname !== to) {
                         history.push(to);
+                        window.location.reload(false);
                     }
                 }}
                 style={{'backgroundColor':'purple'}}

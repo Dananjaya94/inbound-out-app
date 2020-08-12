@@ -422,6 +422,8 @@ export default class inbound extends Component{
         axios.post('http://localhost:4000/inbound/add',newInbound)
         .then(res => toast(res.data));
 
+        window.location.reload(false);
+
     //     axios.post('http://localhost:3000', employee)
     //   .then(res => {
     //       const persons = res.data;

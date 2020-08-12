@@ -102,7 +102,7 @@ $.ajax({
                       console.log(outrowsss);
                       
                       $('#tbloutbound').DataTable({
-
+                        "scrollY": "100px",
                         data: outrowsss,
 
                         columns: [
