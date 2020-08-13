@@ -5,6 +5,8 @@ var user;
 export const userService = {
     login,
     logout,
+    getUser,
+    getPassword
     // getAll
 };
 
@@ -34,6 +36,18 @@ function login(username, password) {
 
     //         return user;
     //     });
+}
+
+function getUser(){
+    var us = JSON.parse(localStorage.getItem('user'));
+
+    return us;
+}
+
+function getPassword(){
+    var pw = JSON.parse(localStorage.getItem('pass'))
+
+    return pw;
 }
 
 function logout() {

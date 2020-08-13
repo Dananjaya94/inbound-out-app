@@ -10,6 +10,8 @@ import $ from 'jquery';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
+import { userService } from "./userServices";
+
 import Grid from '@material-ui/core/Grid';
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -454,7 +456,8 @@ onSubmit(e){
     {
         
         let content = this.renderOutboundData(this.state.OutboundAllData);
-
+        let usr = userService.getUser();
+        let pw = userService.getPassword();
         const notifySuccess = () => toast("Successfully Added");
         return(
             <div className="row">
@@ -654,7 +657,7 @@ onSubmit(e){
                                   }}
                                 renderInput={(params4) => <TextField {...params4} label="Select Vendor" variant="outlined"></TextField>}
                                 ></Autocomplete> */}
-                    <a href = "http://10.10.1.220/repair/login.aspx" target = "_blank" className = "btn btn-primary" style = {{width:"100%"}}>Send to Repair</a>
+                    <a href ={ 'http://10.10.1.220/repair/homerep.aspx?uname=' + usr + '&pwd=' + pw } target = "_blank" className = "btn btn-primary" style = {{width:"100%"}}>Send to Repair</a>
                     </div>
                 </div>
                 

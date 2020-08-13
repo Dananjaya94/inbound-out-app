@@ -241,7 +241,6 @@ export default function SignIn() {
               alert(response.data);
               if((response.data)===true)
               {
-                alert("Success");
                 // handleSuccessAuth(response.data);
                 userService.login(username,password);
                 history.push('/inbound');
