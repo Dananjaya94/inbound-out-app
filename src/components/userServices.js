@@ -15,13 +15,11 @@ function login(username, password) {
     //     body: JSON.stringify({ username, password })
     // };
 
-    var userData = window.btoa(username + ':' + password);
     localStorage.setItem('user', JSON.stringify(username));
     localStorage.setItem('pass',JSON.stringify(password));
 
     console.log(JSON.parse(localStorage.getItem('user')));
     console.log(JSON.parse(localStorage.getItem('pass')));
-    alert("Done");
     
     // return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
     //     .then(handleResponse)

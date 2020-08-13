@@ -39,6 +39,9 @@ var itofficermeta = [];
 var itofficeid = [];
 var itofficername = [];
 
+var usnm = localStorage.getItem('user');
+var pw = localStorage.getItem('pass');
+
 
 $(document).ready(function(){
 
@@ -444,6 +447,7 @@ onSubmit(e){
         OutBoundDT: []
         
         });
+        
 
 }
     render()
@@ -650,7 +654,7 @@ onSubmit(e){
                                   }}
                                 renderInput={(params4) => <TextField {...params4} label="Select Vendor" variant="outlined"></TextField>}
                                 ></Autocomplete> */}
-                    <a href = "http://10.10.1.220/repair/login.aspx?uname=RESHANG" target = "_blank" className = "btn btn-primary" style = {{width:"100%"}}>Send to Repair</a>
+                    <a href = "http://10.10.1.220/repair/login.aspx" target = "_blank" className = "btn btn-primary" style = {{width:"100%"}}>Send to Repair</a>
                     </div>
                 </div>
                 
