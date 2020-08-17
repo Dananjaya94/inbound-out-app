@@ -40,9 +40,25 @@
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+        <script type="text/javascript">
+
+        function validatePath()
+        {
+          if(window.location.pathname == '/')
+          {
+            document.querySelectorAll('.test').forEach((element , index ) => {
+              if(element.innerHTML.includes('SideNav'))
+              {
+                element.style.display = 'none';
+              }
+            })
+          }
+        }
+        </script>
+
         
   </head>
-  <body>
+  <body onload="validatePath();">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--

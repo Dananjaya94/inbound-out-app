@@ -20,14 +20,27 @@ import exp from "./components/example.conponent";
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
+var routeStat = false;
+
 
 function App() {
     let HideSideNav = window.location.pathname === '/' ? null : <SideNav/>
     
-  return (
+    function checkRoute(){
+        if(window.location.pathname === '/')
+        {
+            routeStat = true;
+        }
+        else if((window.location.pathname === '/inbound')||(window.location.pathname === '/outbound')||(window.location.pathname === '/'))
+        {
+            routeStat = false;
+        }
+    };
     
-
-    <Router>
+  return (
+      
+    <div className = "container" onLoad = {checkRoute()}>
+        <Router>
     <Route render={({ location, history }) => (
         <React.Fragment>
             <SideNav
@@ -39,11 +52,12 @@ function App() {
                     }
                 }}
                 style={{'backgroundColor':'purple'}}
+                disabled = {routeStat}
             >
                 {/* defaultSelected="inbound" */}
                 <SideNav.Toggle />
                 <SideNav.Nav >
-                    <NavItem eventKey="inbound">
+                    <NavItem eventKey="inbound" disabled = {routeStat}>
                         <NavIcon>
                             <i className="fa fa-fw fa-inbound" style={{ fontSize: '1.75em'}} />
                         </NavIcon>
@@ -51,7 +65,7 @@ function App() {
                             Inbound
                         </NavText>
                     </NavItem>
-                    <NavItem eventKey="outbound">
+                    <NavItem eventKey="outbound" disabled = {routeStat}>
                         <NavIcon>
                             <i className="fa fa-fw fa-outbound" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
@@ -60,7 +74,7 @@ function App() {
                         </NavText>
                     </NavItem>
 
-                    <NavItem eventKey="view">
+                    <NavItem eventKey="view" disabled = {routeStat}>
                         <NavIcon>
                             <i className="fa fa-fw fa-view" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
@@ -69,7 +83,7 @@ function App() {
                         </NavText>
                     </NavItem>
 
-                    <NavItem eventKey="reports">
+                    <NavItem eventKey="reports" disabled = {routeStat}>
                         <NavIcon>
                             <i className="fa fa-fw fa-reports" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
@@ -78,7 +92,7 @@ function App() {
                         </NavText>
                     </NavItem>
 
-                    <NavItem eventKey="repairandrep">
+                    <NavItem eventKey="repairandrep" disabled = {routeStat}>
                         <NavIcon>
                             <i className="fa fa-fw fa-repairandrep" style={{ fontSize: '1.75em' }} />
                         </NavIcon>
@@ -127,6 +141,7 @@ function App() {
 </ClickOutside> */}
 
 </Router>
+    </div>
     
     
 
