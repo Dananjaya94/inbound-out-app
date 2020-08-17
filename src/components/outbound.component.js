@@ -465,7 +465,6 @@ onSubmit(e){
                     <div className="leftside">
             <div style={{margin:20}}>
             <div className="row">
-            <div className="col-md-4"></div>
 
             
                     
@@ -475,7 +474,6 @@ onSubmit(e){
             <div className="col-md-4"></div>
             </div>
             <div className="row">
-                    <div className="col-md-4"></div>
                     <div className="col-md-4">
                             <div className="form-group">
                              Outbound date : 
@@ -494,7 +492,6 @@ onSubmit(e){
                     </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-4"></div>
                         <div className="col-md-4">
                             <div className="form-group">
                              Item Description : 
@@ -507,7 +504,6 @@ onSubmit(e){
                     </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-4"></div>
                         <div className="col-md-4">
                             <div className="form-group">
                              Serial No : 
@@ -531,7 +527,6 @@ onSubmit(e){
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-md-4"></div>
                         <div className="col-md-4">
                             <div className="form-group">
                              Dept/Branch Code: 
@@ -554,7 +549,6 @@ onSubmit(e){
                         </div>
                     </div>
                     <div className="row">
-                    <div className="col-md-4"></div>
                         <div className="col-md-4">
                             <div className="form-group">
                              Hand over User Name : 
@@ -571,7 +565,6 @@ onSubmit(e){
                         </div>
                     </div>
                     <div className="row">
-                    <div className="col-md-4"></div>
                         <div className="col-md-4">
                             <div className="form-group">
                                  Hand Over User EPF : 
@@ -584,7 +577,6 @@ onSubmit(e){
                         </div>
                     </div>
                     <div className="row">
-                    <div className="col-md-4"></div>
                             <div className="col-md-4"> 
                             <div className="form-group">                          
                                  IT Officer Name : 
@@ -609,7 +601,6 @@ onSubmit(e){
                             </div>
                     </div>
                     <div className="row">
-                    <div className="col-md-4"></div>
                             <div className="col-md-4"> 
                             <div className="form-group">                          
                                  IT Officer ID : 
@@ -625,7 +616,6 @@ onSubmit(e){
 
                     
                     <div className="row">
-                    <div className="col-md-4"></div>
                             <div className="col-md-4"> 
                             <div className="btn-group mr-2"> 
                             <input id="submitOutbound" type="submit" value="Add Outbound" className="btn btn-primary" onClick={this.onSubmit}></input>{}
