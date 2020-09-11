@@ -1,19 +1,17 @@
 import React , {Component} from 'react';
-import axios from 'axios';
 import $ from 'jquery';
-import dt from 'datatables.net';
 
-var arr = {};
-var inboundData = {};
-var inrowsss = [];
-var incolls = [];
-var outrowsss = [];
-var outcolls = [];
+
+var repairOutcolls = [];
+var repairOutrows = [];
+
+var replacementcolls = [];
+var replacementOutrows = [];
 
 $.ajax({
     type: "GET",
 
-        url: "http://localhost:4000/inboundselected",
+        url: "http://localhost:4000/getrepair",
         contentType: "application/json",
         beforeSend: function () {
         },
@@ -26,37 +24,43 @@ $.ajax({
 
                   $.each(data, function (index, value) {
 
-                      incolls = [];
-                      inrowsss= [];
+                    repairOutcolls = [];
+                      repairOutrows= [];
 
                       var tempArray = new Array;
                       console.log(value);
                       for (var o in value.metaData) {
-                          incolls.push(value.metaData[o]);
+                        repairOutcolls.push(value.metaData[o]);
                       }
 
                       for (var i in value.rows) {
-                          inrowsss.push(value.rows[i]);
+                        repairOutrows.push(value.rows[i]);
                       }
-                      console.log(inrowsss);
+                      console.log(repairOutrows);
                       
-                      $('#tblinbound').DataTable({
+                      $('#repairtable').DataTable({
                         "scrollY": "100px",
-                        data: inrowsss,
+                        data: repairOutrows,
 
                         columns: [
 
-                            { title: "Id" },
+                            { title: "Repair Seq" },
 
-                            { title: "Date" },
+                            { title: "Asset Seq" },
 
-                            { title: "Description" },
+                            { title: "Asset Serial" },
 
-                            { title: "Department" },
+                            { title: "Sent Date" },
 
-                            { title: "User" },
+                            { title: "Recived Date"},
 
-                            { title: "Officer" },
+                            { title: "Repair Remarks"},
+
+                            { title: "Cost"},
+
+                            { title: "Vendor"}
+
+                           
 
                         ]
 
@@ -74,7 +78,7 @@ $.ajax({
 $.ajax({
     type: "GET",
 
-        url: "http://localhost:4000/outbound",
+        url: "http://localhost:4000/getrepair",
         contentType: "application/json",
         beforeSend: function () {
         },
@@ -87,37 +91,37 @@ $.ajax({
 
                   $.each(data, function (index, value) {
 
-                      outcolls = [];
-                      outrowsss= [];
+                    replacementcolls = [];
+                    replacementOutrows= [];
 
                       var tempArray = new Array;
                       console.log(value);
                       for (var o in value.metaData) {
-                          outcolls.push(value.metaData[o]);
+                        replacementcolls.push(value.metaData[o]);
                       }
 
                       for (var i in value.rows) {
-                          outrowsss.push(value.rows[i]);
+                        replacementOutrows.push(value.rows[i]);
                       }
-                      console.log(outrowsss);
+                      console.log(replacementOutrows);
                       
-                      $('#tbloutbound').DataTable({
+                      $('#replacementtable').DataTable({
                         "scrollY": "100px",
-                        data: outrowsss,
+                        data: replacementOutrows,
 
                         columns: [
 
-                            { title: "Id" },
+                            { title: "Replace Seq" },
 
-                            { title: "Date" },
+                            { title: "Previos Asset Seq" },
 
-                            { title: "Description" },
+                            { title: "Previous Asset Serial" },
 
-                            { title: "Department" },
+                            { title: "New Asset Seq" },
 
-                            { title: "User" },
+                            { title: "New Asset Seq"}
 
-                            { title: "Officer" },
+                           
 
                         ]
 
@@ -132,57 +136,31 @@ $.ajax({
 
 });
 
-export default class ViewComponent extends Component
-{
+export default class RepairAndReplacements extends Component{
     constructor(props)
     {
         super(props);
-
-        this.state = {
-            inboundRows: [],
-            inboundDT: [],
-            outboundRows: [],
-            outboundDT:[]
-        }
-    }
-
-    setInboundData(indt)
-    {
-        this.inboundRows = indt;
-        console.log(indt);
-    }
-
-    setOutboundData(outdt)
-    {
-        this.outboundRows = outdt;
-        console.log(outdt);
-    }
-    
-    renderInboundData(inboundt)
-    {
-        console.log(inboundt);
     }
 
     render()
     {
-        let cont = this.renderInboundData(this.inrowsss);
         return(
             <div className="container">
                 <div className = "row">
                     <div className = "col-md-3"></div>
                     <div className = "col-md-9">
-                    <h2>View Component</h2>  
+                    <h2>Repair and Replacements</h2>  
                     </div>
                 </div>
                 <div className="row">
                     
-                    <div className="col-md-3" id = "inner">
-                    <h4>Inbound Details</h4>
+                    <div className="col-md-2" id = "inner">
+                    <h4>Repair Details</h4>
                     </div>
-                    <div className="col-md-9">
+                    <div className="col-md-10" style = {{width:"100%"}}>
                       
                         
-                        <table id="tblinbound">
+                        <table id="repairtable">
 
                         </table>
                     </div>
@@ -190,10 +168,10 @@ export default class ViewComponent extends Component
                 <hr></hr>
                 <div className="row">
                     <div className="col-md-3" id = "inner">
-                    <h4>Outbound Details</h4>
+                    <h4>Replacement Details</h4>
                     </div>
                     <div className="col-md-9">
-                        <table id="tbloutbound">
+                        <table id="replacementtable">
 
                         </table>
                     </div>

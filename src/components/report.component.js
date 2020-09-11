@@ -5,9 +5,91 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DatePicker from 'react-date-picker';
 import 'react-date-picker/dist/entry.nostyle';
+
+import Report from 'react-data-report';
+
+import * as jsPDF from 'jspdf';
+import 'jspdf-autotable';
+
+import $ from 'jquery';
+
+
+import axios from 'axios';
+import html2canvas from 'html2canvas';
+
 import { render } from '@testing-library/react';
 
+var outrowsss = [];
+var outcolls = [];
 
+$.ajax({
+    type: "GET",
+
+        url: "http://localhost:4000/inoutfulldetails/",
+        contentType: "application/json",
+        beforeSend: function () {
+        },
+
+        success: function (data) {
+
+
+
+            //console.log(data);
+
+                  $.each(data, function (index, value) {
+
+                      outcolls = [];
+                      outrowsss= [];
+
+                      var tempArray = new Array;
+                      console.log(value);
+                      for (var o in value.metaData) {
+                          outcolls.push(value.metaData[o]);
+                      }
+
+                      for (var i in value.rows) {
+                          outrowsss.push(value.rows[i]);
+                      }
+                      console.log(outrowsss);
+                      
+                      $('#tblReport').DataTable({
+                        "scrollY": "400px",
+                        data: outrowsss,
+
+                        columns: [
+
+                            { title: "Id" },
+
+                            { title: "Date" },
+
+                            { title: "Description" },
+
+                            { title: "Serial Number" },
+
+                            { title: "Department" },
+
+                            { title: "User" },
+
+                            { title: "User EPF"},
+
+                            { title: "Officer" },
+
+                            { title: "Officer EPF"},
+
+                            { title: "Type"},
+
+                        ]
+
+                    });
+
+                  })
+      },
+
+      error: function (jqXHR, exception) {
+
+      }
+
+});
 
 export default class reportscomp extends Component{
 
@@ -23,13 +105,71 @@ export default class reportscomp extends Component{
             start_date : new Date(),
             end_date : new Date(),
             generate_outbound : false,
-            generate_inbound : false
+            generate_inbound : false,
+            InboundOutboundData: [],
+            inboundDT: []
         }
     }
 
-    
+    componentWillMount()
+    {
+        axios.get('http://localhost:4000/inoutfulldetails/')
+        .then(data=> {
+            this.setState({InboundOutboundData : data.data});
+            console.log(data);
+        })
+        .catch(function (error){
+            console.log(error);
+        })
+    }
+
+    renderInboundData(inboundDT){
+        console.log("Inbound Data Rendering");
+        let tableContent1 = (inboundDT === undefined || inboundDT === null || inboundDT.length === 0) ? null : (
+            inboundDT.data.map((item1) => {
+                return (
+                    <tr key = {item1.inboundoutbound_id}>
+                        <td>{item1.inboundoutbound_date}</td>
+                        <td>{item1.inboundoutbound_description}</td>
+                        <td>{item1.inboundoutbound_serialnumber}</td>
+                        <td>{item1.inboundoutbound_departmentorbranch}</td>
+                        <td>{item1.inboundoutbound_handoverusername}</td>
+                        <td>{item1.inboundoutbound_handoveruserepf}</td>
+                        <td>{item1.inboundoutbound_itofficername}</td>
+                        <td>{item1.inboundoutbound_itofficerepf}</td>
+                        <td>{item1.inboundoutbound_tr_type}</td>
+                    </tr>
+                );
+            })
+        );
+
+        return (
+            
+                <table className="tableFixHead" style={{overflowX:"auto"}} id="inboundTable" cellPadding="6">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Item Description</th>
+                            <th>Serial Number</th>
+                            <th>Department</th>
+                            <th>Hand over User</th>
+                            <th>Hand Over EPF</th>
+                            <th>It Officer</th>
+                            <th>If Officer Epf</th>
+                            <th>Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {tableContent1}
+                    </tbody>
+                </table>
+           
+        );
+    }
+
     onChangeStartDate = start_date => this.setState({ start_date })
     onChangeEndDate = end_date => this.setState({ end_date })
+
     
     onSubmitInbound(e)
     {
@@ -37,8 +177,54 @@ export default class reportscomp extends Component{
 
         console.log(`Report Strat Date : ${this.state.start_date}`);
         console.log(`Report End Date : ${this.state.end_date}`);
+
+//         const input = document.getElementById('mytable');
+// html2canvas(input)
+//   .then((canvas) => {
+//     const imgData = canvas.toDataURL('image/png');
+
+//     html2canvas(input)
+//   .then((canvas) => {
+//     const pdf = new jsPDF();
+//     pdf.addSVG(canvas);
+//     pdf.save("download.pdf");  
+//   });
+
+//   });
+
+// var doc = new jsPDF();
+// // You can use html:
+// doc.autoTable({html: '#my-table'});
+
+// // Or JavaScript:
+// doc.autoTable({
+//     head: [['date', 'description', 'department','user','itofficer']],
+//     body: [this.state.renderInboundData]
+// });
+
+// doc.save('table.pdf');
         toast("Successfully Generated");
     }
+
+    printDocument() {  
+        
+
+        toast("Pdf Generated");
+        const input = document.getElementById('tblReport');  
+        html2canvas(input)  
+          .then((canvas) => {  
+            var imgWidth = 200;  
+            var pageHeight = 290;  
+            var imgHeight = canvas.height * imgWidth / canvas.width;  
+            var heightLeft = imgHeight;  
+            const imgData = canvas.toDataURL('image/png');  
+            const pdf = new jsPDF('l', 'mm', 'a4')  
+            var position = 0;  
+            var heightLeft = imgHeight;  
+            pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);  
+            pdf.save("download.pdf");  
+          });  
+      }
 
     onSubmitOutbound(e)
     {
@@ -54,30 +240,47 @@ export default class reportscomp extends Component{
         
     const notifySuccess = () => toast("Successfully Added");
     const notifyGenerated = () => toast("Successfully Generated");
+
+    //let content = this.renderInboundData(this.state.InboundOutboundData);
+
         return(
             <div className="container">
-                <h2>Report Generator</h2>
+                
+                <div className = "row">
+                    <div className="col-md-2">
+                    </div>
+
+                    <div className="col-md-10">
+                    <h2>Report Generator</h2>
+                    
+                    </div>
+                </div>
+
+                <div className="row">
+                    <div className="col-md-12" >
+                    {/* {content} */}
+
+                    <table id="tblReport" className = "innerreport"></table>
+                    <br></br>
+                    {/* <Report data={outrowsss} opening={(<h1>This is an opening content.</h1>)}/> */}
+
+                    </div>
+                </div>
+
+                <div className="row">
                 <table cellPadding="20" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
 
                     <tbody>
                         <tr>
                             <td>
                                 <div className="form-group">
-                                    <label>Start Date :</label>
+                                    {/* <label>Start Date :</label> */}
                                 </div>
                             </td>
 
                             <td>
                                 <div className="form-group">
-                                    <label>End Date :</label>
+                                    {/* <label>End Date :</label> */}
                                 </div>
                             </td>
 
@@ -88,15 +291,16 @@ export default class reportscomp extends Component{
                                 <div className="form-group">
                                     {/* <input type="text" className="form-control" value={this.state.start_date} onChange={this.onChangeStartDate}></input> */}
                                     {/* <Calendar ></Calendar> */}
-                                    <DatePicker value={this.state.start_date} onChange={this.onChangeStartDate}></DatePicker>
+                                    {/* <DatePicker value={this.state.start_date} onChange={this.onChangeStartDate}></DatePicker> */}
                                 </div>
                             </td>
 
                             <td>
                                 <div className="form-group">
+                                    
                                     {/* <input type="text" className="form-control" value={this.state.end_date} onChange={this.onChangeEndDate}></input> */}
                                     {/* <Calendar ></Calendar> */}
-                                    <DatePicker value={this.state.end_date} onChange={this.onChangeEndDate}></DatePicker>
+                                    {/* <DatePicker value={this.state.end_date} onChange={this.onChangeEndDate} onClick={this.onSubmitInbound}></DatePicker> */}
                                 </div>
                             </td>
                         </tr>
@@ -104,7 +308,7 @@ export default class reportscomp extends Component{
                         <tr>
                             <td>
                                 <div className="form-group">
-                                <input type="submit" value="Create Inbound Report" className="btn btn-primary" onClick={this.onSubmitInbound}></input>
+                                <input type="submit" value="Create Report" className="btn btn-primary" onClick={this.onSubmitInbound} onClick={this.printDocument}></input>
                                 {/* <ToastContainer 
                                 position="top-center"
                                 autoClose={10000}
@@ -120,7 +324,7 @@ export default class reportscomp extends Component{
 
                             <td>
                                 <div className="form-group">
-                                <input type="submit" value="Create Outbound Report" className="btn btn-primary" onClick={this.onSubmitOutbound} onClick={notifyGenerated}></input>
+                                {/* <input type="submit" value="Create Report" className="btn btn-primary" onClick={this.onSubmitOutbound} onClick={notifyGenerated}></input> */}
                                 <ToastContainer 
                                 position="top-center"
                                 autoClose={5000}
@@ -131,12 +335,16 @@ export default class reportscomp extends Component{
                                 pauseOnFocusLoss
                                 draggable
                                 pauseOnHover/>
+                                
                                 </div>
                             </td>
 
                         </tr>
                     </tbody>
                 </table>
+                </div>
+
+                
             </div>
         )
     }
